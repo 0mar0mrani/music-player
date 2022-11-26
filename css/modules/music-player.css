@@ -1,0 +1,26 @@
+.songs {
+	display: flex;
+	flex-direction: column;
+}
+
+.songs__header-container,
+.songs__song {
+	display: grid;
+	grid-template-columns: 0.1fr repeat(4, 1fr);
+}
+
+.songs__header-container {
+	background-color: rebeccapurple;
+	font-size: 4rem;
+}
+
+.songs__song-cover {
+	width: 10rem;
+	height: 10rem;
+}
+
+.songs__song-cover img{
+	width: 100%;
+	height: auto;
+	display: block;
+}

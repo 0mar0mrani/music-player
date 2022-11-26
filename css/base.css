@@ -1,3 +1,8 @@
 html {
 	font-size: 10px;
 }
+
+body {
+	color: black;
+	font-size: 2rem;
+}
