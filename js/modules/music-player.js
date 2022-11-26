@@ -1,0 +1,43 @@
+export default function MusicPlayer() {
+
+	const songs = [
+		{	title: 'Lifelike',
+			artist: 'Alexi Action',
+			duration: '2:24',
+			url: '/assets/audio/lifelike.mp3',
+			cover: '/assets/image/lifelike.jpg',
+		},
+		{	title: 'Mountain Path',
+			artist: 'Magnetic',
+			duration: '3:28',
+			url: '/assets/audio/mountainpath.mp3',
+			cover: '/assets/image/mountainpath.jpg',
+		},		
+		{	title: 'Please Calm My Mind',
+			artist: 'Lesfm',
+			duration: '2:55',
+			url: '/assets/audio/pleasecalmmymind.mp3',
+			cover: '/assets/image/pleasecalmmymind.jpg',
+		},		
+		{	title: 'Drop It',
+			artist: 'Coma',
+			duration: '1:42',
+			url: '/assets/audio/dropit.mp3',
+			cover: '/assets/image/dropit.jpg',
+		},
+		{	title: 'Password Infinity',
+			artist: 'Evgeny',
+			duration: '2:25',
+			url: '/assets/audio/passwordinfinity.mp3',
+			cover: '/assets/image/passwordinfinity.jpg',
+		},
+		{	title: 'The Beat of Nature',
+			artist: 'Olexy',
+			duration: '2:53',
+			url: '/assets/audio/thebeatofnature.mp3',
+			cover: '/assets/image/thebeatofnature.jpg',
+		},
+	]
+
+}
+
