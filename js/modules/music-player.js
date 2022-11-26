@@ -39,5 +39,48 @@ export default function MusicPlayer() {
 		},
 	]
 
+	const songsContainer = document.querySelector('.songs__container')
+	
+	function renderHTML() {
+		renderSongs();
+	}
+
+	function renderSongs() {
+		for (let index = 0; index < songs.length; index += 1) {
+			const song = document.createElement('div');
+			song.className = 'songs__song';
+
+			const songNumber = document.createElement('p');
+			songNumber.className = 'songs__song-number';
+			songNumber.innerHTML = `${index + 1}`;
+			song.append(songNumber);
+
+			const songCover = document.createElement('div')
+			songCover.className = 'songs__song-cover'
+			const songCoverImage = document.createElement('img')
+			songCoverImage.src = `${songs[index].cover}`
+			songCover.append(songCoverImage);
+			song.append(songCover);
+
+			const songTitle = document.createElement('p');
+			songTitle.className = 'songs__song-title';
+			songTitle.innerHTML = `${songs[index].title}`;
+			song.append(songTitle);
+			
+			const songArtist = document.createElement('p');
+			songArtist.className = 'songs__song-artist';
+			songArtist.innerHTML = `${songs[index].artist}`;
+			song.append(songArtist);
+
+			const songDuration = document.createElement('p');
+			songDuration.className = 'songs__song-duration';
+			songDuration.innerHTML = `${songs[index].duration}`;
+			song.append(songDuration);
+
+			songsContainer.append(song);
+		}
+	}
+
+	renderHTML();
 }
 
