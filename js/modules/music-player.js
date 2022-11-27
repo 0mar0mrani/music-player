@@ -97,6 +97,9 @@ export default function MusicPlayer() {
 		}
 	}
 
+	function setCurrentSong() {
+		currentSong = allSongs[currentSongIndex];
+	}
 
 	function toggleIsPlaying() {
 		isPlaying = !isPlaying;
