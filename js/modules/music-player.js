@@ -102,6 +102,11 @@ export default function MusicPlayer() {
 		renderAudio();
 		renderHTML();
 	}
+
+	function handleVolumeRangeInput() {
+		setVolume()
+	}
+
 	function setVolume() {
 		const rangeInput = volumeRange.value;
 		audio.volume = rangeInput / 100;
