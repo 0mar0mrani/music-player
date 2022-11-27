@@ -14,6 +14,13 @@
 	font-size: 4rem;
 }
 
+.songs__song {
+	align-items: center;
+	width: 100%;
+	border: none;
+	background-color: inherit;
+}
+
 .songs__song-cover {
 	width: 10rem;
 	height: 10rem;
@@ -23,4 +30,44 @@
 	width: 100%;
 	height: auto;
 	display: block;
+}
+
+.songs__controllers {
+	background-color: rebeccapurple;
+}
+
+
+.songs__time {
+	width: 100%;
+	display: flex;
+	gap: 2rem;
+	padding: 0 1rem;
+}
+
+.songs__timeline-container {
+	flex-grow: 1;
+}
+
+.songs__timeline-range {
+	width: 100%;
+}
+
+.songs__timestamp-current-time,
+.songs__timestamp-duration {
+	width: 4rem;
+}
+
+.songs__current-song-cover {
+	width: 20rem;
+	height: 20rem;
+}
+
+.songs__current-song-cover img {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+
+.songs__current-song {
+	display: flex;
 }
