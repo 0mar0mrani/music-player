@@ -3,3 +3,8 @@
 	margin: 0;
 	box-sizing: border-box;
 }
+
+button {
+	cursor: pointer;
+	font-family: inherit;
+}
