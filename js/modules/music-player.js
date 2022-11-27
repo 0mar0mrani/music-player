@@ -81,6 +81,14 @@ export default function MusicPlayer() {
 		audio.volume = rangeInput / 100;
 	}
 
+	function increaseCurrentSongIndex() {
+		if (currentSongIndex < allSongs.length - 1) {
+			currentSongIndex += 1;
+		} else {
+			currentSongIndex = 0;
+		}
+	}
+
 	function renderHTML() {
 		renderSongs();
 	}
