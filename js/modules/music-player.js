@@ -104,6 +104,15 @@ export default function MusicPlayer() {
 	function toggleIsPlaying() {
 		isPlaying = !isPlaying;
 	}
+
+	function renderAudio() {
+		if (isPlaying) {
+			audio.play();
+		} else {
+			audio.pause();
+		}
+	}
+
 	function renderHTML() {
 		renderSongs();
 	}
