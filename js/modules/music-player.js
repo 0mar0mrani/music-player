@@ -142,6 +142,31 @@ export default function MusicPlayer() {
 	function renderHTML() {
 		renderSongs();
 		renderCurrentSong();
+	}
+
+	function renderTimeline() {
+		const duration = audio.duration;
+		const currentTime = audio.currentTime;
+		const currentTimeInPercent =  currentTime / duration * 100;
+
+		timelineRange.value = currentTimeInPercent;
+
+
+		const durationInMinutes = Math.floor(Math.floor(duration) / 60);
+		const durationInSeconds = Math.floor(duration) - durationInMinutes * 60;
+
+		if (isNaN(durationInMinutes) === false) {
+			timeStampDuration.innerHTML = `${durationInMinutes}:${durationInSeconds}`
+		}
+
+		const currentTimeInMinutes = Math.floor(Math.floor(currentTime) / 60)
+		const currentTimeInSeconds = Math.floor(currentTime) - currentTimeInMinutes * 60;
+
+		if (isNaN(durationInMinutes) === false) {
+			timeStampCurrentTime.innerHTML = `${currentTimeInMinutes}:${currentTimeInSeconds}`
+		}
+	}
+
 	function renderCurrentSong() {
 		currentSongCoverImage.src = currentSong.cover;
 		currentSongTitle.innerText = currentSong.title;
