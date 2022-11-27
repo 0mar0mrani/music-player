@@ -113,6 +113,16 @@ export default function MusicPlayer() {
 		}
 	}
 
+	function returnCheckIfSongFinished() {
+		const duration = audio.duration;
+		const currentTime = audio.currentTime
+
+		if (duration / currentTime === 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	function renderHTML() {
 		renderSongs();
 	}
