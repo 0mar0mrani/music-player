@@ -75,6 +75,12 @@ export default function MusicPlayer() {
 			songButton.addEventListener('click', handleSongButtonClick);
 		}
 	}
+
+	function setVolume() {
+		const rangeInput = volumeRange.value;
+		audio.volume = rangeInput / 100;
+	}
+
 	function renderHTML() {
 		renderSongs();
 	}
