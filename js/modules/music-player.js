@@ -48,9 +48,10 @@ export default function MusicPlayer() {
 	let currentSongIndex;
 	let currentPlaylist = allSongs;
 	let isPlaying = false;
+	let isRepeat = false;
 	const audio = new Audio();
 	let timerID;
-	
+
 	const songsContainer = document.querySelector('.songs__container');
 	let songButtons;
 	const playButton = document.querySelector('.songs__play-button');
@@ -63,6 +64,7 @@ export default function MusicPlayer() {
 	const currentSongCoverImage = document.querySelector('.songs__current-song-cover img');
 	const currentSongTitle = document.querySelector('.songs__current-song-title');
 	const currentSongArtist = document.querySelector('.songs__current-song-artist');
+	const repeatButton = document.querySelector('.songs__repeat-button');
 	function addQuerySelector() {
 		songButtons = document.querySelectorAll('.songs__song');
 	}
@@ -72,7 +74,7 @@ export default function MusicPlayer() {
 	nextButton.addEventListener('click', handleNextButtonClick);
 	volumeRange.addEventListener('input', handleVolumeRangeInput);
 	timelineRange.addEventListener('input', handleTimelineRangeInput);
-
+	repeatButton.addEventListener('click', handleRepeatButtonClick)
 	function addEventListeners() {
 		for (const songButton of songButtons) {
 			songButton.addEventListener('click', handleSongButtonClick);
@@ -80,7 +82,9 @@ export default function MusicPlayer() {
 	}
 
 	function handleNextButtonClick() {
-		increaseCurrentSongIndex();
+		if (!isRepeat) {
+			increaseCurrentSongIndex();
+		}
 		setCurrentSong();
 		changeAudioSource();
 		isPlaying = true;
@@ -89,7 +93,9 @@ export default function MusicPlayer() {
 	}
 
 	function handlePreviousButtonClick() {
-		decreaseCurrentSongIndex();
+		if (!isRepeat) {
+			decreaseCurrentSongIndex();
+		}
 		setCurrentSong();
 		changeAudioSource();
 		isPlaying = true;
@@ -125,6 +131,15 @@ export default function MusicPlayer() {
 		renderHTML();
 
 		timerID = setInterval(renderTimeline, 10)
+	}
+
+	function handleRepeatButtonClick() {
+		toggleRepeat();
+		console.log(isRepeat);
+	}
+
+	function toggleRepeat() {
+		isRepeat = !isRepeat;
 	}
 
 	function setVolume() {
@@ -179,7 +194,9 @@ export default function MusicPlayer() {
 		const isCurrentSongFinished = returnCheckIfSongFinished();
 		
 		if (isCurrentSongFinished) {
-			increaseCurrentSongIndex();
+			if (!isRepeat) {
+				increaseCurrentSongIndex();
+			}
 			setCurrentSong();
 			changeAudioSource();
 			isPlaying = true;
