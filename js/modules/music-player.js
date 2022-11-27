@@ -114,6 +114,19 @@ export default function MusicPlayer() {
 
 		audio.currentTime = valueInputToCurrentTime;
 	}
+
+	function handleSongButtonClick(event) {
+		const [clickedSong, clickedSongIndex] = getPropertiesOfClickedSong(event);
+		currentSong = clickedSong;
+		currentSongIndex = clickedSongIndex;
+		changeAudioSource();
+		isPlaying = true;
+		renderAudio();
+		renderHTML();
+
+		timerID = setInterval(renderTimeline, 10)
+	}
+
 	function setVolume() {
 		const rangeInput = volumeRange.value;
 		audio.volume = rangeInput / 100;
