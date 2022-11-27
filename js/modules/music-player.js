@@ -220,7 +220,7 @@ export default function MusicPlayer() {
 	}
 	
 	function renderHTML() {
-		renderSongs();
+		renderSongList();
 		renderCurrentSong();
 		renderRepeatButton();
 		renderPlayButton();
@@ -273,7 +273,7 @@ export default function MusicPlayer() {
 		}
 	}
 
-	function renderSongs() {
+	function renderSongList() {
 		songsContainer.innerHTML = ''
 
 		for (let index = 0; index < allSongs.length; index += 1) {
