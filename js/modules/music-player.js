@@ -257,9 +257,11 @@ export default function MusicPlayer() {
 	}
 
 	function renderCurrentSong() {
-		currentSongCoverImage.src = currentSong.cover;
-		currentSongTitle.innerText = currentSong.title;
-		currentSongArtist.innerText = currentSong.artist;
+		if (currentSong) {
+			currentSongCoverImage.src = currentSong.cover;
+			currentSongTitle.innerText = currentSong.title;
+			currentSongArtist.innerText = currentSong.artist;
+		}
 	}
 
 	function renderSongs() {
