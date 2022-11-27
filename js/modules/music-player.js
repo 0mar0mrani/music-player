@@ -107,6 +107,13 @@ export default function MusicPlayer() {
 		setVolume()
 	}
 
+	function handleTimelineRangeInput() {
+		const valueInput = timelineRange.value;
+		const roundedDuration = audio.duration;
+		const valueInputToCurrentTime =  valueInput * roundedDuration / 100;
+
+		audio.currentTime = valueInputToCurrentTime;
+	}
 	function setVolume() {
 		const rangeInput = volumeRange.value;
 		audio.volume = rangeInput / 100;
