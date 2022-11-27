@@ -87,6 +87,16 @@ export default function MusicPlayer() {
 		renderAudio();
 		renderHTML();
 	}
+
+	function handlePreviousButtonClick() {
+		decreaseCurrentSongIndex();
+		setCurrentSong();
+		changeAudioSource();
+		isPlaying = true;
+		renderAudio();
+		renderHTML();
+	}
+
 	function setVolume() {
 		const rangeInput = volumeRange.value;
 		audio.volume = rangeInput / 100;
