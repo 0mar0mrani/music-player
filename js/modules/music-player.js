@@ -89,6 +89,14 @@ export default function MusicPlayer() {
 		}
 	}
 
+	function decreaseCurrentSongIndex() {
+		if (currentSongIndex !== 0) {
+			currentSongIndex -= 1;
+		} else {
+			currentSongIndex = 0;
+		}
+	}
+
 	function renderHTML() {
 		renderSongs();
 	}
