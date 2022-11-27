@@ -63,6 +63,9 @@ export default function MusicPlayer() {
 	const currentSongCoverImage = document.querySelector('.songs__current-song-cover img');
 	const currentSongTitle = document.querySelector('.songs__current-song-title');
 	const currentSongArtist = document.querySelector('.songs__current-song-artist');
+	function addQuerySelector() {
+		songButtons = document.querySelectorAll('.songs__song');
+	}
 
 	playButton.addEventListener('click', handlePlayButtonClick);
 	previousButton.addEventListener('click', handlePreviousButtonClick);
