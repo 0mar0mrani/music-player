@@ -39,8 +39,37 @@ export default function MusicPlayer() {
 		},
 	]
 
-	const songsContainer = document.querySelector('.songs__container')
+	let currentSong;
+	let currentSongIndex;
+	let currentPlaylist = allSongs;
+	let isPlaying = false;
+	const audio = new Audio();
+	let timerID;
 	
+	const songsContainer = document.querySelector('.songs__container');
+	let songButtons;
+	const playButton = document.querySelector('.songs__play-button');
+	const previousButton = document.querySelector('.songs__previous-button');
+	const nextButton = document.querySelector('.songs__next-button');
+	const volumeRange = document.querySelector('.songs__volume-range');
+	const timelineRange = document.querySelector('.songs__timeline-range');
+	const timeStampCurrentTime = document.querySelector('.songs__timestamp-current-time');
+	const timeStampDuration = document.querySelector('.songs__timestamp-duration');
+	const currentSongCoverImage = document.querySelector('.songs__current-song-cover img');
+	const currentSongTitle = document.querySelector('.songs__current-song-title');
+	const currentSongArtist = document.querySelector('.songs__current-song-artist');
+
+	playButton.addEventListener('click', handlePlayButtonClick);
+	previousButton.addEventListener('click', handlePreviousButtonClick);
+	nextButton.addEventListener('click', handleNextButtonClick);
+	volumeRange.addEventListener('input', handleVolumeRangeInput);
+	timelineRange.addEventListener('input', handleTimelineRangeInput);
+
+	function addEventListeners() {
+		for (const songButton of songButtons) {
+			songButton.addEventListener('click', handleSongButtonClick);
+		}
+	}
 	function renderHTML() {
 		renderSongs();
 	}
