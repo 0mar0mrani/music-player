@@ -124,6 +124,17 @@ export default function MusicPlayer() {
 		}
 	}
 
+
+	function getPropertiesOfClickedSong(event) {
+		const clickedSong = event.currentTarget.dataset.id;
+
+		for (let index = 0; index < allSongs.length; index += 1) {
+			if (allSongs[index].id === clickedSong) {
+				return [allSongs[index], index];
+			}
+		}
+	}
+
 	function changeAudioSource() {
 		audio.src = currentSong.url;
 	}
