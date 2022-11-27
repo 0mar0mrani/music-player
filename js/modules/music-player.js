@@ -123,6 +123,11 @@ export default function MusicPlayer() {
 			return false;
 		}
 	}
+
+	function changeAudioSource() {
+		audio.src = currentSong.url;
+	}
+	
 	function renderHTML() {
 		renderSongs();
 	}
