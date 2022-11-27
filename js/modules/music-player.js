@@ -135,7 +135,7 @@ export default function MusicPlayer() {
 
 	function handleRepeatButtonClick() {
 		toggleRepeat();
-		console.log(isRepeat);
+		renderRepeatButton()
 	}
 
 	function toggleRepeat() {
@@ -222,6 +222,15 @@ export default function MusicPlayer() {
 	function renderHTML() {
 		renderSongs();
 		renderCurrentSong();
+		renderRepeatButton();
+	}
+
+	function renderRepeatButton() {
+		if (isRepeat) {
+			repeatButton.style.backgroundColor = 'red';
+		} else {
+			repeatButton.style.backgroundColor = '#ffffff';
+		}
 	}
 
 	function renderTimeline() {
