@@ -230,6 +230,7 @@ export default function MusicPlayer() {
 		}
 	}
 
+	setInterval(goToNextSongIfFinished, 1000)
 	renderHTML();
 }
 
