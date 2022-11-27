@@ -97,6 +97,10 @@ export default function MusicPlayer() {
 		}
 	}
 
+
+	function toggleIsPlaying() {
+		isPlaying = !isPlaying;
+	}
 	function renderHTML() {
 		renderSongs();
 	}
