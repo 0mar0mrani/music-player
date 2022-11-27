@@ -79,6 +79,14 @@ export default function MusicPlayer() {
 		}
 	}
 
+	function handleNextButtonClick() {
+		increaseCurrentSongIndex();
+		setCurrentSong();
+		changeAudioSource();
+		isPlaying = true;
+		renderAudio();
+		renderHTML();
+	}
 	function setVolume() {
 		const rangeInput = volumeRange.value;
 		audio.volume = rangeInput / 100;
