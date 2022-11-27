@@ -223,6 +223,7 @@ export default function MusicPlayer() {
 		renderSongs();
 		renderCurrentSong();
 		renderRepeatButton();
+		renderPlayButton();
 	}
 
 	function renderRepeatButton() {
@@ -230,6 +231,14 @@ export default function MusicPlayer() {
 			repeatButton.style.backgroundColor = 'red';
 		} else {
 			repeatButton.style.backgroundColor = '#ffffff';
+		}
+	}
+
+	function renderPlayButton() {
+		if (isPlaying) {
+			playButton.innerText = 'Pause'
+		} else {
+			playButton.innerText ='Play'
 		}
 	}
 
