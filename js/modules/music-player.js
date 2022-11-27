@@ -141,6 +141,10 @@ export default function MusicPlayer() {
 	
 	function renderHTML() {
 		renderSongs();
+	function renderCurrentSong() {
+		currentSongCoverImage.src = currentSong.cover;
+		currentSongTitle.innerText = currentSong.title;
+		currentSongArtist.innerText = currentSong.artist;
 	}
 
 	function renderSongs() {
