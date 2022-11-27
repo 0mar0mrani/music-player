@@ -20,6 +20,44 @@
 			
 			<div class="songs__container">
 			</div>
+
+			<div class="songs__controllers">
+				<div class="songs__current-song">
+					<div class="songs__current-song-cover">
+						<img>
+					</div>
+					
+					<div>
+						<p class="songs__current-song-title">TEST</p>
+
+						<p class="songs__current-song-artist">TEST</p>
+					</div>
+				</div>
+
+				<button class="songs__previous-button">Previous</button>
+
+				<button class="songs__play-button">Play</button>
+
+				<button class="songs__next-button">Next</button>
+
+				<div class="songs__volume-container">
+					<input type="range" min="1" max="100" value="100" class="songs__volume-range">
+				</div>
+
+				<button class="songs__shuffle-button">Shuffle</button>
+
+				<button class="songs__repeat-button">Repeat</button>
+
+				<div class="songs__time">
+					<div class="songs__timestamp-current-time">0:0</div>
+
+					<div class="songs__timeline-container">
+						<input type="range" min="0" max="100" value="0" step="0.01" class="songs__timeline-range">
+					</div>
+					
+					<div class="songs__timestamp-duration">0:0</div>
+				</div>
+			</div>
 		</section>
 	</body>
 </html>
