@@ -1,41 +1,46 @@
 export default function MusicPlayer() {
-
-	const songs = [
+	const allSongs = [
 		{	title: 'Lifelike',
 			artist: 'Alexi Action',
 			duration: '2:24',
 			url: '/assets/audio/lifelike.mp3',
 			cover: '/assets/image/lifelike.jpg',
+			id: '1',
 		},
 		{	title: 'Mountain Path',
 			artist: 'Magnetic',
 			duration: '3:28',
 			url: '/assets/audio/mountainpath.mp3',
 			cover: '/assets/image/mountainpath.jpg',
+			id: '2',
 		},		
 		{	title: 'Please Calm My Mind',
 			artist: 'Lesfm',
 			duration: '2:55',
 			url: '/assets/audio/pleasecalmmymind.mp3',
 			cover: '/assets/image/pleasecalmmymind.jpg',
+			id: '3',
 		},		
 		{	title: 'Drop It',
 			artist: 'Coma',
 			duration: '1:42',
 			url: '/assets/audio/dropit.mp3',
 			cover: '/assets/image/dropit.jpg',
+			id: '4',
 		},
 		{	title: 'Password Infinity',
 			artist: 'Evgeny',
 			duration: '2:25',
 			url: '/assets/audio/passwordinfinity.mp3',
 			cover: '/assets/image/passwordinfinity.jpg',
+			id: '5',
 		},
 		{	title: 'The Beat of Nature',
 			artist: 'Olexy',
 			duration: '2:53',
 			url: '/assets/audio/thebeatofnature.mp3',
 			cover: '/assets/image/thebeatofnature.jpg',
+			id: '6',
 		},
 	]
 
@@ -75,9 +80,12 @@ export default function MusicPlayer() {
 	}
 
 	function renderSongs() {
-		for (let index = 0; index < songs.length; index += 1) {
-			const song = document.createElement('div');
+		songsContainer.innerHTML = ''
+
+		for (let index = 0; index < allSongs.length; index += 1) {
+			const song = document.createElement('button');
 			song.className = 'songs__song';
+			song.dataset.id = `${allSongs[index].id}`;
 
 			const songNumber = document.createElement('p');
 			songNumber.className = 'songs__song-number';
@@ -87,26 +95,29 @@ export default function MusicPlayer() {
 			const songCover = document.createElement('div')
 			songCover.className = 'songs__song-cover'
 			const songCoverImage = document.createElement('img')
-			songCoverImage.src = `${songs[index].cover}`
+			songCoverImage.src = `${allSongs[index].cover}`
 			songCover.append(songCoverImage);
 			song.append(songCover);
 
 			const songTitle = document.createElement('p');
 			songTitle.className = 'songs__song-title';
-			songTitle.innerHTML = `${songs[index].title}`;
+			songTitle.innerHTML = `${allSongs[index].title}`;
 			song.append(songTitle);
 			
 			const songArtist = document.createElement('p');
 			songArtist.className = 'songs__song-artist';
-			songArtist.innerHTML = `${songs[index].artist}`;
+			songArtist.innerHTML = `${allSongs[index].artist}`;
 			song.append(songArtist);
 
 			const songDuration = document.createElement('p');
 			songDuration.className = 'songs__song-duration';
-			songDuration.innerHTML = `${songs[index].duration}`;
+			songDuration.innerHTML = `${allSongs[index].duration}`;
 			song.append(songDuration);
 
 			songsContainer.append(song);
+
+			addQuerySelector();
+			addEventListeners();
 		}
 	}
 
