@@ -127,6 +127,18 @@ export default function MusicPlayer() {
 		}
 	}
 
+	function goToNextSongIfFinished() {
+		const isCurrentSongFinished = returnCheckIfSongFinished();
+		
+		if (isCurrentSongFinished) {
+			increaseCurrentSongIndex();
+			setCurrentSong();
+			changeAudioSource();
+			isPlaying = true;
+			renderAudio();
+			renderHTML();
+		}
+	}
 
 	function getPropertiesOfClickedSong(event) {
 		const clickedSong = event.currentTarget.dataset.id;
