@@ -320,25 +320,25 @@ export default function MusicPlayer() {
 
 	function renderRepeatButton() {
 		if (isRepeat) {
-			repeatButton.style.backgroundColor = 'red';
+			repeatButton.classList.add('songs__button--active');
 		} else {
-			repeatButton.style.backgroundColor = '#ffffff';
+			repeatButton.classList.remove('songs__button--active');
 		}
 	}
 
 	function renderPlayButton() {
 		if (isPlaying) {
-			playButton.innerText = 'Pause'
+			playButtonImage.src = '/assets/svg/pause.svg';
 		} else {
-			playButton.innerText ='Play'
+			playButtonImage.src = '/assets/svg/play.svg';
 		}
 	}
 
 	function renderShuffleButton() {
 		if (isShuffle) {
-			shuffleButton.style.backgroundColor = 'red';
+			shuffleButton.classList.add('songs__button--active');
 		} else {
-			shuffleButton.style.backgroundColor = '#ffffff';
+			shuffleButton.classList.remove('songs__button--active');
 		}
 	}
 
