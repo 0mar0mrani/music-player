@@ -1,5 +1,5 @@
 export default function MusicPlayer() {
-	let allSongs = [
+	const allSongs = [
 		{	title: 'Lifelike',
 			artist: 'Alexi Action',
 			duration: '2:24',
@@ -151,6 +151,7 @@ export default function MusicPlayer() {
 	function handleShuffleButtonClick() {
 		toggleShuffle();
 		shuffleSongs();
+		renderHTML();
 	}
 
 	function toggleShuffle() {
@@ -165,7 +166,7 @@ export default function MusicPlayer() {
 				[que[index], que[j]] = [que[j], que[index]];
 			}
 		} else {
-			que = currentPlaylist;
+			que = [...currentPlaylist];
 		}
 	}
 
@@ -251,6 +252,7 @@ export default function MusicPlayer() {
 		renderCurrentSong();
 		renderRepeatButton();
 		renderPlayButton();
+		renderShuffleButton();
 	}
 
 	function renderRepeatButton() {
@@ -266,6 +268,14 @@ export default function MusicPlayer() {
 			playButton.innerText = 'Pause'
 		} else {
 			playButton.innerText ='Play'
+		}
+	}
+
+	function renderShuffleButton() {
+		if (isShuffle) {
+			shuffleButton.style.backgroundColor = 'red';
+		} else {
+			shuffleButton.style.backgroundColor = '#ffffff';
 		}
 	}
 
