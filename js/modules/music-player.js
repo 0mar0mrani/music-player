@@ -114,6 +114,7 @@ export default function MusicPlayer() {
 	let isPlaying = false;
 	let isRepeat = false;
 	let isShuffle = false;
+	let currentVolume;
 	const audio = new Audio();
 	let timerID;
 
@@ -145,6 +146,7 @@ export default function MusicPlayer() {
 	timelineRange.addEventListener('input', handleTimelineRangeInput);
 	repeatButton.addEventListener('click', handleRepeatButtonClick);
 	shuffleButton.addEventListener('click', handleShuffleButtonClick);
+	muteButton.addEventListener('click', handleMuteButtonClick)
 
 	function addEventListeners() {
 		for (const songButton of songButtons) {
@@ -181,6 +183,7 @@ export default function MusicPlayer() {
 	}
 
 	function handleVolumeRangeInput() {
+		setCurrentVolume();
 		setVolume();
 		renderHTML();
 	}
@@ -208,6 +211,23 @@ export default function MusicPlayer() {
 	function handleRepeatButtonClick() {
 		toggleRepeat();
 		renderHTML();
+	}
+
+	function setCurrentVolume() {
+		currentVolume = audio.volume;
+	}
+
+	function handleMuteButtonClick() {
+		toggleMute();
+		renderHTML();
+	}
+
+	function toggleMute() {
+		if (audio.volume === 0) {
+			audio.volume = currentVolume;
+		} else {
+			audio.volume = 0;
+		}
 	}
 
 	function toggleRepeat() {
