@@ -107,10 +107,10 @@ export default function MusicPlayer() {
 		},
 	]
 
-	let currentSong;
 	let currentSongIndex;
 	let currentPlaylist = [...allSongs];
 	let que = [...currentPlaylist];
+	let currentSong = que[0];
 	let isPlaying = false;
 	let isRepeat = false;
 	let isShuffle = false;
@@ -120,6 +120,7 @@ export default function MusicPlayer() {
 	const songsContainer = document.querySelector('.songs__container');
 	let songButtons;
 	const playButton = document.querySelector('.songs__play-button');
+	const playButtonImage = document.querySelector('.songs__play-button img');
 	const previousButton = document.querySelector('.songs__previous-button');
 	const nextButton = document.querySelector('.songs__next-button');
 	const volumeRange = document.querySelector('.songs__volume-range');
@@ -130,7 +131,9 @@ export default function MusicPlayer() {
 	const currentSongTitle = document.querySelector('.songs__current-song-title');
 	const currentSongArtist = document.querySelector('.songs__current-song-artist');
 	const repeatButton = document.querySelector('.songs__repeat-button');
-	const shuffleButton = document.querySelector('.songs__shuffle-button')
+	const shuffleButton = document.querySelector('.songs__shuffle-button');
+	const muteButton = document.querySelector('.songs__mute-button');
+	const muteButtonImage = document.querySelector('.songs__mute-button img');
 	function addQuerySelector() {
 		songButtons = document.querySelectorAll('.songs__song');
 	}
@@ -178,7 +181,8 @@ export default function MusicPlayer() {
 	}
 
 	function handleVolumeRangeInput() {
-		setVolume()
+		setVolume();
+		renderHTML();
 	}
 
 	function handleTimelineRangeInput() {
@@ -203,7 +207,7 @@ export default function MusicPlayer() {
 
 	function handleRepeatButtonClick() {
 		toggleRepeat();
-		renderRepeatButton()
+		renderHTML();
 	}
 
 	function toggleRepeat() {
@@ -313,9 +317,18 @@ export default function MusicPlayer() {
 	function renderHTML() {
 		renderSongList();
 		renderCurrentSong();
-		renderRepeatButton();
 		renderPlayButton();
 		renderShuffleButton();
+		renderRepeatButton();
+		renderMuteButton();
+	}
+
+	function renderMuteButton() {
+		if (audio.volume === 0) {
+			muteButtonImage.src = '/assets/svg/no-audio.svg';
+		} else {
+			muteButtonImage.src = '/assets/svg/audio.svg';
+		}
 	}
 
 	function renderRepeatButton() {
