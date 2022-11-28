@@ -1,5 +1,5 @@
 export default function MusicPlayer() {
-	const allSongs = [
+	let allSongs = [
 		{	title: 'Lifelike',
 			artist: 'Alexi Action',
 			duration: '2:24',
@@ -46,9 +46,11 @@ export default function MusicPlayer() {
 
 	let currentSong;
 	let currentSongIndex;
-	let currentPlaylist = allSongs;
+	let currentPlaylist = [...allSongs];
+	let que = [...currentPlaylist];
 	let isPlaying = false;
 	let isRepeat = false;
+	let isShuffle = false;
 	const audio = new Audio();
 	let timerID;
 
@@ -65,6 +67,7 @@ export default function MusicPlayer() {
 	const currentSongTitle = document.querySelector('.songs__current-song-title');
 	const currentSongArtist = document.querySelector('.songs__current-song-artist');
 	const repeatButton = document.querySelector('.songs__repeat-button');
+	const shuffleButton = document.querySelector('.songs__shuffle-button')
 	function addQuerySelector() {
 		songButtons = document.querySelectorAll('.songs__song');
 	}
@@ -74,7 +77,9 @@ export default function MusicPlayer() {
 	nextButton.addEventListener('click', handleNextButtonClick);
 	volumeRange.addEventListener('input', handleVolumeRangeInput);
 	timelineRange.addEventListener('input', handleTimelineRangeInput);
-	repeatButton.addEventListener('click', handleRepeatButtonClick)
+	repeatButton.addEventListener('click', handleRepeatButtonClick);
+	shuffleButton.addEventListener('click', handleShuffleButtonClick);
+
 	function addEventListeners() {
 		for (const songButton of songButtons) {
 			songButton.addEventListener('click', handleSongButtonClick);
@@ -142,13 +147,35 @@ export default function MusicPlayer() {
 		isRepeat = !isRepeat;
 	}
 
+	
+	function handleShuffleButtonClick() {
+		toggleShuffle();
+		shuffleSongs();
+	}
+
+	function toggleShuffle() {
+		isShuffle = !isShuffle;
+	}
+	
+	// https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+	function shuffleSongs() {
+		if (isShuffle) {
+			for (let index = que.length - 1; index > 0; index -= 1) {
+				const j = Math.floor(Math.random() * (index + 1));
+				[que[index], que[j]] = [que[j], que[index]];
+			}
+		} else {
+			que = currentPlaylist;
+		}
+	}
+
 	function setVolume() {
 		const rangeInput = volumeRange.value;
 		audio.volume = rangeInput / 100;
 	}
 
 	function increaseCurrentSongIndex() {
-		if (currentSongIndex < allSongs.length - 1) {
+		if (currentSongIndex < currentPlaylist.length - 1) {
 			currentSongIndex += 1;
 		} else {
 			currentSongIndex = 0;
@@ -164,7 +191,7 @@ export default function MusicPlayer() {
 	}
 
 	function setCurrentSong() {
-		currentSong = allSongs[currentSongIndex];
+		currentSong = que[currentSongIndex];
 	}
 
 	function toggleIsPlaying() {
@@ -276,10 +303,10 @@ export default function MusicPlayer() {
 	function renderSongList() {
 		songsContainer.innerHTML = ''
 
-		for (let index = 0; index < allSongs.length; index += 1) {
+		for (let index = 0; index < currentPlaylist.length; index += 1) {
 			const song = document.createElement('button');
 			song.className = 'songs__song';
-			song.dataset.id = `${allSongs[index].id}`;
+			song.dataset.id = `${currentPlaylist[index].id}`;
 
 			const songNumber = document.createElement('p');
 			songNumber.className = 'songs__song-number';
@@ -289,23 +316,23 @@ export default function MusicPlayer() {
 			const songCover = document.createElement('div')
 			songCover.className = 'songs__song-cover'
 			const songCoverImage = document.createElement('img')
-			songCoverImage.src = `${allSongs[index].cover}`
+			songCoverImage.src = `${currentPlaylist[index].cover}`
 			songCover.append(songCoverImage);
 			song.append(songCover);
 
 			const songTitle = document.createElement('p');
 			songTitle.className = 'songs__song-title';
-			songTitle.innerHTML = `${allSongs[index].title}`;
+			songTitle.innerHTML = `${currentPlaylist[index].title}`;
 			song.append(songTitle);
 			
 			const songArtist = document.createElement('p');
 			songArtist.className = 'songs__song-artist';
-			songArtist.innerHTML = `${allSongs[index].artist}`;
+			songArtist.innerHTML = `${currentPlaylist[index].artist}`;
 			song.append(songArtist);
 
 			const songDuration = document.createElement('p');
 			songDuration.className = 'songs__song-duration';
-			songDuration.innerHTML = `${allSongs[index].duration}`;
+			songDuration.innerHTML = `${currentPlaylist[index].duration}`;
 			song.append(songDuration);
 
 			songsContainer.append(song);
