@@ -341,6 +341,11 @@ export default function MusicPlayer() {
 		renderShuffleButton();
 		renderRepeatButton();
 		renderMuteButton();
+		renderVolumeRange();
+	}
+
+	function renderVolumeRange() {
+		volumeRange.value = audio.volume * 100;
 	}
 
 	function renderMuteButton() {
