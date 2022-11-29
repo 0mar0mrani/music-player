@@ -1,0 +1,43 @@
+.songs {
+	display: flex;
+	flex-direction: column;
+}
+
+.songs__header-container,
+.songs__song {
+	display: grid;
+	grid-template-columns: 0.1fr repeat(4, 1fr);
+}
+
+.songs__header-container {
+	background-color: rebeccapurple;
+	font-size: 4rem;
+	height: 6rem;
+}
+
+.songs__song {
+	align-items: center;
+	width: 100%;
+	border: none;
+	background-color: inherit;
+}
+
+.songs__song-cover {
+	width: 10rem;
+	height: 10rem;
+}
+
+.songs__song-cover img{
+	width: 100%;
+	height: auto;
+	display: block;
+}
+
+.songs__container {
+	height: calc(100vh - (10rem + 6rem));
+	overflow: scroll;
+}
+
+.songs__button--active {
+	filter: invert(20%) sepia(96%) saturate(3879%) hue-rotate(357deg) brightness(101%) contrast(99%);
+}

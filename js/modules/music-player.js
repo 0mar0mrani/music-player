@@ -120,21 +120,21 @@ export default function MusicPlayer() {
 
 	const songsContainer = document.querySelector('.songs__container');
 	let songButtons;
-	const playButton = document.querySelector('.songs__play-button');
-	const playButtonImage = document.querySelector('.songs__play-button img');
-	const previousButton = document.querySelector('.songs__previous-button');
-	const nextButton = document.querySelector('.songs__next-button');
-	const volumeRange = document.querySelector('.songs__volume-range');
-	const timelineRange = document.querySelector('.songs__timeline-range');
-	const timeStampCurrentTime = document.querySelector('.songs__timestamp-current-time');
-	const timeStampDuration = document.querySelector('.songs__timestamp-duration');
-	const currentSongCoverImage = document.querySelector('.songs__current-song-cover img');
-	const currentSongTitle = document.querySelector('.songs__current-song-title');
-	const currentSongArtist = document.querySelector('.songs__current-song-artist');
-	const repeatButton = document.querySelector('.songs__repeat-button');
-	const shuffleButton = document.querySelector('.songs__shuffle-button');
-	const muteButton = document.querySelector('.songs__mute-button');
-	const muteButtonImage = document.querySelector('.songs__mute-button img');
+	const playButton = document.querySelector('.audio-player__play-button');
+	const playButtonImage = document.querySelector('.audio-player__play-button img');
+	const previousButton = document.querySelector('.audio-player__previous-button');
+	const nextButton = document.querySelector('.audio-player__next-button');
+	const volumeRange = document.querySelector('.audio-player__volume-range');
+	const timelineRange = document.querySelector('.audio-player__timeline-range');
+	const timeStampCurrentTime = document.querySelector('.audio-player__current-time');
+	const timeStampDuration = document.querySelector('.audio-player__duration');
+	const currentSongCoverImage = document.querySelector('.audio-player__cover img');
+	const currentSongTitle = document.querySelector('.audio-player__title');
+	const currentSongArtist = document.querySelector('.audio-player__artist');
+	const repeatButton = document.querySelector('.audio-player__repeat-button');
+	const shuffleButton = document.querySelector('.audio-player__shuffle-button');
+	const muteButton = document.querySelector('.audio-player__mute-button');
+	const muteButtonImage = document.querySelector('.audio-player__mute-button img');
 	function addQuerySelector() {
 		songButtons = document.querySelectorAll('.songs__song');
 	}

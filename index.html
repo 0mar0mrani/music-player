@@ -22,61 +22,61 @@
 			<div class="songs__container">
 			</div>
 
-			<div class="songs__controllers">
-				<div class="songs__current-song">
-					<div class="songs__current-song-cover">
+			<div class="audio-player">
+				<div class="audio-player__current-song">
+					<div class="audio-player__cover">
 						<img>
 					</div>
 					
-					<div class="songs__current-song-container">
-						<p class="songs__current-song-title">TEST</p>
+					<div class="audio-player__names-container">
+						<p class="audio-player__title">TEST</p>
 
-						<p class="songs__current-song-artist">TEST</p>
+						<p class="audio-player__artist">TEST</p>
 					</div>
 				</div>
 
-				<div class="songs__controllers-controller">
-					<div class="songs__controller-container">
-						<button class="songs__shuffle-button">
+				<div class="audio-player__main-controllers">
+					<div class="audio-player__main-controllers-top">
+						<button class="audio-player__shuffle-button">
 							<img src="/assets/svg/shuffle.svg" alt="Shuffle">
 						</button>
 
-						<button class="songs__previous-button">
+						<button class="audio-player__previous-button">
 							<img src="/assets/svg/previous.svg" alt="Previous">
 						</button>
 						
-						<button class="songs__play-button">
+						<button class="audio-player__play-button">
 							<img src="/assets/svg/play.svg" alt="Play">
 						</button>
 						
-						<button class="songs__next-button">
+						<button class="audio-player__next-button">
 							<img src="/assets/svg/next.svg" alt="Next">
 						</button>
 						
-						<button class="songs__repeat-button">
+						<button class="audio-player__repeat-button">
 							<img src="/assets/svg/repeat.svg" alt="Repeat">
 						</button>
 					</div>
 
-					<div class="songs__time">
-						<div class="songs__timestamp-current-time">0:0</div>
+					<div class="audio-player__main-controllers-bottom">
+						<div class="audio-player__current-time">0:0</div>
 	
-						<div class="songs__timeline-container">
-							<input type="range" min="0" max="100" value="0" step="0.01" class="songs__timeline-range">
+						<div class="audio-player__timeline-container">
+							<input type="range" min="0" max="100" value="0" step="0.01" class="audio-player__timeline-range">
 						</div>
 						
-						<div class="songs__timestamp-duration">0:0</div>
+						<div class="audio-player__duration">0:0</div>
 					</div>
 				</div>
 
 				
-				<div class="songs__volume-mute-container">
-					<button class="songs__mute-button">
+				<div class="audio-player__volume-controllers">
+					<button class="audio-player__mute-button">
 						<img src="/assets/svg/audio.svg" alt="Mute">
 					</button>
 	
-					<div class="songs__volume-container">
-						<input type="range" min="0" max="100" value="100" class="songs__volume-range">
+					<div class="audio-player__volume-container">
+						<input type="range" min="0" max="100" value="100" class="audio-player__volume-range">
 					</div>
 				</div>
 			</div>
