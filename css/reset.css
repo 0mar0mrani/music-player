@@ -7,4 +7,12 @@
 button {
 	cursor: pointer;
 	font-family: inherit;
+	border: none;
+	background-color: inherit;
+}
+
+img {
+	width: 100%;
+	height: auto;
+	display: block;
 }
