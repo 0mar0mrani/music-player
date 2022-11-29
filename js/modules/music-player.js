@@ -118,6 +118,60 @@ export default function MusicPlayer() {
 	const audio = new Audio();
 	let timerID;
 
+	
+
+	let currentSorting = null;
+
+	const titleButton = document.querySelector('.songs__title-button');
+	const artistButton = document.querySelector('.songs__artist-button');
+	const durationButton = document.querySelector('.songs__duration-button');
+
+	titleButton.addEventListener('click', handleTitleButtonClick);
+	artistButton.addEventListener('click', handleArtistButtonClick);
+	durationButton.addEventListener('click', handleDurationButtonClick);
+
+	function handleTitleButtonClick() {
+		currentSorting = 'title';
+		sortCurrentPlaylist();
+		setQue();
+		renderHTML();
+	}
+
+	function handleArtistButtonClick() {
+		currentSorting = 'artist';
+		sortCurrentPlaylist();
+		setQue();
+		renderHTML();
+	}
+
+	function handleDurationButtonClick() {
+		currentSorting = 'duration';
+		sortCurrentPlaylist();
+		setQue();
+		renderHTML();
+	}
+	
+	function sortCurrentPlaylist() {
+		currentPlaylist.sort((a, b) => {
+			return a[currentSorting] > b[currentSorting] ? 1 : -1;
+		});
+	}
+
+	function setQue() {
+		que = [...currentPlaylist];
+	}
+
+	function setIndexOfCurrentSong() {
+		const idOfCurrentSong = currentSong.id;
+
+		for (let index = 0; index < que.length; index += 1) {
+			if (que[index].id === idOfCurrentSong) {
+				currentSongIndex = index;
+				break;
+			}
+		}
+	}
+
 	const songsContainer = document.querySelector('.songs__container');
 	let songButtons;
 	const playButton = document.querySelector('.audio-player__play-button');
@@ -155,6 +209,7 @@ export default function MusicPlayer() {
 	}
 
 	function handleNextButtonClick() {
+		setIndexOfCurrentSong();
 		if (!isRepeat) {
 			increaseCurrentSongIndex();
 		}
@@ -166,6 +221,7 @@ export default function MusicPlayer() {
 	}
 
 	function handlePreviousButtonClick() {
+		setIndexOfCurrentSong();
 		if (!isRepeat) {
 			decreaseCurrentSongIndex();
 		}
