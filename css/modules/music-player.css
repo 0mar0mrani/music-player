@@ -133,6 +133,8 @@
 }
 
 .songs__timeline-container {
+	display: flex;
+	align-items: center;
 	flex-grow: 1;
 }
 
