@@ -3,6 +3,7 @@ html {
 }
 
 body {
-	color: black;
+	color: var(--text-color);
 	font-size: 2rem;
+	font-family: 'Roboto', sans-serif;
 }
