@@ -145,7 +145,8 @@ export default function MusicPlayer() {
 	// 
 	const playlistContainer = document.querySelector('.playlists__container');
 	const addPlaylistButton = document.querySelector('.playlist__add-playlist-button');
-	let songs = null;
+	let playlists = null;
+
 	addPlaylistButton.addEventListener('click', handleAddPlaylistButton)
 
 	function addQuerySelectorPlaylist() {
@@ -472,10 +473,8 @@ export default function MusicPlayer() {
 	function renderPlaylistMenu() {
 		if (isPlaylistMenuOpen) {
 			songsElement.classList.add('songs--playlist-open');
-			console.log('open');
 		} else {
 			songsElement.classList.remove('songs--playlist-open');	
-			console.log('closed');
 		}
 	}
 
