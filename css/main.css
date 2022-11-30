@@ -3,4 +3,5 @@
 @import '/css/base.css';
 
 @import '/css/modules/music-player/audio-player.css';
-@import '/css/modules/music-player/main.css';
+@import '/css/modules/music-player/playlist.css';
+@import '/css/modules/music-player/songs.css';
