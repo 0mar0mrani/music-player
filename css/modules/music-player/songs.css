@@ -1,6 +1,7 @@
 .songs {
 	display: flex;
 	flex-direction: column;
+	position: relative;
 }
 
 .songs__header-container,
@@ -10,7 +11,8 @@
 }
 
 .songs__header-container {
-	background-color: rebeccapurple;
+	background-color: var(--background-color-lighter);
+	color: var(--text-color);
 	font-size: 4rem;
 	height: 6rem;
 }
@@ -19,7 +21,13 @@
 	align-items: center;
 	width: 100%;
 	border: none;
-	background-color: inherit;
+	font-size: 2rem;
+	color: var(--text-color);
+	background-color: var(--background-color-lighter);
+}
+
+.songs__song:hover {
+	background-color: var(--background-color-lightest);
 }
 
 .songs__song-cover {
