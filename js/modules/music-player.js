@@ -124,7 +124,10 @@ export default function MusicPlayer() {
 	let timerID;
 	let currentSorting = null;
 
-	
+	//
+	const contextMenu = document.querySelector('.songs__context-menu');
+
+
 
 	//
 	const songsElement = document.querySelector('.songs');
@@ -180,7 +183,7 @@ export default function MusicPlayer() {
 
 		const newPlaylist = {
 			name: `Playlist ${amountOfPlaylists}`,
-			songs: '',
+			songs: [],
 		}
 
 		allPlaylists.push(newPlaylist);
@@ -240,6 +243,7 @@ export default function MusicPlayer() {
 	const songsContainer = document.querySelector('.songs__container');
 	let songButtons;
 	let addToPlaylistButtons;
+	let contextMenuButtons;
 	const playButton = document.querySelector('.audio-player__play-button');
 	const playButtonImage = document.querySelector('.audio-player__play-button img');
 	const previousButton = document.querySelector('.audio-player__previous-button');
@@ -255,9 +259,11 @@ export default function MusicPlayer() {
 	const shuffleButton = document.querySelector('.audio-player__shuffle-button');
 	const muteButton = document.querySelector('.audio-player__mute-button');
 	const muteButtonImage = document.querySelector('.audio-player__mute-button img');
+
 	function addQuerySelector() {
 		songButtons = document.querySelectorAll('.songs__song');
 		addToPlaylistButtons = document.querySelectorAll('.songs__add-to-playlist-button');
+		contextMenuButtons = document.querySelectorAll('.songs__context-menu-item');
 	}
 
 	playButton.addEventListener('click', handlePlayButtonClick);
@@ -279,12 +285,59 @@ export default function MusicPlayer() {
 				handleAddPlaylistButtonClick(event, index);
 			});
 		}
+
+		for (let index = 0; index < contextMenuButtons.length; index += 1) {
+			contextMenuButtons[index].addEventListener('click', () => {
+				handleContextMenuButtonsClick(index) 
+			})
+		}
+	}
+
+	let currentIndexOfContextMenuButton = null;
+
+	function handleContextMenuButtonsClick(index) {
+		addSongToRightPlaylist(index);
+	}
+
+	function addSongToRightPlaylist(index) {
+		const selectedSong = currentPlaylist[currentIndexOfContextMenuButton];
+		const selectedPlaylist = allPlaylists[index + 1].songs;
+		selectedPlaylist.push(selectedSong);
+	}
+
+	let isContextMenuOpen = false;
+
+	window.addEventListener('click', handleWindowClick);
+
+
+	function handleWindowClick() {
+		isContextMenuOpen = false;
+
+		if (isContextMenuOpen) {
+			contextMenu.classList.add('songs__context-menu--open');
+		} else {
+			contextMenu.classList.remove('songs__context-menu--open');
+		} 
 	}
 
 	function handleAddPlaylistButtonClick(event, index) {
-
-		console.log(index);
 		event.stopPropagation();
+
+		currentIndexOfContextMenuButton = index;
+
+		isContextMenuOpen = !isContextMenuOpen;
+
+		if (isContextMenuOpen) {
+			contextMenu.classList.add('songs__context-menu--open');
+		} else {
+			contextMenu.classList.remove('songs__context-menu--open');
+		} 
+
+		const x = event.clientX;
+		const y = event.clientY;
+
+		contextMenu.style.top = `${y}px`;
+		contextMenu.style.left = `${x}px`;
 	}
 
 	function handleNextButtonClick() {
@@ -479,11 +532,27 @@ export default function MusicPlayer() {
 		renderMuteButton();
 		renderVolumeRange();
 		renderPlaylistMenu();
+		renderItemsInContextMenu();
 
 		addQuerySelectorPlaylist();
 		addEventListenerPlaylist()
 		addQuerySelector();
 		addEventListeners();
+	}
+
+	function renderItemsInContextMenu() {
+		contextMenu.innerHTML = '';
+
+		for (let index = 1; index < allPlaylists.length; index += 1) {
+			const menuItem = document.createElement('li');
+			const button = document.createElement('button');
+	
+			button.className = 'songs__context-menu-item';
+			button.innerText = `${allPlaylists[index].name}`;
+	
+			menuItem.append(button);
+			contextMenu.append(menuItem);
+		}
 	}
 
 	function renderPlaylistMenu() {

@@ -1,0 +1,19 @@
+.songs__context-menu {
+	position: absolute;
+	top: 0;
+	width: 20rem;
+	height: 50rem;
+	background-color: rebeccapurple;
+	transform: translate(-100%, 2rem);
+	display: none;
+	z-index: 999;
+	list-style: none;
+}
+
+.songs__context-menu--open {
+	display: block;
+}
+
+.songs__context-menu li {
+	list-style: none;
+}
