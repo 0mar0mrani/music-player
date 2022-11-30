@@ -118,15 +118,34 @@ export default function MusicPlayer() {
 	let isPlaying = false;
 	let isRepeat = false;
 	let isShuffle = false;
+	let isPlaylistMenuOpen = false;
 	let currentVolume;
 	const audio = new Audio();
 	let timerID;
 	let currentSorting = null;
 
+	//
+	const songsElement = document.querySelector('.songs');
+
+	const playlistButton = document.querySelector('.songs__playlist-button');
+	playlistButton.addEventListener('click', handlePlaylistButtonClick);
+
+	function handlePlaylistButtonClick() {
+		togglePlaylistMenu();
+		renderHTML();
+	}
+
+
+
+	function togglePlaylistMenu() {
+		isPlaylistMenuOpen = !isPlaylistMenuOpen;
+	}
 	
+
+	// 
 	const playlistContainer = document.querySelector('.playlists__container');
 	const addPlaylistButton = document.querySelector('.playlist__add-playlist-button');
-	let playlists = null;
+	let songs = null;
 	addPlaylistButton.addEventListener('click', handleAddPlaylistButton)
 
 	function addQuerySelectorPlaylist() {
@@ -442,11 +461,22 @@ export default function MusicPlayer() {
 		renderRepeatButton();
 		renderMuteButton();
 		renderVolumeRange();
+		renderPlaylistMenu();
 
 		addQuerySelectorPlaylist();
 		addEventListenerPlaylist()
 		addQuerySelector();
 		addEventListeners();
+	}
+
+	function renderPlaylistMenu() {
+		if (isPlaylistMenuOpen) {
+			songsElement.classList.add('songs--playlist-open');
+			console.log('open');
+		} else {
+			songsElement.classList.remove('songs--playlist-open');	
+			console.log('closed');
+		}
 	}
 
 	function renderVolumeRange() {
