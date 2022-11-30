@@ -5,6 +5,7 @@
 	background-color: rebeccapurple;
 	width: 33vw;
 	height: calc(100vh);
+	transform: translateX(33vw);
 }
 
 .playlists__container {
