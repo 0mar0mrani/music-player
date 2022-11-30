@@ -1,114 +1,118 @@
 export default function MusicPlayer() {
-	const allSongs = [
-		{	title: 'Lifelike',
-			artist: 'Alexi Action',
-			duration: '2:24',
-			url: '/assets/audio/lifelike.mp3',
-			cover: '/assets/image/lifelike.jpg',
-			id: '1',
-		},
-		{	title: 'Mountain Path',
-			artist: 'Magnetic',
-			duration: '3:28',
-			url: '/assets/audio/mountainpath.mp3',
-			cover: '/assets/image/mountainpath.jpg',
-			id: '2',
-		},		
-		{	title: 'Please Calm My Mind',
-			artist: 'Lesfm',
-			duration: '2:55',
-			url: '/assets/audio/pleasecalmmymind.mp3',
-			cover: '/assets/image/pleasecalmmymind.jpg',
-			id: '3',
-		},		
-		{	title: 'Drop It',
-			artist: 'Coma',
-			duration: '1:42',
-			url: '/assets/audio/dropit.mp3',
-			cover: '/assets/image/dropit.jpg',
-			id: '4',
-		},
-		{	title: 'Password Infinity',
-			artist: 'Evgeny',
-			duration: '2:25',
-			url: '/assets/audio/passwordinfinity.mp3',
-			cover: '/assets/image/passwordinfinity.jpg',
-			id: '5',
-		},
-		{	title: 'The Beat of Nature',
-			artist: 'Olexy',
-			duration: '2:53',
-			url: '/assets/audio/thebeatofnature.mp3',
-			cover: '/assets/image/thebeatofnature.jpg',
-			id: '6',
-		},
-		{	title: 'Powerfull',
-			artist: 'Penguin',
-			duration: '1:13',
-			url: '/assets/audio/powerful.mp3',
-			cover: '/assets/image/powerful.jpg',
-			id: '7',
-		},
-		{	title: 'The Blackest Bouquet',
-			artist: 'LeonellCassio',
-			duration: '3:41',
-			url: '/assets/audio/theblackestbouquet.mp3',
-			cover: '/assets/image/theblackestbouquet.jpg',
-			id: '8',
-		},
-		{	title: 'Weeknds',
-			artist: 'Dayfox',
-			duration: '3:28',
-			url: '/assets/audio/weeknds.mp3',
-			cover: '/assets/image/weeknds.jpg',
-			id: '9',
-		},
-		{	title: 'Best Time',
-			artist: 'FASS',
-			duration: '2:08',
-			url: '/assets/audio/besttime.mp3',
-			cover: '/assets/image/besttime.jpg',
-			id: '10',
-		},
-		{	title: 'Whip',
-			artist: 'Praz',
-			duration: '2:44',
-			url: '/assets/audio/whip.mp3',
-			cover: '/assets/image/whip.jpg',
-			id: '11',
-		},
-		{	title: 'Sweet Love',
-			artist: 'Dayfox',
-			duration: '3:13',
-			url: '/assets/audio/sweetlove.mp3',
-			cover: '/assets/image/sweetlove.jpg',
-			id: '12',
-		},
-		{	title: 'Brainfluid',
-			artist: 'CINIM',
-			duration: '3:13',
-			url: '/assets/audio/brainfluid.mp3',
-			cover: '/assets/image/brainfluid.jpg',
-			id: '13',
-		},
-		{	title: 'Euphoria',
-			artist: 'Playsound',
-			duration: '2:16',
-			url: '/assets/audio/euphoria.mp3',
-			cover: '/assets/image/euphoria.jpg',
-			id: '14',
-		},
-		{	title: 'Into The Night',
-			artist: 'Prazkhanal',
-			duration: '2:16',
-			url: '/assets/audio/intothenight.mp3',
-			cover: '/assets/image/intothenight.jpg',
-			id: '15',
-		},
-	]
+	const allSongs = {
+		name: 'All songs',
+		songs:[
+			{	title: 'Lifelike',
+				artist: 'Alexi Action',
+				duration: '2:24',
+				url: '/assets/audio/lifelike.mp3',
+				cover: '/assets/image/lifelike.jpg',
+				id: '1',
+			},
+			{	title: 'Mountain Path',
+				artist: 'Magnetic',
+				duration: '3:28',
+				url: '/assets/audio/mountainpath.mp3',
+				cover: '/assets/image/mountainpath.jpg',
+				id: '2',
+			},		
+			{	title: 'Please Calm My Mind',
+				artist: 'Lesfm',
+				duration: '2:55',
+				url: '/assets/audio/pleasecalmmymind.mp3',
+				cover: '/assets/image/pleasecalmmymind.jpg',
+				id: '3',
+			},		
+			{	title: 'Drop It',
+				artist: 'Coma',
+				duration: '1:42',
+				url: '/assets/audio/dropit.mp3',
+				cover: '/assets/image/dropit.jpg',
+				id: '4',
+			},
+			{	title: 'Password Infinity',
+				artist: 'Evgeny',
+				duration: '2:25',
+				url: '/assets/audio/passwordinfinity.mp3',
+				cover: '/assets/image/passwordinfinity.jpg',
+				id: '5',
+			},
+			{	title: 'The Beat of Nature',
+				artist: 'Olexy',
+				duration: '2:53',
+				url: '/assets/audio/thebeatofnature.mp3',
+				cover: '/assets/image/thebeatofnature.jpg',
+				id: '6',
+			},
+			{	title: 'Powerfull',
+				artist: 'Penguin',
+				duration: '1:13',
+				url: '/assets/audio/powerful.mp3',
+				cover: '/assets/image/powerful.jpg',
+				id: '7',
+			},
+			{	title: 'The Blackest Bouquet',
+				artist: 'LeonellCassio',
+				duration: '3:41',
+				url: '/assets/audio/theblackestbouquet.mp3',
+				cover: '/assets/image/theblackestbouquet.jpg',
+				id: '8',
+			},
+			{	title: 'Weeknds',
+				artist: 'Dayfox',
+				duration: '3:28',
+				url: '/assets/audio/weeknds.mp3',
+				cover: '/assets/image/weeknds.jpg',
+				id: '9',
+			},
+			{	title: 'Best Time',
+				artist: 'FASS',
+				duration: '2:08',
+				url: '/assets/audio/besttime.mp3',
+				cover: '/assets/image/besttime.jpg',
+				id: '10',
+			},
+			{	title: 'Whip',
+				artist: 'Praz',
+				duration: '2:44',
+				url: '/assets/audio/whip.mp3',
+				cover: '/assets/image/whip.jpg',
+				id: '11',
+			},
+			{	title: 'Sweet Love',
+				artist: 'Dayfox',
+				duration: '3:13',
+				url: '/assets/audio/sweetlove.mp3',
+				cover: '/assets/image/sweetlove.jpg',
+				id: '12',
+			},
+			{	title: 'Brainfluid',
+				artist: 'CINIM',
+				duration: '3:13',
+				url: '/assets/audio/brainfluid.mp3',
+				cover: '/assets/image/brainfluid.jpg',
+				id: '13',
+			},
+			{	title: 'Euphoria',
+				artist: 'Playsound',
+				duration: '2:16',
+				url: '/assets/audio/euphoria.mp3',
+				cover: '/assets/image/euphoria.jpg',
+				id: '14',
+			},
+			{	title: 'Into The Night',
+				artist: 'Prazkhanal',
+				duration: '2:16',
+				url: '/assets/audio/intothenight.mp3',
+				cover: '/assets/image/intothenight.jpg',
+				id: '15',
+			},
+		]
+	}
 
+	let allPlaylists = [allSongs]
 	let currentSongIndex;
-	let currentPlaylist = [...allSongs];
+	let currentPlaylist = [...allSongs.songs];
 	let que = [...currentPlaylist];
 	let currentSong = que[0];
 	let isPlaying = false;
@@ -117,10 +121,49 @@ export default function MusicPlayer() {
 	let currentVolume;
 	const audio = new Audio();
 	let timerID;
+	let currentSorting = null;
 
 	
+	const playlistContainer = document.querySelector('.playlists__container');
+	const addPlaylistButton = document.querySelector('.playlist__add-playlist-button');
+	let playlists = null;
+	addPlaylistButton.addEventListener('click', handleAddPlaylistButton)
 
-	let currentSorting = null;
+	function addQuerySelectorPlaylist() {
+		playlists = document.querySelectorAll('.playlists__playlist');
+	}
+
+	function addEventListenerPlaylist() {
+		for (let index = 0; index < allPlaylists.length; index += 1) {
+			playlists[index].addEventListener('click', () => {
+				handlePlaylistClick(index);
+			})
+		}
+	}
+
+	function handleAddPlaylistButton() {
+		addNewPlaylist();
+		renderHTML();
+	}
+
+	function handlePlaylistClick(index) {
+		currentPlaylist = [...allPlaylists[index].songs]
+		que = [...currentPlaylist]
+		renderHTML();
+	}
+
+	function addNewPlaylist() {
+
+		const amountOfPlaylists = allPlaylists.length;
+
+		const newPlaylist = {
+			name: `Playlist ${amountOfPlaylists}`,
+			songs: '',
+		}
+
+		allPlaylists.push(newPlaylist);
+	}
+
 
 	const titleButton = document.querySelector('.songs__title-button');
 	const artistButton = document.querySelector('.songs__artist-button');
@@ -379,9 +422,9 @@ export default function MusicPlayer() {
 	function getPropertiesOfClickedSong(event) {
 		const clickedSong = event.currentTarget.dataset.id;
 
-		for (let index = 0; index < allSongs.length; index += 1) {
-			if (allSongs[index].id === clickedSong) {
-				return [allSongs[index], index];
+		for (let index = 0; index < allSongs.songs.length; index += 1) {
+			if (allSongs.songs[index].id === clickedSong) {
+				return [allSongs.songs[index], index];
 			}
 		}
 	}
@@ -392,12 +435,18 @@ export default function MusicPlayer() {
 	
 	function renderHTML() {
 		renderSongList();
+		renderPlaylist();
 		renderCurrentSong();
 		renderPlayButton();
 		renderShuffleButton();
 		renderRepeatButton();
 		renderMuteButton();
 		renderVolumeRange();
+
+		addQuerySelectorPlaylist();
+		addEventListenerPlaylist()
+		addQuerySelector();
+		addEventListeners();
 	}
 
 	function renderVolumeRange() {
@@ -467,6 +516,18 @@ export default function MusicPlayer() {
 		}
 	}
 
+	function renderPlaylist() {
+		playlistContainer.innerHTML = '';
+
+		for (let index = 0; index < allPlaylists.length; index += 1) {
+			const playlist = document.createElement('button');
+			playlist.className = 'playlists__playlist';
+			playlist.innerText = `${allPlaylists[index].name}`;
+
+			playlistContainer.append(playlist);
+		}
+	}
+
 	function renderSongList() {
 		songsContainer.innerHTML = ''
 
@@ -504,8 +565,6 @@ export default function MusicPlayer() {
 
 			songsContainer.append(song);
 
-			addQuerySelector();
-			addEventListeners();
 		}
 	}
 
