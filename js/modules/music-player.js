@@ -124,6 +124,8 @@ export default function MusicPlayer() {
 	let timerID;
 	let currentSorting = null;
 
+	
+
 	//
 	const songsElement = document.querySelector('.songs');
 
@@ -237,6 +239,7 @@ export default function MusicPlayer() {
 
 	const songsContainer = document.querySelector('.songs__container');
 	let songButtons;
+	let addToPlaylistButtons;
 	const playButton = document.querySelector('.audio-player__play-button');
 	const playButtonImage = document.querySelector('.audio-player__play-button img');
 	const previousButton = document.querySelector('.audio-player__previous-button');
@@ -254,6 +257,7 @@ export default function MusicPlayer() {
 	const muteButtonImage = document.querySelector('.audio-player__mute-button img');
 	function addQuerySelector() {
 		songButtons = document.querySelectorAll('.songs__song');
+		addToPlaylistButtons = document.querySelectorAll('.songs__add-to-playlist-button');
 	}
 
 	playButton.addEventListener('click', handlePlayButtonClick);
@@ -269,6 +273,18 @@ export default function MusicPlayer() {
 		for (const songButton of songButtons) {
 			songButton.addEventListener('click', handleSongButtonClick);
 		}
+
+		for (let index = 0; index < addToPlaylistButtons.length; index += 1) {
+			addToPlaylistButtons[index].addEventListener('click', (event) => {
+				handleAddPlaylistButtonClick(event, index);
+			});
+		}
+	}
+
+	function handleAddPlaylistButtonClick(event, index) {
+
+		console.log(index);
+		event.stopPropagation();
 	}
 
 	function handleNextButtonClick() {
@@ -521,7 +537,6 @@ export default function MusicPlayer() {
 
 		timelineRange.value = currentTimeInPercent;
 
-
 		const durationInMinutes = Math.floor(Math.floor(duration) / 60);
 		const durationInSeconds = Math.floor(duration) - durationInMinutes * 60;
 
@@ -592,8 +607,12 @@ export default function MusicPlayer() {
 			songDuration.innerHTML = `${currentPlaylist[index].duration}`;
 			song.append(songDuration);
 
-			songsContainer.append(song);
+			const addPlaylist = document.createElement('button');
+			addPlaylist.className = 'songs__add-to-playlist-button';
+			addPlaylist.innerHTML = '<img src="/assets/svg/add-to-playlist.svg">'
+			song.append(addPlaylist);
 
+			songsContainer.append(song);
 		}
 	}
 

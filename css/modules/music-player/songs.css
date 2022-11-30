@@ -12,7 +12,7 @@
 .songs__header-container,
 .songs__song {
 	display: grid;
-	grid-template-columns: 0.1fr repeat(4, 1fr);
+	grid-template-columns: 0.1fr repeat(5, 1fr);
 }
 
 .songs__playlist-button {
@@ -37,6 +37,22 @@
 	font-size: 2rem;
 	color: var(--text-color);
 	background-color: var(--background-color-lighter);
+	z-index: 0;
+}
+
+.songs__add-to-playlist-button {
+	width: 4rem;
+	height: 4rem;
+	justify-self: flex-end;
+	margin-right: 3rem;
+	background-color: rebeccapurple;
+	z-index: 100;
+}
+
+.songs__add-to-playlist-button img {
+	width: 100%;
+	height: auto;
+	filter: invert(96%) sepia(7%) saturate(79%) hue-rotate(202deg) brightness(99%) contrast(94%);
 }
 
 .songs__song:hover {
