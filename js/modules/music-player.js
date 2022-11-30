@@ -3,54 +3,89 @@ import Playlists from "./music-player/playlist.js";
 export default function MusicPlayer() {
 	const playlistsModule = Playlists();
 
-	let currentSongIndex;
-	let currentPlaylist = [...playlistsModule.allSongs.songs];
-	let que = [...currentPlaylist];
-	let currentSong = que[0];
 	let isPlaying = false;
 	let isRepeat = false;
 	let isShuffle = false;
 	let isPlaylistMenuOpen = false;
+	let currentPlaylist = [...playlistsModule.allSongs.songs];
+	let currentSongIndex = null;
+	let playlists = null;
+	let que = [...currentPlaylist];
+	let currentSong = que[0];
 	let currentVolume;
 	const audio = new Audio();
 	let timerID;
 	let currentSorting = null;
+	let songButtons = null;
+	let addToPlaylistButtons = null;
+	let contextMenuButtons = null;
+	let currentIndexOfContextMenuButton = null;
+	let isContextMenuOpen = false;
 
-	//
-	const contextMenu = document.querySelector('.songs__context-menu');
-
-
-
-	//
-	const songsElement = document.querySelector('.songs');
-
-	const playlistButton = document.querySelector('.songs__playlist-button');
-	playlistButton.addEventListener('click', handlePlaylistButtonClick);
-
-	function handlePlaylistButtonClick() {
-		togglePlaylistMenu();
-		renderHTML();
-	}
-
-
-
-	function togglePlaylistMenu() {
-		isPlaylistMenuOpen = !isPlaylistMenuOpen;
-	}
-	
-
-	// 
+	const titleButton = document.querySelector('.songs__title-button');
+	const artistButton = document.querySelector('.songs__artist-button');
+	const durationButton = document.querySelector('.songs__duration-button');
 	const playlistContainer = document.querySelector('.playlists__container');
 	const addPlaylistButton = document.querySelector('.playlist__add-playlist-button');
-	let playlists = null;
+	const contextMenu = document.querySelector('.songs__context-menu');
+	const songsElement = document.querySelector('.songs');
+	const playlistButton = document.querySelector('.songs__playlist-button');
+	const songsContainer = document.querySelector('.songs__container');
+	const playButton = document.querySelector('.audio-player__play-button');
+	const playButtonImage = document.querySelector('.audio-player__play-button img');
+	const previousButton = document.querySelector('.audio-player__previous-button');
+	const nextButton = document.querySelector('.audio-player__next-button');
+	const volumeRange = document.querySelector('.audio-player__volume-range');
+	const timelineRange = document.querySelector('.audio-player__timeline-range');
+	const timeStampCurrentTime = document.querySelector('.audio-player__current-time');
+	const timeStampDuration = document.querySelector('.audio-player__duration');
+	const currentSongCoverImage = document.querySelector('.audio-player__cover img');
+	const currentSongTitle = document.querySelector('.audio-player__title');
+	const currentSongArtist = document.querySelector('.audio-player__artist');
+	const repeatButton = document.querySelector('.audio-player__repeat-button');
+	const shuffleButton = document.querySelector('.audio-player__shuffle-button');
+	const muteButton = document.querySelector('.audio-player__mute-button');
+	const muteButtonImage = document.querySelector('.audio-player__mute-button img');
 
-	addPlaylistButton.addEventListener('click', handleAddPlaylistButton)
-
-	function addQuerySelectorPlaylist() {
+	function addQuerySelector() {
+		songButtons = document.querySelectorAll('.songs__song');
+		addToPlaylistButtons = document.querySelectorAll('.songs__add-to-playlist-button');
+		contextMenuButtons = document.querySelectorAll('.songs__context-menu-item');
 		playlists = document.querySelectorAll('.playlists__playlist');
 	}
+	
+	titleButton.addEventListener('click', handleTitleButtonClick);
+	artistButton.addEventListener('click', handleArtistButtonClick);
+	durationButton.addEventListener('click', handleDurationButtonClick);
+	playlistButton.addEventListener('click', handlePlaylistButtonClick);
+	addPlaylistButton.addEventListener('click', handleAddPlaylistButton)
+	playButton.addEventListener('click', handlePlayButtonClick);
+	previousButton.addEventListener('click', handlePreviousButtonClick);
+	nextButton.addEventListener('click', handleNextButtonClick);
+	volumeRange.addEventListener('input', handleVolumeRangeInput);
+	timelineRange.addEventListener('input', handleTimelineRangeInput);
+	repeatButton.addEventListener('click', handleRepeatButtonClick);
+	shuffleButton.addEventListener('click', handleShuffleButtonClick);
+	muteButton.addEventListener('click', handleMuteButtonClick);
+	window.addEventListener('click', handleWindowClick);
 
-	function addEventListenerPlaylist() {
+	function addEventListeners() {
+		for (const songButton of songButtons) {
+			songButton.addEventListener('click', handleSongButtonClick);
+		}
+
+		for (let index = 0; index < addToPlaylistButtons.length; index += 1) {
+			addToPlaylistButtons[index].addEventListener('click', (event) => {
+				handleAddPlaylistButtonClick(event, index);
+			});
+		}
+
+		for (let index = 0; index < contextMenuButtons.length; index += 1) {
+			contextMenuButtons[index].addEventListener('click', () => {
+				handleContextMenuButtonsClick(index) 
+			})
+		}
+
 		for (let index = 0; index < playlistsModule.allPlaylists.length; index += 1) {
 			playlists[index].addEventListener('click', () => {
 				handlePlaylistClick(index);
@@ -58,6 +93,15 @@ export default function MusicPlayer() {
 		}
 	}
 
+	function handlePlaylistButtonClick() {
+		togglePlaylistMenu();
+		renderHTML();
+	}
+
+	function togglePlaylistMenu() {
+		isPlaylistMenuOpen = !isPlaylistMenuOpen;
+	}
+	
 	function handleAddPlaylistButton() {
 		addNewPlaylist();
 		renderHTML();
@@ -68,27 +112,6 @@ export default function MusicPlayer() {
 		que = [...currentPlaylist]
 		renderHTML();
 	}
-
-	function addNewPlaylist() {
-
-		const amountOfPlaylists = playlistsModule.allPlaylists.length;
-
-		const newPlaylist = {
-			name: `Playlist ${amountOfPlaylists}`,
-			songs: [],
-		}
-
-		playlistsModule.allPlaylists.push(newPlaylist);
-	}
-
-
-	const titleButton = document.querySelector('.songs__title-button');
-	const artistButton = document.querySelector('.songs__artist-button');
-	const durationButton = document.querySelector('.songs__duration-button');
-
-	titleButton.addEventListener('click', handleTitleButtonClick);
-	artistButton.addEventListener('click', handleArtistButtonClick);
-	durationButton.addEventListener('click', handleDurationButtonClick);
 
 	function handleTitleButtonClick() {
 		currentSorting = 'title';
@@ -111,96 +134,9 @@ export default function MusicPlayer() {
 		renderHTML();
 	}
 	
-	function sortCurrentPlaylist() {
-		currentPlaylist.sort((a, b) => {
-			return a[currentSorting] > b[currentSorting] ? 1 : -1;
-		});
-	}
-
-	function setQue() {
-		que = [...currentPlaylist];
-	}
-
-	function setIndexOfCurrentSong() {
-		const idOfCurrentSong = currentSong.id;
-
-		for (let index = 0; index < que.length; index += 1) {
-			if (que[index].id === idOfCurrentSong) {
-				currentSongIndex = index;
-				break;
-			}
-		}
-	}
-
-	const songsContainer = document.querySelector('.songs__container');
-	let songButtons;
-	let addToPlaylistButtons;
-	let contextMenuButtons;
-	const playButton = document.querySelector('.audio-player__play-button');
-	const playButtonImage = document.querySelector('.audio-player__play-button img');
-	const previousButton = document.querySelector('.audio-player__previous-button');
-	const nextButton = document.querySelector('.audio-player__next-button');
-	const volumeRange = document.querySelector('.audio-player__volume-range');
-	const timelineRange = document.querySelector('.audio-player__timeline-range');
-	const timeStampCurrentTime = document.querySelector('.audio-player__current-time');
-	const timeStampDuration = document.querySelector('.audio-player__duration');
-	const currentSongCoverImage = document.querySelector('.audio-player__cover img');
-	const currentSongTitle = document.querySelector('.audio-player__title');
-	const currentSongArtist = document.querySelector('.audio-player__artist');
-	const repeatButton = document.querySelector('.audio-player__repeat-button');
-	const shuffleButton = document.querySelector('.audio-player__shuffle-button');
-	const muteButton = document.querySelector('.audio-player__mute-button');
-	const muteButtonImage = document.querySelector('.audio-player__mute-button img');
-
-	function addQuerySelector() {
-		songButtons = document.querySelectorAll('.songs__song');
-		addToPlaylistButtons = document.querySelectorAll('.songs__add-to-playlist-button');
-		contextMenuButtons = document.querySelectorAll('.songs__context-menu-item');
-	}
-
-	playButton.addEventListener('click', handlePlayButtonClick);
-	previousButton.addEventListener('click', handlePreviousButtonClick);
-	nextButton.addEventListener('click', handleNextButtonClick);
-	volumeRange.addEventListener('input', handleVolumeRangeInput);
-	timelineRange.addEventListener('input', handleTimelineRangeInput);
-	repeatButton.addEventListener('click', handleRepeatButtonClick);
-	shuffleButton.addEventListener('click', handleShuffleButtonClick);
-	muteButton.addEventListener('click', handleMuteButtonClick)
-
-	function addEventListeners() {
-		for (const songButton of songButtons) {
-			songButton.addEventListener('click', handleSongButtonClick);
-		}
-
-		for (let index = 0; index < addToPlaylistButtons.length; index += 1) {
-			addToPlaylistButtons[index].addEventListener('click', (event) => {
-				handleAddPlaylistButtonClick(event, index);
-			});
-		}
-
-		for (let index = 0; index < contextMenuButtons.length; index += 1) {
-			contextMenuButtons[index].addEventListener('click', () => {
-				handleContextMenuButtonsClick(index) 
-			})
-		}
-	}
-
-	let currentIndexOfContextMenuButton = null;
-
 	function handleContextMenuButtonsClick(index) {
 		addSongToRightPlaylist(index);
 	}
-
-	function addSongToRightPlaylist(index) {
-		const selectedSong = currentPlaylist[currentIndexOfContextMenuButton];
-		const selectedPlaylist = playlistsModule.allPlaylists[index + 1].songs;
-		selectedPlaylist.push(selectedSong);
-	}
-
-	let isContextMenuOpen = false;
-
-	window.addEventListener('click', handleWindowClick);
-
 
 	function handleWindowClick() {
 		isContextMenuOpen = false;
@@ -293,13 +229,51 @@ export default function MusicPlayer() {
 		renderHTML();
 	}
 
-	function setCurrentVolume() {
-		currentVolume = audio.volume;
-	}
-
 	function handleMuteButtonClick() {
 		toggleMute();
 		renderHTML();
+	}
+
+	function addSongToRightPlaylist(index) {
+		const selectedSong = currentPlaylist[currentIndexOfContextMenuButton];
+		const selectedPlaylist = playlistsModule.allPlaylists[index + 1].songs;
+		selectedPlaylist.push(selectedSong);
+	}
+
+	function sortCurrentPlaylist() {
+		currentPlaylist.sort((a, b) => {
+			return a[currentSorting] > b[currentSorting] ? 1 : -1;
+		});
+	}
+
+	function setQue() {
+		que = [...currentPlaylist];
+	}
+
+	function setIndexOfCurrentSong() {
+		const idOfCurrentSong = currentSong.id;
+
+		for (let index = 0; index < que.length; index += 1) {
+			if (que[index].id === idOfCurrentSong) {
+				currentSongIndex = index;
+				break;
+			}
+		}
+	}
+
+	function addNewPlaylist() {
+		const amountOfPlaylists = playlistsModule.allPlaylists.length;
+
+		const newPlaylist = {
+			name: `Playlist ${amountOfPlaylists}`,
+			songs: [],
+		}
+
+		playlistsModule.allPlaylists.push(newPlaylist);
+	}
+
+	function setCurrentVolume() {
+		currentVolume = audio.volume;
 	}
 
 	function toggleMute() {
@@ -426,8 +400,6 @@ export default function MusicPlayer() {
 		renderPlaylistMenu();
 		renderItemsInContextMenu();
 
-		addQuerySelectorPlaylist();
-		addEventListenerPlaylist()
 		addQuerySelector();
 		addEventListeners();
 	}
