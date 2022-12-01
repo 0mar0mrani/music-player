@@ -79,7 +79,3 @@
 	height: calc(100vh - (10rem + 6rem));
 	overflow: scroll;
 }
-
-.songs__button--active {
-	filter: invert(20%) sepia(96%) saturate(3879%) hue-rotate(357deg) brightness(101%) contrast(99%);
-}

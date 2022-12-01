@@ -461,9 +461,9 @@ export default function MusicPlayer() {
 
 	function renderRepeatButton() {
 		if (isRepeat) {
-			repeatButton.classList.add('songs__button--active');
+			repeatButton.classList.add('audio-player__button--active');
 		} else {
-			repeatButton.classList.remove('songs__button--active');
+			repeatButton.classList.remove('audio-player__button--active');
 		}
 	}
 
@@ -477,9 +477,9 @@ export default function MusicPlayer() {
 
 	function renderShuffleButton() {
 		if (isShuffle) {
-			shuffleButton.classList.add('songs__button--active');
+			shuffleButton.classList.add('audio-player__button--active');
 		} else {
-			shuffleButton.classList.remove('songs__button--active');
+			shuffleButton.classList.remove('audio-player__button--active');
 		}
 	}
 
