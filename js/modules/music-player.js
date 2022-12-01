@@ -36,6 +36,7 @@ export default function MusicPlayer() {
 	const durationButton = document.querySelector('.songs__duration-button');
 	
 	const playlistButton = document.querySelector('.songs__playlist-button');
+	const playlistButtonIcon = document.querySelector('.songs__playlist-button img');
 	const addPlaylistButton = document.querySelector('.playlist__add-playlist-button');
 	const playlistContainer = document.querySelector('.playlists__container');
 	let addToPlaylistButtons = null;
@@ -439,8 +440,10 @@ export default function MusicPlayer() {
 	function renderPlaylistMenu() {
 		if (isPlaylistMenuOpen) {
 			songsElement.classList.add('songs--playlist-open');
+			playlistButtonIcon.src = '/assets/svg/close.svg';
 		} else {
-			songsElement.classList.remove('songs--playlist-open');	
+			songsElement.classList.remove('songs--playlist-open');
+			playlistButtonIcon.src = '/assets/svg/menu.svg';
 		}
 	}
 
