@@ -7,4 +7,5 @@ body {
 	font-size: 2rem;
 	font-family: 'Roboto', sans-serif;
 	overflow: hidden;
+	background-color: var(--background-color-lighter);
 }
