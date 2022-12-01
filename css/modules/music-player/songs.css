@@ -52,6 +52,11 @@
 	justify-self: flex-end;
 	margin-right: 3rem;
 	z-index: 100;
+	display: none;
+}
+
+.songs__song:hover .songs__add-to-playlist-button {
+	display: block;
 }
 
 .songs__add-to-playlist-button img {
