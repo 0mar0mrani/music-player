@@ -162,7 +162,7 @@ export default function MusicPlayer() {
 	function handleAddPlaylistButtonClick(event, index) {
 		event.stopPropagation();
 
-		currentIndexOfContextMenuButton = index;
+		indexOfClickedContextMenuButton = index;
 
 		isContextMenuOpen = !isContextMenuOpen;
 
@@ -246,7 +246,7 @@ export default function MusicPlayer() {
 	}
 
 	function addSongToRightPlaylist(index) {
-		const selectedSong = currentPlaylist[currentIndexOfContextMenuButton];
+		const selectedSong = currentPlaylist[indexOfClickedContextMenuButton];
 		const selectedPlaylist = playlistsModule.allPlaylists[index + 1].songs;
 		selectedPlaylist.push(selectedSong);
 	}
