@@ -6,31 +6,40 @@ export default function MusicPlayer() {
 	let isPlaying = false;
 	let isRepeat = false;
 	let isShuffle = false;
-	let isPlaylistMenuOpen = false;
+	let currentSong = null;
+
 	let currentPlaylist = [...playlistsModule.allSongs.songs];
 	let currentSongIndex = null;
 	let playlists = null;
 	let que = [...currentPlaylist];
-	let currentSong = que[0];
-	let currentVolume;
+	
 	const audio = new Audio();
-	let timerID;
-	let currentSorting = null;
-	let songButtons = null;
-	let addToPlaylistButtons = null;
-	let contextMenuButtons = null;
-	let currentIndexOfContextMenuButton = null;
+	let currentVolume = null;
+	
+	let isPlaylistMenuOpen = false;
 	let isContextMenuOpen = false;
+	
+	let indexOfClickedContextMenuButton = null;
+	
+	let timerID;
+	
+	const songsElement = document.querySelector('.songs');
+	const songsContainer = document.querySelector('.songs__container');
+	let songButtons = null;
+	let currentSorting = null;
+	
+	const contextMenu = document.querySelector('.songs__context-menu');
+	let contextMenuButtons = null;
 
 	const titleButton = document.querySelector('.songs__title-button');
 	const artistButton = document.querySelector('.songs__artist-button');
 	const durationButton = document.querySelector('.songs__duration-button');
-	const playlistContainer = document.querySelector('.playlists__container');
-	const addPlaylistButton = document.querySelector('.playlist__add-playlist-button');
-	const contextMenu = document.querySelector('.songs__context-menu');
-	const songsElement = document.querySelector('.songs');
+	
 	const playlistButton = document.querySelector('.songs__playlist-button');
-	const songsContainer = document.querySelector('.songs__container');
+	const addPlaylistButton = document.querySelector('.playlist__add-playlist-button');
+	const playlistContainer = document.querySelector('.playlists__container');
+	let addToPlaylistButtons = null;
+
 	const playButton = document.querySelector('.audio-player__play-button');
 	const playButtonImage = document.querySelector('.audio-player__play-button img');
 	const previousButton = document.querySelector('.audio-player__previous-button');
@@ -57,8 +66,10 @@ export default function MusicPlayer() {
 	titleButton.addEventListener('click', handleTitleButtonClick);
 	artistButton.addEventListener('click', handleArtistButtonClick);
 	durationButton.addEventListener('click', handleDurationButtonClick);
+
 	playlistButton.addEventListener('click', handlePlaylistButtonClick);
 	addPlaylistButton.addEventListener('click', handleAddPlaylistButton)
+
 	playButton.addEventListener('click', handlePlayButtonClick);
 	previousButton.addEventListener('click', handlePreviousButtonClick);
 	nextButton.addEventListener('click', handleNextButtonClick);
