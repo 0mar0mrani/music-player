@@ -264,6 +264,7 @@ export default function MusicPlayer() {
 	function handlePlaylistDeleteButtonClick(event, index) {
 		event.stopPropagation();
 		deletePlaylist(index);
+		playlistsModule.storePlaylistLocally();
 		renderHTML();
 	}
 
