@@ -6,7 +6,7 @@ export default function MusicPlayer() {
 	let isPlaying = false;
 	let isRepeat = false;
 	let isShuffle = false;
-	let currentSong = que[0];
+	let currentSong = null;
 
 	let currentPlaylist = [...playlistsModule.allSongs.songs];
 	let currentSongIndex = 0;
@@ -560,7 +560,8 @@ export default function MusicPlayer() {
 			songsContainer.append(song);
 		}
 	}
-	
+
+	currentSong = que[0];
 	changeAudioSource();
 	setInterval(goToNextSongIfFinished, 1000)
 	renderHTML();
