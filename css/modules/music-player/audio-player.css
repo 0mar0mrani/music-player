@@ -145,5 +145,5 @@
 }
 
 .audio-player__button--active {
-	filter: invert(73%) sepia(98%) saturate(892%) hue-rotate(358deg) brightness(104%) contrast(101%);
+	filter: var(--highlight-color-filter);
 }
