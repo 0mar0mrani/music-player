@@ -190,6 +190,16 @@ export default function MusicPlayer() {
 
 		contextMenu.style.top = `${y}px`;
 		contextMenu.style.left = `${x}px`;
+
+
+		const windowHeight = window.innerHeight;
+		const startOfBottomTwoThird =  (windowHeight / 5) * 3;
+
+		if (event.clientY > startOfBottomTwoThird) {
+			contextMenu.style.transform = 'translate(-100%, -100%)';
+		} else {
+			contextMenu.style.transform = 'translate(-100%)';
+		}
 	}
 
 	function handleNextButtonClick() {
