@@ -40,6 +40,7 @@ export default function MusicPlayer() {
 	const addPlaylistButton = document.querySelector('.playlist__add-playlist-button');
 	const playlistContainer = document.querySelector('.playlists__container');
 	let addToPlaylistButtons = null;
+	let playlistDeleteButtons = null;
 
 	const playButton = document.querySelector('.audio-player__play-button');
 	const playButtonImage = document.querySelector('.audio-player__play-button img');
@@ -62,6 +63,7 @@ export default function MusicPlayer() {
 		addToPlaylistButtons = document.querySelectorAll('.songs__add-to-playlist-button');
 		contextMenuButtons = document.querySelectorAll('.songs__context-menu-item');
 		playlists = document.querySelectorAll('.playlists__playlist');
+		playlistDeleteButtons = document.querySelectorAll('.playlist__playlist-delete-button');
 	}
 	
 	titleButton.addEventListener('click', handleTitleButtonClick);
@@ -101,6 +103,12 @@ export default function MusicPlayer() {
 		for (let index = 0; index < playlistsModule.allPlaylists.length; index += 1) {
 			playlists[index].addEventListener('click', () => {
 				handlePlaylistClick(index);
+			})
+		}
+
+		for (let index = 0; index < playlistDeleteButtons.length; index += 1) {
+			playlistDeleteButtons[index].addEventListener('click', (event) => {
+				handlePlaylistDeleteButtonClick(event, index)
 			})
 		}
 	}
@@ -253,6 +261,12 @@ export default function MusicPlayer() {
 		renderHTML();
 	}
 
+	function handlePlaylistDeleteButtonClick(event, index) {
+		event.stopPropagation();
+		deletePlaylist(index);
+		renderHTML();
+	}
+
 	function addSongToRightPlaylist(index) {
 		const selectedSong = currentPlaylist[indexOfClickedContextMenuButton];
 		const selectedPlaylist = playlistsModule.allPlaylists[index + 1].songs;
@@ -289,6 +303,10 @@ export default function MusicPlayer() {
 		}
 
 		playlistsModule.allPlaylists.push(newPlaylist);
+	}
+
+	function deletePlaylist(index) {
+		playlistsModule.allPlaylists.splice(index, 1);
 	}
 
 	function setCurrentVolume() {
