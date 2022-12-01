@@ -123,6 +123,7 @@ export default function MusicPlayer() {
 	function handlePlaylistClick(index) {
 		currentPlaylist = [...playlistsModule.allPlaylists[index].songs]
 		que = [...currentPlaylist]
+		togglePlaylistMenu();
 		renderHTML();
 	}
 
