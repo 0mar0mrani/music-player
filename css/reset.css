@@ -7,8 +7,10 @@
 button {
 	cursor: pointer;
 	font-family: inherit;
+	font-size: inherit;
 	border: none;
 	background-color: inherit;
+	color: inherit;
 }
 
 img {
