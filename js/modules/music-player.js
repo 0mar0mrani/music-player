@@ -207,6 +207,7 @@ export default function MusicPlayer() {
 		toggleIsPlaying();
 		renderAudio();
 		renderHTML();
+		timerID = setInterval(renderTimeline, 10);
 	}
 
 	function handleVolumeRangeInput() {
