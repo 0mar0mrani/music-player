@@ -2,12 +2,14 @@
 	position: absolute;
 	top: 0;
 	width: 20rem;
-	height: 50rem;
-	background-color: rebeccapurple;
-	transform: translate(-100%, 2rem);
+	height: 30rem;
+	background-color: var(--text-color);
+	color: var(--background-color-lighter);
+	transform: translate(-100%);
 	display: none;
 	z-index: 999;
 	list-style: none;
+	overflow-y: scroll;
 }
 
 .songs__context-menu--open {
@@ -16,4 +18,28 @@
 
 .songs__context-menu li {
 	list-style: none;
+}
+
+.songs__context-menu-header {
+	font-size: 2rem;
+	padding-bottom: 1rem;
+	border-bottom: solid 1px var(--background-color);
+	pointer-events: none;
+	padding: 1rem;
+}
+
+.songs__context-menu-item {
+	width: 100%;
+	text-align: start;
+	padding: 1rem;
+}
+
+.songs__context-menu-item:hover {
+	background-color: var(--text-color-darker);
+}
+
+.songs__context-menu ul {
+	display: flex;
+	flex-direction: column;
+
 }

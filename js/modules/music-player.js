@@ -29,6 +29,7 @@ export default function MusicPlayer() {
 	let currentSorting = null;
 	
 	const contextMenu = document.querySelector('.songs__context-menu');
+	const contextMenuUl = document.querySelector('.songs__context-menu ul');
 	let contextMenuButtons = null;
 	
 	const titleButton = document.querySelector('.songs__title-button');
@@ -443,7 +444,7 @@ export default function MusicPlayer() {
 	}
 
 	function renderItemsInContextMenu() {
-		contextMenu.innerHTML = '';
+		contextMenuUl.innerHTML = '';
 
 		for (let index = 1; index < playlistsModule.allPlaylists.length; index += 1) {
 			const menuItem = document.createElement('li');
@@ -453,7 +454,7 @@ export default function MusicPlayer() {
 			button.innerText = `${playlistsModule.allPlaylists[index].name}`;
 	
 			menuItem.append(button);
-			contextMenu.append(menuItem);
+			contextMenuUl.append(menuItem);
 		}
 	}
 
