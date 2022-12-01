@@ -209,7 +209,10 @@ export default function MusicPlayer() {
 		toggleIsPlaying();
 		renderAudio();
 		renderHTML();
-		timerID = setInterval(renderTimeline, 10);
+		if (isPlaying) {
+			timerID = setInterval(renderTimeline, 10);
+		}
+		clearInterval(timerID);
 	}
 
 	function handleVolumeRangeInput() {
