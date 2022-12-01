@@ -67,11 +67,14 @@ export default function MusicPlayer() {
 		playlistDeleteButtons = document.querySelectorAll('.playlist__playlist-delete-button');
 	}
 	
+	songsElement.addEventListener('click', handleSongsElementClick)
 	titleButton.addEventListener('click', handleTitleButtonClick);
 	artistButton.addEventListener('click', handleArtistButtonClick);
 	durationButton.addEventListener('click', handleDurationButtonClick);
 
-	playlistButton.addEventListener('click', handlePlaylistButtonClick);
+	playlistButton.addEventListener('click', (event) => {
+		handlePlaylistButtonClick(event);
+	});
 	addPlaylistButton.addEventListener('click', handleAddPlaylistButton)
 
 	playButton.addEventListener('click', handlePlayButtonClick);
@@ -114,7 +117,8 @@ export default function MusicPlayer() {
 		}
 	}
 
-	function handlePlaylistButtonClick() {
+	function handlePlaylistButtonClick(event) {
+		event.stopPropagation();
 		togglePlaylistMenu();
 		renderHTML();
 	}
@@ -156,6 +160,11 @@ export default function MusicPlayer() {
 		setQue();
 		renderHTML();
 	}
+
+	function handleSongsElementClick() {
+		isPlaylistMenuOpen = false;
+		renderHTML();
+	}
 	
 	function handleContextMenuButtonsClick(index) {
 		addSongToRightPlaylist(index);
@@ -173,32 +182,33 @@ export default function MusicPlayer() {
 	}
 
 	function handleAddPlaylistButtonClick(event, index) {
-		event.stopPropagation();
-
-		indexOfClickedContextMenuButton = index;
-
-		isContextMenuOpen = !isContextMenuOpen;
-
-		if (isContextMenuOpen) {
-			contextMenu.classList.add('songs__context-menu--open');
-		} else {
-			contextMenu.classList.remove('songs__context-menu--open');
-		} 
-
-		const x = event.clientX;
-		const y = event.clientY;
-
-		contextMenu.style.top = `${y}px`;
-		contextMenu.style.left = `${x}px`;
-
-
-		const windowHeight = window.innerHeight;
-		const startOfBottomTwoThird =  (windowHeight / 5) * 3;
-
-		if (event.clientY > startOfBottomTwoThird) {
-			contextMenu.style.transform = 'translate(-100%, -100%)';
-		} else {
-			contextMenu.style.transform = 'translate(-100%)';
+		if (!isPlaylistMenuOpen) {
+			event.stopPropagation();
+	
+			indexOfClickedContextMenuButton = index;
+	
+			isContextMenuOpen = !isContextMenuOpen;
+	
+			if (isContextMenuOpen) {
+				contextMenu.classList.add('songs__context-menu--open');
+			} else {
+				contextMenu.classList.remove('songs__context-menu--open');
+			} 
+	
+			const x = event.clientX;
+			const y = event.clientY;
+	
+			contextMenu.style.top = `${y}px`;
+			contextMenu.style.left = `${x}px`;
+	
+			const windowHeight = window.innerHeight;
+			const startOfBottomTwoThird =  (windowHeight / 5) * 3;
+	
+			if (event.clientY > startOfBottomTwoThird) {
+				contextMenu.style.transform = 'translate(-100%, -100%)';
+			} else {
+				contextMenu.style.transform = 'translate(-100%)';
+			}
 		}
 	}
 
@@ -251,13 +261,15 @@ export default function MusicPlayer() {
 	}
 
 	function handleSongButtonClick(event) {
-		const [clickedSong, clickedSongIndex] = getPropertiesOfClickedSong(event);
-		currentSong = clickedSong;
-		currentSongIndex = clickedSongIndex;
-		changeAudioSource();
-		isPlaying = true;
-		renderAudio();
-		renderHTML();
+		if (!isPlaylistMenuOpen) {
+			const [clickedSong, clickedSongIndex] = getPropertiesOfClickedSong(event);
+			currentSong = clickedSong;
+			currentSongIndex = clickedSongIndex;
+			changeAudioSource();
+			isPlaying = true;
+			renderAudio();
+			renderHTML();
+		}
 
 		timerID = setInterval(renderTimeline, 10)
 	}
@@ -609,10 +621,12 @@ export default function MusicPlayer() {
 				songDuration.innerHTML = `${currentPlaylist[index].duration}`;
 				song.append(songDuration);
 				
-				const addPlaylist = document.createElement('button');
-				addPlaylist.className = 'songs__add-to-playlist-button';
-				addPlaylist.innerHTML = '<img src="/assets/svg/add-to-playlist.svg">'
-				song.append(addPlaylist);
+				if (!isPlaylistMenuOpen) {
+					const addPlaylist = document.createElement('button');
+					addPlaylist.className = 'songs__add-to-playlist-button';
+					addPlaylist.innerHTML = '<img src="/assets/svg/add-to-playlist.svg">'
+					song.append(addPlaylist);
+				}
 				
 				songsContainer.append(song);
 			}
