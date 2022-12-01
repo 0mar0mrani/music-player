@@ -81,6 +81,17 @@
 }
 
 .songs__container {
+	position: relative;
 	height: calc(100vh - (10rem + 6rem));
 	overflow: scroll;
+}
+
+/* No Songs In Playlist Message */
+.songs__no-songs-message {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 4rem;
+	color: var(--highlight-color);
 }
