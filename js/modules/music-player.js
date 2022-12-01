@@ -115,6 +115,7 @@ export default function MusicPlayer() {
 	
 	function handleAddPlaylistButton() {
 		addNewPlaylist();
+		playlistsModule.storePlaylistLocally();
 		renderHTML();
 	}
 
@@ -147,6 +148,7 @@ export default function MusicPlayer() {
 	
 	function handleContextMenuButtonsClick(index) {
 		addSongToRightPlaylist(index);
+		playlistsModule.storePlaylistLocally(); 
 	}
 
 	function handleWindowClick() {
@@ -401,8 +403,8 @@ export default function MusicPlayer() {
 	}
 	
 	function renderHTML() {
-		renderSongList();
-		renderPlaylist();
+		renderSongView();
+		renderPlaylistView();
 		renderCurrentSong();
 		renderPlayButton();
 		renderShuffleButton();
@@ -505,7 +507,7 @@ export default function MusicPlayer() {
 		}
 	}
 
-	function renderPlaylist() {
+	function renderPlaylistView() {
 		playlistContainer.innerHTML = '';
 
 		for (let index = 0; index < playlistsModule.allPlaylists.length; index += 1) {
@@ -517,7 +519,7 @@ export default function MusicPlayer() {
 		}
 	}
 
-	function renderSongList() {
+	function renderSongView() {
 		songsContainer.innerHTML = ''
 
 		for (let index = 0; index < currentPlaylist.length; index += 1) {
@@ -563,7 +565,7 @@ export default function MusicPlayer() {
 
 	currentSong = que[0];
 	changeAudioSource();
-	setInterval(goToNextSongIfFinished, 1000)
+	setInterval(goToNextSongIfFinished, 1000);
 	renderHTML();
 }
 

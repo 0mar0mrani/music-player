@@ -111,9 +111,28 @@ export default function Playlists() {
 	}
 
 	let allPlaylists = [allSongs]
+
+	function storePlaylistLocally() {
+		const serializedAllPlaylist = JSON.stringify(allPlaylists);
+		window.localStorage.setItem('playlists', serializedAllPlaylist);
+	}
+
+	function getLocalAllPlaylists() {
+		const localPlaylists = window.localStorage.getItem('playlists');
+		const parsedLocalPlaylist = JSON.parse(localPlaylists);
+
+		if (localPlaylists) {
+			allPlaylists = parsedLocalPlaylist;
+			console.log(allPlaylists);
+		}
+	}
+
+	getLocalAllPlaylists();
 	
 	return {
 		allSongs,
 		allPlaylists,
+		storePlaylistLocally,
+		getLocalAllPlaylists,
 	}
 }
