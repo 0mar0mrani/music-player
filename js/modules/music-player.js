@@ -520,7 +520,17 @@ export default function MusicPlayer() {
 		for (let index = 0; index < playlistsModule.allPlaylists.length; index += 1) {
 			const playlist = document.createElement('button');
 			playlist.className = 'playlists__playlist';
-			playlist.innerText = `${playlistsModule.allPlaylists[index].name}`;
+
+			const playlistName = document.createElement('p');
+			playlistName.innerText = `${playlistsModule.allPlaylists[index].name}`;
+			playlist.append(playlistName);
+
+			const deleteButton = document.createElement('button');
+			deleteButton.className = 'playlist__playlist-delete-button';
+			const deleteButtonIcon = document.createElement('img');
+			deleteButtonIcon.src = '/assets/svg/close.svg';
+			deleteButton.append(deleteButtonIcon);
+			playlist.append(deleteButton);
 
 			playlistContainer.append(playlist);
 		}

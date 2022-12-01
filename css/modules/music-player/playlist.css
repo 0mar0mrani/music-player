@@ -19,6 +19,8 @@
 }
 
 .playlists__playlist {
+	display: flex;
+	justify-content: space-between;
 	text-align: start;
 	padding: 2rem 4rem;
 }
@@ -64,4 +66,19 @@
 .playlist__add-playlist-button-icon img {
 	width: 100%;
 	height: auto;
+}
+
+/* Delete Button */
+.playlist__playlist-delete-button {
+	width: 4rem;
+	height: 4rem;
+}
+
+.playlist__playlist-delete-button img {
+	width: 100%;
+	height: auto;
+}
+
+.playlists__playlist:first-child .playlist__playlist-delete-button {
+	display: none;
 }
