@@ -6,10 +6,10 @@ export default function MusicPlayer() {
 	let isPlaying = false;
 	let isRepeat = false;
 	let isShuffle = false;
-	let currentSong = null;
+	let currentSong = que[0];
 
 	let currentPlaylist = [...playlistsModule.allSongs.songs];
-	let currentSongIndex = null;
+	let currentSongIndex = 0;
 	let playlists = null;
 	let que = [...currentPlaylist];
 	
@@ -20,7 +20,7 @@ export default function MusicPlayer() {
 	let isContextMenuOpen = false;
 	
 	let indexOfClickedContextMenuButton = null;
-	
+
 	let timerID;
 	
 	const songsElement = document.querySelector('.songs');
@@ -30,7 +30,7 @@ export default function MusicPlayer() {
 	
 	const contextMenu = document.querySelector('.songs__context-menu');
 	let contextMenuButtons = null;
-
+	
 	const titleButton = document.querySelector('.songs__title-button');
 	const artistButton = document.querySelector('.songs__artist-button');
 	const durationButton = document.querySelector('.songs__duration-button');
@@ -560,7 +560,8 @@ export default function MusicPlayer() {
 			songsContainer.append(song);
 		}
 	}
-
+	
+	changeAudioSource();
 	setInterval(goToNextSongIfFinished, 1000)
 	renderHTML();
 }
