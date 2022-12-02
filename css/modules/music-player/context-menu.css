@@ -18,10 +18,25 @@
 }
 
 .songs__context-menu-header {
+	position: relative;
 	font-size: 2rem;
 	padding-bottom: 1rem;
 	pointer-events: none;
 	padding: 1rem;
+}
+
+.songs__context-menu-header::before {
+	position: absolute;
+	content: '';
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-image: url('/assets/svg/arrow-down.svg');
+	background-repeat: no-repeat;
+	background-position: 87%;
+	background-size: 3rem;
+	filter: var(--background-color-lighter-filter);
 }
 
 .songs__context-menu-item {

@@ -7,6 +7,10 @@
 	--background-color-lighter: #1e1e1e;
 	--background-color-lightest: #4b4b4b;
 
+
+	--background-color-lighter-filter: invert(0%) sepia(19%) saturate(11%) hue-rotate(316deg) brightness(94%) contrast(76%);
+
+
 	--highlight-color: #ffd401;
 	--highlight-color-filter: invert(73%) sepia(98%) saturate(892%) hue-rotate(358deg) brightness(104%) contrast(101%);
 }
