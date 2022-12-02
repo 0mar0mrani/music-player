@@ -5,6 +5,21 @@
 	transition: transform 0.3s ease-in;
 }
 
+/* Header */
+.songs__header-number {
+	font-size: 2rem;
+	align-self: center;
+	justify-self: center;
+	pointer-events: none;
+	user-select: none;
+}
+
+.songs__title-button,
+.songs__artist-button,
+.songs__duration-button {
+	text-align: start;
+}
+
 .songs--playlist-open{
 	transform: translateX(-33vw);
 }
@@ -13,6 +28,12 @@
 .songs__song {
 	display: grid;
 	grid-template-columns: 0.1fr repeat(5, 1fr);
+}
+
+/* Header */
+
+.songs__title-button {
+	grid-column: 3 / 4;
 }
 
 .songs__playlist-button {
@@ -30,9 +51,9 @@
 }
 
 .songs__header-container {
-	background-color: var(--background-color-lighter);
+	background-color: var(--background-color);
 	color: var(--text-color);
-	font-size: 4rem;
+	font-size: 2.5rem;
 	height: 6rem;
 }
 
