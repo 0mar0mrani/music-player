@@ -30,7 +30,7 @@ export default function MusicPlayer() {
 	
 	const contextMenu = document.querySelector('.songs__context-menu');
 	const contextMenuUl = document.querySelector('.songs__context-menu ul');
-	const contextMenuDeleteSongButton = document.querySelector('.songs__context-delete-song');
+	const deleteSongButton = document.querySelector('.songs__context-delete-song');
 	let contextMenuButtons = null;
 	
 	const titleButton = document.querySelector('.songs__title-button');
@@ -70,18 +70,19 @@ export default function MusicPlayer() {
 		playlistDeleteButtons = document.querySelectorAll('.playlist__playlist-delete-button');
 	}
 	
-	songsElement.addEventListener('click', handleSongsElementClick)
+	songsElement.addEventListener('click', handleSongsElementClick);
 	titleButton.addEventListener('click', handleTitleButtonClick);
 	artistButton.addEventListener('click', handleArtistButtonClick);
 	durationButton.addEventListener('click', handleDurationButtonClick);
 
+	addPlaylistButton.addEventListener('click', handleAddPlaylistButton)
+	deleteSongButton.addEventListener('click', handleDeleteSongButtonHandle)
 	playlistView.addEventListener('click', (event) => {
 		handlePlaylistViewClick(event) 
 	})
 	playlistButton.addEventListener('click', (event) => {
 		handlePlaylistButtonClick(event);
 	});
-	addPlaylistButton.addEventListener('click', handleAddPlaylistButton)
 
 	playButton.addEventListener('click', handlePlayButtonClick);
 	previousButton.addEventListener('click', handlePreviousButtonClick);
@@ -150,6 +151,20 @@ export default function MusicPlayer() {
 		currentPlaylist = playlistsModule.allPlaylists[currentPlaylistIndex];
 		currentPlaylistForSorting = [...currentPlaylist.songs]
 		togglePlaylistMenu();
+		renderHTML();
+	}
+
+	function handleDeleteSongButtonHandle() {
+		const currentPlaylistDirectory = playlistsModule.allPlaylists[currentPlaylistIndex].songs;
+
+		currentPlaylistDirectory.splice(indexOfClickedContextMenuButton, 1);
+
+
+		playlistsModule.storePlaylistLocally(); 
+		
+		currentPlaylist = playlistsModule.allPlaylists[currentPlaylistIndex];
+		currentPlaylistForSorting = [...currentPlaylist.songs]
+		
 		renderHTML();
 	}
 
@@ -496,11 +511,9 @@ export default function MusicPlayer() {
 		}
 		
 		if (currentPlaylist.deletable) {
-			console.log('active');
-			contextMenuDeleteSongButton.classList.add('songs__context-delete-song--active');
+			deleteSongButton.classList.add('songs__context-delete-song--active');
 		} else {
-			console.log('not active');
-			contextMenuDeleteSongButton.classList.remove('songs__context-delete-song--active');
+			deleteSongButton.classList.remove('songs__context-delete-song--active');
 		}
 
 		contextMenuUl.innerHTML = '';

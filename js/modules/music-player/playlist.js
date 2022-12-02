@@ -1,6 +1,7 @@
 export default function Playlists() {
 	const allSongs = {
 		name: 'All Songs',
+		deletable: false,
 		songs:[
 			{	title: 'Lifelike',
 				artist: 'Alexi Action',
@@ -123,7 +124,6 @@ export default function Playlists() {
 
 		if (localPlaylists) {
 			allPlaylists = parsedLocalPlaylist;
-			console.log(allPlaylists);
 		}
 	}
 
