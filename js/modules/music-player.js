@@ -10,7 +10,6 @@ export default function MusicPlayer() {
 
 	let currentPlaylist = [...playlistsModule.allSongs.songs];
 	let currentSongIndex = 0;
-	let playlists = null;
 	let que = [...currentPlaylist];
 	
 	const audio = new Audio();
@@ -20,7 +19,7 @@ export default function MusicPlayer() {
 	let isContextMenuOpen = false;
 	
 	let indexOfClickedContextMenuButton = null;
-
+	
 	let timerID;
 	
 	const songsElement = document.querySelector('.songs');
@@ -36,13 +35,15 @@ export default function MusicPlayer() {
 	const artistButton = document.querySelector('.songs__artist-button');
 	const durationButton = document.querySelector('.songs__duration-button');
 	
+	const playlistView = document.querySelector('.playlists');
 	const playlistButton = document.querySelector('.songs__playlist-button');
 	const playlistButtonIcon = document.querySelector('.songs__playlist-button img');
 	const addPlaylistButton = document.querySelector('.playlist__add-playlist-button');
 	const playlistContainer = document.querySelector('.playlists__container');
+	let playlists = null;
 	let addToPlaylistButtons = null;
 	let playlistDeleteButtons = null;
-
+	
 	const playButton = document.querySelector('.audio-player__play-button');
 	const playButtonImage = document.querySelector('.audio-player__play-button img');
 	const previousButton = document.querySelector('.audio-player__previous-button');
@@ -72,6 +73,9 @@ export default function MusicPlayer() {
 	artistButton.addEventListener('click', handleArtistButtonClick);
 	durationButton.addEventListener('click', handleDurationButtonClick);
 
+	playlistView.addEventListener('click', (event) => {
+		handlePlaylistViewClick(event) 
+	})
 	playlistButton.addEventListener('click', (event) => {
 		handlePlaylistButtonClick(event);
 	});
@@ -115,6 +119,10 @@ export default function MusicPlayer() {
 				handlePlaylistDeleteButtonClick(event, index)
 			})
 		}
+	}
+
+	function handlePlaylistViewClick(event) {
+		event.stopPropagation();
 	}
 
 	function handlePlaylistButtonClick(event) {
