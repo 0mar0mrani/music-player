@@ -2,13 +2,11 @@
 	position: absolute;
 	top: 0;
 	width: 20rem;
-	height: 30rem;
 	background-color: var(--text-color);
 	color: var(--background-color-lighter);
 	display: none;
 	z-index: 999;
 	list-style: none;
-	overflow-y: scroll;
 }
 
 .songs__context-menu--open {
@@ -40,6 +38,8 @@
 .songs__context-menu ul {
 	display: flex;
 	flex-direction: column;
+	height: 25rem;
+	overflow-y: scroll;
 }
 
 .songs__context-delete-song {
