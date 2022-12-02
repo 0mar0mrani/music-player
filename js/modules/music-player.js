@@ -178,16 +178,12 @@ export default function MusicPlayer() {
 	function handleContextMenuButtonsClick(index) {
 		addSongToRightPlaylist(index);
 		playlistsModule.storePlaylistLocally(); 
+		renderHTML();
 	}
 
 	function handleWindowClick() {
 		isContextMenuOpen = false;
-
-		if (isContextMenuOpen) {
-			contextMenu.classList.add('songs__context-menu--open');
-		} else {
-			contextMenu.classList.remove('songs__context-menu--open');
-		} 
+		renderHTML();
 	}
 
 	function handleAddPlaylistButtonClick(event, index) {
@@ -197,13 +193,9 @@ export default function MusicPlayer() {
 			indexOfClickedContextMenuButton = index;
 	
 			isContextMenuOpen = !isContextMenuOpen;
-	
-			if (isContextMenuOpen) {
-				contextMenu.classList.add('songs__context-menu--open');
-			} else {
-				contextMenu.classList.remove('songs__context-menu--open');
-			} 
-	
+
+			renderHTML();
+
 			const x = event.clientX;
 			const y = event.clientY;
 	
@@ -468,6 +460,7 @@ export default function MusicPlayer() {
 		renderMuteButton();
 		renderVolumeRange();
 		renderPlaylistMenu();
+		renderContextMenu();
 		renderItemsInContextMenu();
 
 		addQuerySelector();
@@ -497,6 +490,14 @@ export default function MusicPlayer() {
 			songsElement.classList.remove('songs--playlist-open');
 			playlistButtonIcon.src = '/assets/svg/menu.svg';
 		}
+	}
+
+	function renderContextMenu() {
+		if (isContextMenuOpen) {
+			contextMenu.classList.add('songs__context-menu--open');
+		} else {
+			contextMenu.classList.remove('songs__context-menu--open');
+		} 
 	}
 
 	function renderVolumeRange() {
