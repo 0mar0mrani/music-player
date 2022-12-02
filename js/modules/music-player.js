@@ -9,7 +9,7 @@ export default function MusicPlayer() {
 	let currentSong = null;
 
 	let currentPlaylist = playlistsModule.allSongs;
-	let currentPlaylistIndex = null;
+	let currentPlaylistIndex = 0;
 	let currentSongIndex = 0;
 	let currentPlaylistForSorting = [...currentPlaylist.songs];
 	
