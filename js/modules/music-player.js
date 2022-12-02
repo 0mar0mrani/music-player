@@ -128,6 +128,7 @@ export default function MusicPlayer() {
 	function handlePlaylistButtonClick(event) {
 		event.stopPropagation();
 		togglePlaylistMenu();
+		isContextMenuOpen = false;
 		renderHTML();
 	}
 
