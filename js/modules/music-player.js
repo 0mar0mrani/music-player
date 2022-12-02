@@ -9,6 +9,7 @@ export default function MusicPlayer() {
 	let currentSong = null;
 
 	let currentPlaylist = [...playlistsModule.allSongs.songs];
+	let currentPlaylistIndex = null;
 	let currentSongIndex = 0;
 	let currentPlaylistForSorting = [...currentPlaylist];
 	
@@ -143,7 +144,9 @@ export default function MusicPlayer() {
 	}
 
 	function handlePlaylistClick(index) {
-		currentPlaylist = [...playlistsModule.allPlaylists[index].songs]
+		currentPlaylistIndex = index;
+		
+		currentPlaylist = [...playlistsModule.allPlaylists[currentPlaylistIndex].songs]
 		currentPlaylistForSorting = [...currentPlaylist]
 		togglePlaylistMenu();
 		renderHTML();
@@ -178,6 +181,10 @@ export default function MusicPlayer() {
 	function handleContextMenuButtonsClick(index) {
 		addSongToRightPlaylist(index);
 		playlistsModule.storePlaylistLocally(); 
+		
+		currentPlaylist = [...playlistsModule.allPlaylists[currentPlaylistIndex].songs]
+		currentPlaylistForSorting = [...currentPlaylist]
+		
 		renderHTML();
 	}
 
