@@ -147,24 +147,16 @@ export default function MusicPlayer() {
 
 	function handlePlaylistClick(index) {
 		currentPlaylistIndex = index;
-		
-		currentPlaylist = playlistsModule.allPlaylists[currentPlaylistIndex];
-		currentPlaylistForSorting = [...currentPlaylist.songs]
+		updateCurrentPlaylist();
 		togglePlaylistMenu();
 		renderHTML();
 	}
 
 	function handleDeleteSongButtonHandle() {
 		const currentPlaylistDirectory = playlistsModule.allPlaylists[currentPlaylistIndex].songs;
-
 		currentPlaylistDirectory.splice(indexOfClickedContextMenuButton, 1);
-
-
-		playlistsModule.storePlaylistLocally(); 
-		
-		currentPlaylist = playlistsModule.allPlaylists[currentPlaylistIndex];
-		currentPlaylistForSorting = [...currentPlaylist.songs]
-		
+		playlistsModule.storePlaylistLocally(); 		
+		updateCurrentPlaylist();
 		renderHTML();
 	}
 
@@ -197,10 +189,7 @@ export default function MusicPlayer() {
 	function handleContextMenuButtonsClick(index) {
 		addSongToRightPlaylist(index);
 		playlistsModule.storePlaylistLocally(); 
-		
-		currentPlaylist = playlistsModule.allPlaylists[currentPlaylistIndex];
-		currentPlaylistForSorting = [...currentPlaylist.songs]
-		
+		updateCurrentPlaylist();
 		renderHTML();
 	}
 
@@ -338,6 +327,11 @@ export default function MusicPlayer() {
 				break;
 			}
 		}
+	}
+
+	function updateCurrentPlaylist() {
+		currentPlaylist = playlistsModule.allPlaylists[currentPlaylistIndex];
+		currentPlaylistForSorting = [...currentPlaylist.songs]
 	}
 
 	function addNewPlaylist() {
