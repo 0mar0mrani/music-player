@@ -8,10 +8,10 @@ export default function MusicPlayer() {
 	let isShuffle = false;
 	let currentSong = null;
 
-	let currentPlaylist = [...playlistsModule.allSongs.songs];
+	let currentPlaylist = playlistsModule.allSongs;
 	let currentPlaylistIndex = null;
 	let currentSongIndex = 0;
-	let currentPlaylistForSorting = [...currentPlaylist];
+	let currentPlaylistForSorting = [...currentPlaylist.songs];
 	
 	const audio = new Audio();
 	let currentVolume = null;
@@ -30,6 +30,7 @@ export default function MusicPlayer() {
 	
 	const contextMenu = document.querySelector('.songs__context-menu');
 	const contextMenuUl = document.querySelector('.songs__context-menu ul');
+	const contextMenuDeleteSongButton = document.querySelector('.songs__context-delete-song');
 	let contextMenuButtons = null;
 	
 	const titleButton = document.querySelector('.songs__title-button');
@@ -146,8 +147,8 @@ export default function MusicPlayer() {
 	function handlePlaylistClick(index) {
 		currentPlaylistIndex = index;
 		
-		currentPlaylist = [...playlistsModule.allPlaylists[currentPlaylistIndex].songs]
-		currentPlaylistForSorting = [...currentPlaylist]
+		currentPlaylist = playlistsModule.allPlaylists[currentPlaylistIndex];
+		currentPlaylistForSorting = [...currentPlaylist.songs]
 		togglePlaylistMenu();
 		renderHTML();
 	}
@@ -182,8 +183,8 @@ export default function MusicPlayer() {
 		addSongToRightPlaylist(index);
 		playlistsModule.storePlaylistLocally(); 
 		
-		currentPlaylist = [...playlistsModule.allPlaylists[currentPlaylistIndex].songs]
-		currentPlaylistForSorting = [...currentPlaylist]
+		currentPlaylist = playlistsModule.allPlaylists[currentPlaylistIndex];
+		currentPlaylistForSorting = [...currentPlaylist.songs]
 		
 		renderHTML();
 	}
@@ -194,29 +195,27 @@ export default function MusicPlayer() {
 	}
 
 	function handleAddPlaylistButtonClick(event, index) {
-		if (!isPlaylistMenuOpen) {
-			event.stopPropagation();
-	
-			indexOfClickedContextMenuButton = index;
-	
-			isContextMenuOpen = true;
+		event.stopPropagation();
 
-			renderHTML();
+		indexOfClickedContextMenuButton = index;
 
-			const x = event.clientX;
-			const y = event.clientY;
-	
-			contextMenu.style.top = `${y}px`;
-			contextMenu.style.left = `${x}px`;
-	
-			const windowHeight = window.innerHeight;
-			const startOfBottomTwoThird =  (windowHeight / 5) * 3;
-	
-			if (event.clientY > startOfBottomTwoThird) {
-				contextMenu.style.transform = 'translate(-100%, -100%)';
-			} else {
-				contextMenu.style.transform = 'translate(-100%)';
-			}
+		isContextMenuOpen = true;
+
+		renderHTML();
+
+		const x = event.clientX;
+		const y = event.clientY;
+
+		contextMenu.style.top = `${y}px`;
+		contextMenu.style.left = `${x}px`;
+
+		const windowHeight = window.innerHeight;
+		const startOfBottomTwoThird =  (windowHeight / 5) * 3;
+
+		if (event.clientY > startOfBottomTwoThird) {
+			contextMenu.style.transform = 'translate(-100%, -100%)';
+		} else {
+			contextMenu.style.transform = 'translate(-100%)';
 		}
 	}
 
@@ -300,19 +299,19 @@ export default function MusicPlayer() {
 	}
 
 	function addSongToRightPlaylist(index) {
-		const selectedSong = currentPlaylist[indexOfClickedContextMenuButton];
+		const selectedSong = currentPlaylist.songs[indexOfClickedContextMenuButton];
 		const selectedPlaylist = playlistsModule.allPlaylists[index + 1].songs;
 		selectedPlaylist.push(selectedSong);
 	}
 
 	function sortCurrentPlaylist() {
-		currentPlaylist.sort((a, b) => {
+		currentPlaylist.songs.sort((a, b) => {
 			return a[currentSorting] > b[currentSorting] ? 1 : -1;
 		});
 	}
 
 	function setCurrentPlaylistForSorting() {
-		currentPlaylistForSorting = [...currentPlaylist];
+		currentPlaylistForSorting = [...currentPlaylist.songs];
 	}
 
 	function setIndexOfCurrentSong() {
@@ -332,6 +331,7 @@ export default function MusicPlayer() {
 		const newPlaylist = {
 			name: `Playlist ${amountOfPlaylists}`,
 			songs: [],
+			deletable: true,
 		}
 
 		playlistsModule.allPlaylists.push(newPlaylist);
@@ -386,7 +386,7 @@ export default function MusicPlayer() {
 	}
 
 	function increaseCurrentSongIndex() {
-		if (currentSongIndex < currentPlaylist.length - 1) {
+		if (currentSongIndex < currentPlaylist.songs.songs.length - 1) {
 			currentSongIndex += 1;
 		} else {
 			currentSongIndex = 0;
@@ -468,11 +468,15 @@ export default function MusicPlayer() {
 		renderVolumeRange();
 		renderPlaylistMenu();
 		renderContextMenu();
+		renderDeleteSongButton() 
 
 		addQuerySelector();
 		addEventListeners();
 	}
 
+	function renderDeleteSongButton() {
+		// if (currentSong)
+	}
 
 	function renderPlaylistMenu() {
 		if (isPlaylistMenuOpen) {
@@ -489,7 +493,15 @@ export default function MusicPlayer() {
 			contextMenu.classList.add('songs__context-menu--open');
 		} else {
 			contextMenu.classList.remove('songs__context-menu--open');
-		} 
+		}
+		
+		if (currentPlaylist.deletable) {
+			console.log('active');
+			contextMenuDeleteSongButton.classList.add('songs__context-delete-song--active');
+		} else {
+			console.log('not active');
+			contextMenuDeleteSongButton.classList.remove('songs__context-delete-song--active');
+		}
 
 		contextMenuUl.innerHTML = '';
 
@@ -594,7 +606,7 @@ export default function MusicPlayer() {
 	}
 
 	function renderSongView() {
-		const isEmptyPlaylist = currentPlaylist.length === 0;
+		const isEmptyPlaylist = currentPlaylist.songs.length === 0;
 		songsContainer.innerHTML = ''
 		
 		if (isEmptyPlaylist) {
@@ -604,10 +616,10 @@ export default function MusicPlayer() {
 
 			songsContainer.append(paragraph);
 		} else {
-			for (let index = 0; index < currentPlaylist.length; index += 1) {
+			for (let index = 0; index < currentPlaylist.songs.length; index += 1) {
 				const song = document.createElement('button');
 				song.className = 'songs__song';
-				song.dataset.id = `${currentPlaylist[index].id}`;
+				song.dataset.id = `${currentPlaylist.songs[index].id}`;
 				
 				const songNumber = document.createElement('p');
 				songNumber.className = 'songs__song-number';
@@ -617,23 +629,23 @@ export default function MusicPlayer() {
 				const songCover = document.createElement('div')
 				songCover.className = 'songs__song-cover'
 				const songCoverImage = document.createElement('img')
-				songCoverImage.src = `${currentPlaylist[index].cover}`
+				songCoverImage.src = `${currentPlaylist.songs[index].cover}`
 				songCover.append(songCoverImage);
 				song.append(songCover);
 				
 				const songTitle = document.createElement('p');
 				songTitle.className = 'songs__song-title';
-				songTitle.innerHTML = `${currentPlaylist[index].title}`;
+				songTitle.innerHTML = `${currentPlaylist.songs[index].title}`;
 				song.append(songTitle);
 				
 				const songArtist = document.createElement('p');
 				songArtist.className = 'songs__song-artist';
-				songArtist.innerHTML = `${currentPlaylist[index].artist}`;
+				songArtist.innerHTML = `${currentPlaylist.songs[index].artist}`;
 				song.append(songArtist);
 				
 				const songDuration = document.createElement('p');
 				songDuration.className = 'songs__song-duration';
-				songDuration.innerHTML = `${currentPlaylist[index].duration}`;
+				songDuration.innerHTML = `${currentPlaylist.songs[index].duration}`;
 				song.append(songDuration);
 				
 				if (!isPlaylistMenuOpen) {

@@ -5,7 +5,6 @@
 	height: 30rem;
 	background-color: var(--text-color);
 	color: var(--background-color-lighter);
-	transform: translate(-100%);
 	display: none;
 	z-index: 999;
 	list-style: none;
@@ -23,7 +22,6 @@
 .songs__context-menu-header {
 	font-size: 2rem;
 	padding-bottom: 1rem;
-	border-bottom: solid 1px var(--background-color);
 	pointer-events: none;
 	padding: 1rem;
 }
@@ -34,12 +32,25 @@
 	padding: 1rem;
 }
 
-.songs__context-menu-item:hover {
+.songs__context-menu-item:hover,
+.songs__context-delete-song:hover {
 	background-color: var(--text-color-darker);
 }
 
 .songs__context-menu ul {
 	display: flex;
 	flex-direction: column;
+}
 
+.songs__context-delete-song {
+	display: none;
+	width: 100%;
+	text-align: start;
+	padding-bottom: 1rem;
+	border-bottom: solid 1px var(--background-color);
+	padding: 1rem;
+}
+
+.songs__context-delete-song--active {
+	display: block;
 }
