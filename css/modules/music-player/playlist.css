@@ -14,15 +14,16 @@
 .playlists__container {
 	display: flex;
 	flex-direction: column;
-	font-size: 3rem;
+	font-size: 2rem;
 	overflow-y: scroll;
 }
 
 .playlists__playlist {
 	display: flex;
+	align-items: center;
 	justify-content: space-between;
 	text-align: start;
-	padding: 2rem 4rem;
+	padding: 1.5rem 3rem;
 }
 
 .playlists__playlist:hover {
@@ -31,21 +32,23 @@
 
 .playlists__playlist:not(:last-child) {
 	border-bottom: solid 1px rgba(0, 0, 0, 0.309);
+	border-width: 80%;
 }
 
 .playlists__playlist:first-child {
 	border-bottom: solid 1px #000;
 }
 
+
 .playlist__add-playlist-button {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	font-size: 3rem;
+	font-size: 2.5rem;
 	gap: 2rem;
-	padding: 2rem 4rem;
+	padding: 1.5rem 3rem;
 	border: solid #000;
-	margin: 4rem 4rem 0 4rem;
+	margin: 3rem 3rem 1rem 3rem;
 	transition: all 0.2s;
 }
 
@@ -59,8 +62,8 @@
 }
 
 .playlist__add-playlist-button-icon {
-	width: 6rem;
-	height: 6rem;
+	width: 4rem;
+	height: 4rem;
 }
 
 .playlist__add-playlist-button-icon img {
@@ -70,8 +73,8 @@
 
 /* Delete Button */
 .playlist__playlist-delete-button {
-	width: 4rem;
-	height: 4rem;
+	width: 3rem;
+	height: 3rem;
 }
 
 .playlist__playlist-delete-button img {
