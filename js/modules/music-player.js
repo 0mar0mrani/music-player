@@ -10,7 +10,7 @@ export default function MusicPlayer() {
 
 	let currentPlaylist = [...playlistsModule.allSongs.songs];
 	let currentSongIndex = 0;
-	let que = [...currentPlaylist];
+	let currentPlaylistForSorting = [...currentPlaylist];
 	
 	const audio = new Audio();
 	let currentVolume = null;
@@ -144,7 +144,7 @@ export default function MusicPlayer() {
 
 	function handlePlaylistClick(index) {
 		currentPlaylist = [...playlistsModule.allPlaylists[index].songs]
-		que = [...currentPlaylist]
+		currentPlaylistForSorting = [...currentPlaylist]
 		togglePlaylistMenu();
 		renderHTML();
 	}
@@ -152,21 +152,21 @@ export default function MusicPlayer() {
 	function handleTitleButtonClick() {
 		currentSorting = 'title';
 		sortCurrentPlaylist();
-		setQue();
+		setCurrentPlaylistForSorting();
 		renderHTML();
 	}
 
 	function handleArtistButtonClick() {
 		currentSorting = 'artist';
 		sortCurrentPlaylist();
-		setQue();
+		setCurrentPlaylistForSorting();
 		renderHTML();
 	}
 
 	function handleDurationButtonClick() {
 		currentSorting = 'duration';
 		sortCurrentPlaylist();
-		setQue();
+		setCurrentPlaylistForSorting();
 		renderHTML();
 	}
 
@@ -304,15 +304,15 @@ export default function MusicPlayer() {
 		});
 	}
 
-	function setQue() {
-		que = [...currentPlaylist];
+	function setCurrentPlaylistForSorting() {
+		currentPlaylistForSorting = [...currentPlaylist];
 	}
 
 	function setIndexOfCurrentSong() {
 		const idOfCurrentSong = currentSong.id;
 
-		for (let index = 0; index < que.length; index += 1) {
-			if (que[index].id === idOfCurrentSong) {
+		for (let index = 0; index < currentPlaylistForSorting.length; index += 1) {
+			if (currentPlaylistForSorting[index].id === idOfCurrentSong) {
 				currentSongIndex = index;
 				break;
 			}
@@ -364,12 +364,12 @@ export default function MusicPlayer() {
 	// https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 	function shuffleSongs() {
 		if (isShuffle) {
-			for (let index = que.length - 1; index > 0; index -= 1) {
+			for (let index = currentPlaylistForSorting.length - 1; index > 0; index -= 1) {
 				const j = Math.floor(Math.random() * (index + 1));
-				[que[index], que[j]] = [que[j], que[index]];
+				[currentPlaylistForSorting[index], currentPlaylistForSorting[j]] = [currentPlaylistForSorting[j], currentPlaylistForSorting[index]];
 			}
 		} else {
-			que = [...currentPlaylist];
+			currentPlaylistForSorting = [...currentPlaylist];
 		}
 	}
 
@@ -395,7 +395,7 @@ export default function MusicPlayer() {
 	}
 
 	function setCurrentSong() {
-		currentSong = que[currentSongIndex];
+		currentSong = currentPlaylistForSorting[currentSongIndex];
 	}
 
 	function toggleIsPlaying() {
@@ -461,26 +461,11 @@ export default function MusicPlayer() {
 		renderVolumeRange();
 		renderPlaylistMenu();
 		renderContextMenu();
-		renderItemsInContextMenu();
 
 		addQuerySelector();
 		addEventListeners();
 	}
 
-	function renderItemsInContextMenu() {
-		contextMenuUl.innerHTML = '';
-
-		for (let index = 1; index < playlistsModule.allPlaylists.length; index += 1) {
-			const menuItem = document.createElement('li');
-			const button = document.createElement('button');
-	
-			button.className = 'songs__context-menu-item';
-			button.innerText = `${playlistsModule.allPlaylists[index].name}`;
-	
-			menuItem.append(button);
-			contextMenuUl.append(menuItem);
-		}
-	}
 
 	function renderPlaylistMenu() {
 		if (isPlaylistMenuOpen) {
@@ -498,6 +483,19 @@ export default function MusicPlayer() {
 		} else {
 			contextMenu.classList.remove('songs__context-menu--open');
 		} 
+
+		contextMenuUl.innerHTML = '';
+
+		for (let index = 1; index < playlistsModule.allPlaylists.length; index += 1) {
+			const menuItem = document.createElement('li');
+			const button = document.createElement('button');
+	
+			button.className = 'songs__context-menu-item';
+			button.innerText = `${playlistsModule.allPlaylists[index].name}`;
+	
+			menuItem.append(button);
+			contextMenuUl.append(menuItem);
+		}
 	}
 
 	function renderVolumeRange() {
@@ -643,7 +641,7 @@ export default function MusicPlayer() {
 		}
 	}
 
-	currentSong = que[0];
+	currentSong = currentPlaylistForSorting[0];
 	changeAudioSource();
 	setInterval(goToNextSongIfFinished, 1000);
 	renderHTML();
