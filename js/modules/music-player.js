@@ -90,7 +90,7 @@ export default function MusicPlayer() {
 	repeatButton.addEventListener('click', handleRepeatButtonClick);
 	shuffleButton.addEventListener('click', handleShuffleButtonClick);
 	muteButton.addEventListener('click', handleMuteButtonClick);
-	window.addEventListener('click', handleWindowClick);
+	songsElement.addEventListener('click', handleWindowClick);
 
 	function addEventListeners() {
 		for (const songButton of songButtons) {
@@ -199,7 +199,7 @@ export default function MusicPlayer() {
 	
 			indexOfClickedContextMenuButton = index;
 	
-			isContextMenuOpen = !isContextMenuOpen;
+			isContextMenuOpen = true;
 
 			renderHTML();
 
