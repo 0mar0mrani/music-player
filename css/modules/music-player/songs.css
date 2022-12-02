@@ -27,7 +27,7 @@
 .songs__header-container,
 .songs__song {
 	display: grid;
-	grid-template-columns: 0.1fr repeat(5, 1fr);
+	grid-template-columns: 0.1fr repeat(4, 1fr) 0.3fr;
 }
 
 /* Header */
@@ -58,13 +58,18 @@
 }
 
 .songs__song {
+	text-align: start;
 	align-items: center;
 	width: 100%;
 	border: none;
-	font-size: 2rem;
+	font-size: 1.5rem;
 	color: var(--text-color);
 	background-color: var(--background-color-lighter);
 	z-index: 0;
+}
+
+.songs__song-number {
+	text-align: center;
 }
 
 .songs__add-to-playlist-button {
@@ -91,8 +96,8 @@
 }
 
 .songs__song-cover {
-	width: 10rem;
-	height: 10rem;
+	width: 8rem;
+	height: 8rem;
 }
 
 .songs__song-cover img{
