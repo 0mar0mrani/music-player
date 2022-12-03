@@ -18,6 +18,10 @@
 	overflow-y: scroll;
 }
 
+.playlists__container::-webkit-scrollbar {
+	display: none;
+} 
+
 .playlists__playlist {
 	display: flex;
 	align-items: center;
