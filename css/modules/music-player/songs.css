@@ -111,6 +111,19 @@
 	overflow-y: scroll;
 }
 
+.songs__container::-webkit-scrollbar {
+	appearance: none;
+	width: 1rem;
+}
+
+.songs__container::-webkit-scrollbar-track {
+	background-color: var(--background-color-lighter);
+}
+
+.songs__container::-webkit-scrollbar-thumb {
+	background-color: var(--background-color)
+}
+
 /* No Songs In Playlist Message */
 .songs__no-songs-message {
 	position: absolute;
