@@ -31,7 +31,6 @@
 }
 
 /* Header */
-
 .songs__title-button {
 	grid-column: 3 / 4;
 }
@@ -120,4 +119,28 @@
 	transform: translate(-50%, -50%);
 	font-size: 4rem;
 	color: var(--highlight-color);
+}
+
+/* Playlist Title */
+.songs__playlist-title {
+	display: flex;
+	align-items: center;
+	gap: 2rem;
+	padding: 2rem 4rem;
+	margin-bottom: 2rem;
+	border-bottom: solid 1px var(--background-color);
+}
+
+.songs__playlist-rename-button {
+	width: 4rem;
+	height: 4rem;
+}
+
+.songs__playlist-title-input {
+	font-size: 4rem;
+	width: 40rem;
+	background-color: inherit;
+	border: none;
+	/* border-bottom: solid 1px; */
+	color: inherit;
 }
