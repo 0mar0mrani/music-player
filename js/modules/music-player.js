@@ -327,6 +327,7 @@ export default function MusicPlayer() {
 			name: `Playlist ${amountOfPlaylists}`,
 			songs: [],
 			deletable: true,
+			renamable: true,
 		}
 
 		playlistsModule.allPlaylists.push(newPlaylist);

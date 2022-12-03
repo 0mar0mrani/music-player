@@ -2,6 +2,7 @@ export default function Playlists() {
 	const allSongs = {
 		name: 'All Songs',
 		deletable: false,
+		renamable: false,
 		songs:[
 			{	title: 'Lifelike',
 				artist: 'Alexi Action',
