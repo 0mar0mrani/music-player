@@ -108,7 +108,7 @@
 .songs__container {
 	position: relative;
 	height: calc(100vh - (10rem + 6rem));
-	overflow-y: scroll;
+	overflow-y: overlay;
 }
 
 .songs__container::-webkit-scrollbar {
