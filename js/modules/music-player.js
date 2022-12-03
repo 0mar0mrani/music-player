@@ -253,8 +253,9 @@ export default function MusicPlayer() {
 		renderHTML();
 		if (isPlaying) {
 			timerID = setInterval(renderTimeline, 10);
+		} else {
+			clearInterval(timerID);
 		}
-		clearInterval(timerID);
 	}
 
 	function handleVolumeRangeInput() {
