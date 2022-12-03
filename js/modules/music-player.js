@@ -43,6 +43,7 @@ export default function MusicPlayer() {
 	const addPlaylistButton = document.querySelector('.playlist__add-playlist-button');
 	const playlistContainer = document.querySelector('.playlists__container');
 	let playlists = null;
+	let renamePlaylistInput = null;
 	let addToPlaylistButtons = null;
 	let playlistDeleteButtons = null;
 	
@@ -68,6 +69,7 @@ export default function MusicPlayer() {
 		contextMenuButtons = document.querySelectorAll('.songs__context-menu-item');
 		playlists = document.querySelectorAll('.playlists__playlist');
 		playlistDeleteButtons = document.querySelectorAll('.playlist__playlist-delete-button');
+		renamePlaylistInput = document.querySelector('.songs__playlist-title-input');
 	}
 	
 	songsElement.addEventListener('click', handleSongsElementClick);
@@ -122,6 +124,36 @@ export default function MusicPlayer() {
 				handlePlaylistDeleteButtonClick(event, index)
 			})
 		}
+
+		renamePlaylistInput.addEventListener('click', handleRenamePlaylistClick);
+
+		renamePlaylistInput.addEventListener('input', handleRenamePlaylistInput)
+
+		renamePlaylistInput.addEventListener('keyup', handleRenamePlaylistKeyup)
+	}
+
+	function handleRenamePlaylistKeyup(event) {
+
+		const key = event.key;
+
+		if (key === 'Enter') {
+			renamePlaylistInput.blur();
+		}
+	}
+
+	function handleRenamePlaylistClick(event) {
+		event.stopPropagation();
+	}
+
+	function handleRenamePlaylistInput() {
+		let newName = renamePlaylistInput.value;
+
+		if (newName === '') {
+			newName = 'Unnamed Playlist';
+		}
+
+		playlistsModule.allPlaylists[currentPlaylistIndex].name = newName;
+		updateCurrentPlaylist();	
 	}
 
 	function handlePlaylistViewClick(event) {
