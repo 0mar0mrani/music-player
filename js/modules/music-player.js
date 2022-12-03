@@ -98,7 +98,7 @@ export default function MusicPlayer() {
 
 	function addEventListeners() {
 		for (const songButton of songButtons) {
-			songButton.addEventListener('click', handleSongButtonClick);
+			songButton.addEventListener('dblclick', handleSongButtonClick);
 		}
 
 		for (let index = 0; index < addToPlaylistButtons.length; index += 1) {
