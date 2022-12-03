@@ -632,7 +632,21 @@ export default function MusicPlayer() {
 
 	function renderSongView() {
 		const isEmptyPlaylist = currentPlaylist.songs.length === 0;
-		songsContainer.innerHTML = ''
+		songsContainer.innerHTML = '';
+
+		const playlistTitle = document.createElement('div');
+		playlistTitle.className = 'songs__playlist-title'
+
+		const titleName = document.createElement('input');
+		titleName.value = `${currentPlaylist.name}`;
+		titleName.className = 'songs__playlist-title-input';
+
+		if (!currentPlaylist.renamable) {
+			titleName.disabled = true;
+		} 
+
+		playlistTitle.append(titleName);
+		songsContainer.append(playlistTitle);
 		
 		if (isEmptyPlaylist) {
 			const paragraph = document.createElement('p');
