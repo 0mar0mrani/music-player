@@ -153,6 +153,7 @@ export default function MusicPlayer() {
 		}
 
 		playlistsModule.allPlaylists[currentPlaylistIndex].name = newName;
+		playlistsModule.storePlaylistLocally();
 		updateCurrentPlaylist();	
 	}
 
