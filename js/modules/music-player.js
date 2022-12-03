@@ -415,7 +415,7 @@ export default function MusicPlayer() {
 	}
 
 	function increaseCurrentSongIndex() {
-		if (currentSongIndex < currentPlaylist.songs.songs.length - 1) {
+		if (currentSongIndex < currentPlaylist.songs.length - 1) {
 			currentSongIndex += 1;
 		} else {
 			currentSongIndex = 0;
