@@ -5,7 +5,7 @@
 	background-color: var(--text-color);
 	width: 33vw;
 	height: 100vh;
-	transform: translateX(34vw);
+	transform: translateX(33.1vw);
 	color: var(--background-color-lighter);
 	display: flex;
 	flex-direction: column;
