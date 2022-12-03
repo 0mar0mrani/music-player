@@ -205,22 +205,7 @@ export default function MusicPlayer() {
 
 		isContextMenuOpen = true;
 
-		renderHTML();
-
-		const x = event.clientX;
-		const y = event.clientY;
-
-		contextMenu.style.top = `${y}px`;
-		contextMenu.style.left = `${x}px`;
-
-		const windowHeight = window.innerHeight;
-		const startOfBottomTwoThird =  (windowHeight / 5) * 3;
-
-		if (event.clientY > startOfBottomTwoThird) {
-			contextMenu.style.transform = 'translate(-100%, -100%)';
-		} else {
-			contextMenu.style.transform = 'translate(-100%)';
-		}
+		renderHTML(event);
 	}
 
 	function handleNextButtonClick() {
@@ -467,7 +452,7 @@ export default function MusicPlayer() {
 		audio.src = currentSong.url;
 	}
 	
-	function renderHTML() {
+	function renderHTML(event) {
 		renderSongView();
 		renderPlaylistView();
 		renderCurrentSong();
@@ -477,7 +462,7 @@ export default function MusicPlayer() {
 		renderMuteButton();
 		renderVolumeRange();
 		renderPlaylistMenu();
-		renderContextMenu();
+		renderContextMenu(event);
 		renderDeleteSongButton() 
 
 		addQuerySelector();
@@ -498,30 +483,61 @@ export default function MusicPlayer() {
 		}
 	}
 
-	function renderContextMenu() {
-		if (isContextMenuOpen) {
-			contextMenu.classList.add('songs__context-menu--open');
-		} else {
-			contextMenu.classList.remove('songs__context-menu--open');
+	function renderContextMenu(event) {
+		renderVisibility()
+		renderDeleteButton();
+		renderMenuButtons();
+
+		if (event) {
+			renderPlacement();
 		}
+
+		function renderVisibility() {
+			if (isContextMenuOpen) {
+				contextMenu.classList.add('songs__context-menu--open');
+			} else {
+				contextMenu.classList.remove('songs__context-menu--open');
+			}
+		}
+
+		function renderDeleteButton() {
+			if (currentPlaylist.deletable) {
+				deleteSongButton.classList.add('songs__context-delete-song--active');
+			} else {
+				deleteSongButton.classList.remove('songs__context-delete-song--active');
+			}
+		}
+
+		function renderMenuButtons() {
+			contextMenuUl.innerHTML = '';
+
+			for (let index = 1; index < playlistsModule.allPlaylists.length; index += 1) {
+				const menuItem = document.createElement('li');
+				const button = document.createElement('button');
 		
-		if (currentPlaylist.deletable) {
-			deleteSongButton.classList.add('songs__context-delete-song--active');
-		} else {
-			deleteSongButton.classList.remove('songs__context-delete-song--active');
+				button.className = 'songs__context-menu-item';
+				button.innerText = `${playlistsModule.allPlaylists[index].name}`;
+		
+				menuItem.append(button);
+				contextMenuUl.append(menuItem);
+			}
 		}
 
-		contextMenuUl.innerHTML = '';
-
-		for (let index = 1; index < playlistsModule.allPlaylists.length; index += 1) {
-			const menuItem = document.createElement('li');
-			const button = document.createElement('button');
+		function renderPlacement() {
+			const x = event.clientX;
+			const y = event.clientY;
 	
-			button.className = 'songs__context-menu-item';
-			button.innerText = `${playlistsModule.allPlaylists[index].name}`;
+			contextMenu.style.top = `${y}px`;
+			contextMenu.style.left = `${x}px`;
 	
-			menuItem.append(button);
-			contextMenuUl.append(menuItem);
+			const windowHeight = window.innerHeight;
+			const startOfBottomTwoThird =  (windowHeight / 5) * 3;
+	
+			if (event.clientY > startOfBottomTwoThird) {
+				contextMenu.style.transform = 'translate(-100%, -100%)';
+			} else {
+				contextMenu.style.transform = 'translate(-100%)';
+			}
 		}
 	}
 
