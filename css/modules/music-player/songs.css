@@ -109,7 +109,7 @@
 .songs__container {
 	position: relative;
 	height: calc(100vh - (10rem + 6rem));
-	overflow: scroll;
+	overflow-y: scroll;
 }
 
 /* No Songs In Playlist Message */
