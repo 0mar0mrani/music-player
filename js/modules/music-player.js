@@ -131,10 +131,7 @@ export default function MusicPlayer() {
 	}
 
 	function handleRenamePlaylistKeyup(event) {
-
-		const key = event.key;
-
-		if (key === 'Enter') {
+		if (event.key === 'Enter') {
 			renamePlaylistInput.blur();
 		}
 	}
@@ -144,14 +141,7 @@ export default function MusicPlayer() {
 	}
 
 	function handleRenamePlaylistInput() {
-		let newName = renamePlaylistInput.value;
-
-		if (newName === '') {
-			newName = 'Unnamed Playlist';
-		}
-
-		playlistsModule.allPlaylists[currentPlaylistIndex].name = newName;
-		playlistsModule.storePlaylistLocally();
+		renamePlaylist();
 		updateCurrentPlaylist();	
 	}
 
@@ -184,9 +174,7 @@ export default function MusicPlayer() {
 	}
 
 	function handleDeleteSongButtonClick() {
-		const currentPlaylistDirectory = playlistsModule.allPlaylists[currentPlaylistIndex].songs;
-		currentPlaylistDirectory.splice(indexOfClickedContextMenuButton, 1);
-		playlistsModule.storePlaylistLocally(); 		
+		deleteSongFromPlaylist();
 		updateCurrentPlaylist();
 		renderHTML();
 	}
@@ -218,7 +206,7 @@ export default function MusicPlayer() {
 	}
 	
 	function handleContextMenuButtonsClick(index) {
-		addSongToRightPlaylist(index);
+		addSongToPlaylist(index);
 		playlistsModule.storePlaylistLocally(); 
 		updateCurrentPlaylist();
 		renderHTML();
@@ -231,11 +219,8 @@ export default function MusicPlayer() {
 
 	function handleAddPlaylistButtonClick(event, index) {
 		event.stopPropagation();
-
 		indexOfClickedContextMenuButton = index;
-
 		isContextMenuOpen = true;
-
 		renderHTML(event);
 	}
 
@@ -319,7 +304,18 @@ export default function MusicPlayer() {
 		renderHTML();
 	}
 
-	function addSongToRightPlaylist(index) {
+	function setIndexOfCurrentSong() {
+		const idOfCurrentSong = currentSong.id;
+
+		for (let index = 0; index < currentPlaylistForShuffle.length; index += 1) {
+			if (currentPlaylistForShuffle[index].id === idOfCurrentSong) {
+				currentSongIndex = index;
+				break;
+			}
+		}
+	}
+
+	function addSongToPlaylist(index) {
 		const selectedSong = currentPlaylist.songs[indexOfClickedContextMenuButton];
 		const selectedPlaylist = playlistsModule.allPlaylists[index + 1].songs;
 		selectedPlaylist.push(selectedSong);
@@ -333,17 +329,6 @@ export default function MusicPlayer() {
 
 	function setCurrentPlaylistForSorting() {
 		currentPlaylistForShuffle = [...currentPlaylist.songs];
-	}
-
-	function setIndexOfCurrentSong() {
-		const idOfCurrentSong = currentSong.id;
-
-		for (let index = 0; index < currentPlaylistForShuffle.length; index += 1) {
-			if (currentPlaylistForShuffle[index].id === idOfCurrentSong) {
-				currentSongIndex = index;
-				break;
-			}
-		}
 	}
 
 	function updateCurrentPlaylist() {
@@ -366,6 +351,23 @@ export default function MusicPlayer() {
 
 	function deletePlaylist(index) {
 		playlistsModule.allPlaylists.splice(index, 1);
+	}
+
+	function renamePlaylist() {
+		let newName = renamePlaylistInput.value;
+
+		if (newName === '') {
+			newName = 'Unnamed Playlist';
+		}
+
+		playlistsModule.allPlaylists[currentPlaylistIndex].name = newName;
+		playlistsModule.storePlaylistLocally();
+	}
+
+	function deleteSongFromPlaylist() {
+		const currentPlaylistDirectory = playlistsModule.allPlaylists[currentPlaylistIndex].songs;
+		currentPlaylistDirectory.splice(indexOfClickedContextMenuButton, 1);
+		playlistsModule.storePlaylistLocally(); 	
 	}
 
 	function setCurrentVolume() {
