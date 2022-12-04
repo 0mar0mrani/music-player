@@ -23,12 +23,12 @@ export default function MusicPlayer() {
 	
 	let timerID;
 	
-	const songsElement = document.querySelector('.songs');
+	const musicPlayer = document.querySelector('.music-player');
 	const songsContainer = document.querySelector('.songs__container');
-	const titleButton = document.querySelector('.songs__title-button');
-	const artistButton = document.querySelector('.songs__artist-button');
-	const durationButton = document.querySelector('.songs__duration-button');
-	const buttonArrows = document.querySelectorAll('.songs__button-arrow ');
+	const titleButton = document.querySelector('.header__title-button');
+	const artistButton = document.querySelector('.header__artist-button');
+	const durationButton = document.querySelector('.header__duration-button');
+	const buttonArrows = document.querySelectorAll('.header__button-arrow ');
 	let songButtons = null;
 	let currentSorting = null;
 	
@@ -38,8 +38,8 @@ export default function MusicPlayer() {
 	let contextMenuButtons = null;
 	
 	const playlistView = document.querySelector('.playlists');
-	const playlistButton = document.querySelector('.songs__playlist-button');
-	const playlistButtonIcon = document.querySelector('.songs__playlist-button img');
+	const playlistButton = document.querySelector('.header__playlist-button');
+	const playlistButtonIcon = document.querySelector('.header__playlist-button img');
 	const addPlaylistButton = document.querySelector('.playlist__add-playlist-button');
 	const playlistContainer = document.querySelector('.playlists__container');
 	let playlists = null;
@@ -72,7 +72,7 @@ export default function MusicPlayer() {
 		renamePlaylistInput = document.querySelector('.songs__playlist-title-input');
 	}
 	
-	songsElement.addEventListener('click', handleSongsElementClick);
+	musicPlayer.addEventListener('click', handleSongsElementClick);
 	titleButton.addEventListener('click', handleTitleButtonClick);
 	artistButton.addEventListener('click', handleArtistButtonClick);
 	durationButton.addEventListener('click', handleDurationButtonClick);
@@ -94,7 +94,7 @@ export default function MusicPlayer() {
 	repeatButton.addEventListener('click', handleRepeatButtonClick);
 	shuffleButton.addEventListener('click', handleShuffleButtonClick);
 	muteButton.addEventListener('click', handleMuteButtonClick);
-	songsElement.addEventListener('click', handleWindowClick);
+	musicPlayer.addEventListener('click', handleWindowClick);
 
 	function addEventListeners() {
 		for (const songButton of songButtons) {
@@ -505,28 +505,28 @@ export default function MusicPlayer() {
 
 	function renderHeader() {
 		for (const buttonArrow of buttonArrows) {
-			buttonArrow.classList.remove('songs__button-arrow--visible');
+			buttonArrow.classList.remove('header__button-arrow--visible');
 		}
 
 		switch (currentSorting) {
 			case 'title':
-				buttonArrows[0].classList.add('songs__button-arrow--visible');
+				buttonArrows[0].classList.add('header__button-arrow--visible');
 				break
 			case 'artist':
-				buttonArrows[1].classList.add('songs__button-arrow--visible');
+				buttonArrows[1].classList.add('header__button-arrow--visible');
 				break
 			case 'duration':
-				buttonArrows[2].classList.add('songs__button-arrow--visible');
+				buttonArrows[2].classList.add('header__button-arrow--visible');
 				break
 		}
 	}
 
 	function renderPlaylistMenu() {
 		if (isPlaylistMenuOpen) {
-			songsElement.classList.add('songs--playlist-open');
+			musicPlayer.classList.add('songs--playlist-open');
 			playlistButtonIcon.src = '/assets/svg/close.svg';
 		} else {
-			songsElement.classList.remove('songs--playlist-open');
+			musicPlayer.classList.remove('songs--playlist-open');
 			playlistButtonIcon.src = '/assets/svg/menu.svg';
 		}
 	}
