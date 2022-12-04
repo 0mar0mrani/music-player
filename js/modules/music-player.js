@@ -24,7 +24,7 @@ export default function MusicPlayer() {
 	let timerID;
 	
 	const musicPlayer = document.querySelector('.music-player');
-	const songsContainer = document.querySelector('.songs__container');
+	const songsContainer = document.querySelector('.songs');
 	const titleButton = document.querySelector('.header__title-button');
 	const artistButton = document.querySelector('.header__artist-button');
 	const durationButton = document.querySelector('.header__duration-button');
@@ -523,10 +523,10 @@ export default function MusicPlayer() {
 
 	function renderPlaylistMenu() {
 		if (isPlaylistMenuOpen) {
-			musicPlayer.classList.add('songs--playlist-open');
+			musicPlayer.classList.add('music-player__playlist-open');
 			playlistButtonIcon.src = '/assets/svg/close.svg';
 		} else {
-			musicPlayer.classList.remove('songs--playlist-open');
+			musicPlayer.classList.remove('music-player__playlist-open');
 			playlistButtonIcon.src = '/assets/svg/menu.svg';
 		}
 	}
