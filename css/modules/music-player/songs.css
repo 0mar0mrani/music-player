@@ -1,73 +1,17 @@
-.songs {
+.music-player {
 	display: flex;
 	flex-direction: column;
 	position: relative;
 	transition: transform 0.3s ease-in;
 }
 
-/* Header */
-.header__number {
-	font-size: 2rem;
-	align-self: center;
-	justify-self: center;
-	pointer-events: none;
-	user-select: none;
-}
-
-.header__title-button,
-.header__artist-button,
-.header__duration-button {
-	display: flex;
-	align-items: center;
-	text-align: start;
-}
-
-.header__button-arrow {
-	display: none;
-	width: 2rem;
-	height: 2rem;
-	margin-left: 1rem;
-	filter: var(--highlight-color-filter);
-}
-
-.header__button-arrow--visible {
-	display: flex;
-}
-
 .songs--playlist-open{
 	transform: translateX(-33vw);
 }
 
-.header__container,
 .songs__song {
 	display: grid;
 	grid-template-columns: 1fr 3fr 10fr 10fr 4fr 2fr;
-}
-
-/* Header */
-.header__title-button {
-	grid-column: 3 / 4;
-}
-
-.header__playlist-button {
-	width: 6rem;
-	height: 6rem;
-	align-self: center;
-	justify-self: flex-end;
-	margin-right: 2rem;
-}
-
-.header__playlist-button img {
-	width: 100%;
-	height: auto;
-	filter: invert(96%) sepia(7%) saturate(79%) hue-rotate(202deg) brightness(99%) contrast(94%);
-}
-
-.header__container {
-	background-color: var(--background-color);
-	color: var(--text-color);
-	font-size: 2.5rem;
-	height: 6rem;
 }
 
 .songs__song {
