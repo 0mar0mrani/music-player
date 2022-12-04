@@ -676,71 +676,101 @@ export default function MusicPlayer() {
 	}
 
 	function renderSongView() {
-		const isEmptyPlaylist = currentPlaylist.songs.length === 0;
 		songsContainer.innerHTML = '';
+		createTitleOfPlaylist();
+		const isPlaylistEmpty = currentPlaylist.songs.length === 0;
 
-		const playlistTitle = document.createElement('div');
-		playlistTitle.className = 'songs__playlist-title'
+		if (isPlaylistEmpty) {
+			createNoSongsMessage();
+		} else {
+			for (let index = 0; index < currentPlaylist.songs.length; index += 1) {
+				const songElement = returnCreateSongElement(index);
 
-		const titleName = document.createElement('input');
-		titleName.value = `${currentPlaylist.name}`;
-		titleName.className = 'songs__playlist-title-input';
+				createSongNumber();
+				createSongCover();
+				createSongTitle();
+				createArtistName();
+				createSongDuration();
+				if (!isPlaylistMenuOpen) {
+					createContextMenu();
+				}
+				songsContainer.append(songElement);	
 
-		if (!currentPlaylist.renamable) {
-			titleName.disabled = true;
-		} 
-
-		playlistTitle.append(titleName);
-		songsContainer.append(playlistTitle);
+				function returnCreateSongElement() {
+					const song = document.createElement('button');
+					song.className = 'songs__song';
+					song.dataset.id = `${currentPlaylist.songs[index].id}`;
+					return song;
+				}
 		
-		if (isEmptyPlaylist) {
+				function createSongNumber() {
+					const songNumber = document.createElement('p');
+					songNumber.className = 'songs__song-number';
+					songNumber.innerHTML = `${index + 1}`;
+					songElement.append(songNumber);
+				}
+		
+				function createSongCover() {
+					const songCover = document.createElement('div')
+					songCover.className = 'songs__song-cover'
+					const songCoverImage = document.createElement('img')
+					songCoverImage.src = `${currentPlaylist.songs[index].cover}`
+					songCover.append(songCoverImage);
+					songElement.append(songCover);
+				}
+		
+				function createSongTitle() {
+					const songTitle = document.createElement('p');
+					songTitle.className = 'songs__song-title';
+					songTitle.innerHTML = `${currentPlaylist.songs[index].title}`;
+					songElement.append(songTitle);
+				}
+				
+				function createArtistName() {
+					const songArtist = document.createElement('p');
+					songArtist.className = 'songs__song-artist';
+					songArtist.innerHTML = `${currentPlaylist.songs[index].artist}`;
+					songElement.append(songArtist);
+				}
+		
+				function createSongDuration() {
+					const songDuration = document.createElement('p');
+					songDuration.className = 'songs__song-duration';
+					songDuration.innerHTML = `${currentPlaylist.songs[index].duration}`;
+					songElement.append(songDuration);
+				}
+				
+				function createContextMenu() {
+					const contextMenu = document.createElement('button');
+					contextMenu.className = 'songs__add-to-playlist-button';
+					contextMenu.innerHTML = '<img src="/assets/svg/add-to-playlist.svg">'
+					songElement.append(contextMenu);
+				}
+			}
+		}
+
+		function createTitleOfPlaylist() {
+			const playlistTitle = document.createElement('div');
+			playlistTitle.className = 'songs__playlist-title'
+			
+			const titleName = document.createElement('input');
+			titleName.value = `${currentPlaylist.name}`;
+			titleName.className = 'songs__playlist-title-input';
+			
+			if (!currentPlaylist.renamable) {
+				titleName.disabled = true;
+			} 
+			
+			playlistTitle.append(titleName);
+			songsContainer.append(playlistTitle);
+		}
+
+		function createNoSongsMessage() {
 			const paragraph = document.createElement('p');
 			paragraph.className = 'songs__no-songs-message'
 			paragraph.innerHTML = 'No songs in playlist'
 
 			songsContainer.append(paragraph);
-		} else {
-			for (let index = 0; index < currentPlaylist.songs.length; index += 1) {
-				const song = document.createElement('button');
-				song.className = 'songs__song';
-				song.dataset.id = `${currentPlaylist.songs[index].id}`;
-				
-				const songNumber = document.createElement('p');
-				songNumber.className = 'songs__song-number';
-				songNumber.innerHTML = `${index + 1}`;
-				song.append(songNumber);
-				
-				const songCover = document.createElement('div')
-				songCover.className = 'songs__song-cover'
-				const songCoverImage = document.createElement('img')
-				songCoverImage.src = `${currentPlaylist.songs[index].cover}`
-				songCover.append(songCoverImage);
-				song.append(songCover);
-				
-				const songTitle = document.createElement('p');
-				songTitle.className = 'songs__song-title';
-				songTitle.innerHTML = `${currentPlaylist.songs[index].title}`;
-				song.append(songTitle);
-				
-				const songArtist = document.createElement('p');
-				songArtist.className = 'songs__song-artist';
-				songArtist.innerHTML = `${currentPlaylist.songs[index].artist}`;
-				song.append(songArtist);
-				
-				const songDuration = document.createElement('p');
-				songDuration.className = 'songs__song-duration';
-				songDuration.innerHTML = `${currentPlaylist.songs[index].duration}`;
-				song.append(songDuration);
-				
-				if (!isPlaylistMenuOpen) {
-					const addPlaylist = document.createElement('button');
-					addPlaylist.className = 'songs__add-to-playlist-button';
-					addPlaylist.innerHTML = '<img src="/assets/svg/add-to-playlist.svg">'
-					song.append(addPlaylist);
-				}
-				
-				songsContainer.append(song);
-			}
 		}
 	}
 
