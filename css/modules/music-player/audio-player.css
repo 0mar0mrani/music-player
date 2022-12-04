@@ -44,7 +44,6 @@
 	display: flex;
 	align-items: center;
 	gap: 2rem;
-	margin-bottom: 1rem;
 }
 
 .audio-player__shuffle-button,
