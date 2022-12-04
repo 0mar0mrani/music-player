@@ -24,27 +24,29 @@ export default function MusicPlayer() {
 	let timerID;
 	
 	const musicPlayer = document.querySelector('.music-player');
+
 	const songsContainer = document.querySelector('.songs');
+	let songButtons = null;
+	let currentSorting = null;
+	let renamePlaylistInput = null;
+	let contextMenuButton = null;
+
 	const titleButton = document.querySelector('.header__title-button');
 	const artistButton = document.querySelector('.header__artist-button');
 	const durationButton = document.querySelector('.header__duration-button');
 	const buttonArrows = document.querySelectorAll('.header__button-arrow ');
-	let songButtons = null;
-	let currentSorting = null;
+	const playlistButton = document.querySelector('.header__playlist-button');
+	const playlistButtonIcon = document.querySelector('.header__playlist-button img');
 	
 	const contextMenu = document.querySelector('.context-menu');
 	const contextMenuUl = document.querySelector('.context-menu ul');
 	const deleteSongButton = document.querySelector('.context-menu__delete-song-button');
-	let contextMenuButtons = null;
+	let contextMenuPlaylistButtons = null;
 	
 	const playlistView = document.querySelector('.playlists');
-	const playlistButton = document.querySelector('.header__playlist-button');
-	const playlistButtonIcon = document.querySelector('.header__playlist-button img');
 	const addPlaylistButton = document.querySelector('.playlist__add-playlist-button');
 	const playlistContainer = document.querySelector('.playlists__container');
 	let playlists = null;
-	let renamePlaylistInput = null;
-	let addToPlaylistButtons = null;
 	let playlistDeleteButtons = null;
 	
 	const playButton = document.querySelector('.audio-player__play-button');
@@ -65,8 +67,8 @@ export default function MusicPlayer() {
 
 	function addQuerySelector() {
 		songButtons = document.querySelectorAll('.songs__song');
-		addToPlaylistButtons = document.querySelectorAll('.songs__add-to-playlist-button');
-		contextMenuButtons = document.querySelectorAll('.context-menu__item');
+		contextMenuButton = document.querySelectorAll('.songs__add-to-playlist-button');
+		contextMenuPlaylistButtons = document.querySelectorAll('.context-menu__item');
 		playlists = document.querySelectorAll('.playlists__playlist');
 		playlistDeleteButtons = document.querySelectorAll('.playlist__playlist-delete-button');
 		renamePlaylistInput = document.querySelector('.songs__playlist-title-input');
@@ -101,14 +103,14 @@ export default function MusicPlayer() {
 			songButton.addEventListener('dblclick', handleSongButtonClick);
 		}
 
-		for (let index = 0; index < addToPlaylistButtons.length; index += 1) {
-			addToPlaylistButtons[index].addEventListener('click', (event) => {
+		for (let index = 0; index < contextMenuButton.length; index += 1) {
+			contextMenuButton[index].addEventListener('click', (event) => {
 				handleAddPlaylistButtonClick(event, index);
 			});
 		}
 
-		for (let index = 0; index < contextMenuButtons.length; index += 1) {
-			contextMenuButtons[index].addEventListener('click', () => {
+		for (let index = 0; index < contextMenuPlaylistButtons.length; index += 1) {
+			contextMenuPlaylistButtons[index].addEventListener('click', () => {
 				handleContextMenuButtonsClick(index) 
 			})
 		}
