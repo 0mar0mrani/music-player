@@ -31,9 +31,7 @@ export default function MusicPlayer() {
 	let renamePlaylistInput = null;
 	let contextMenuButton = null;
 
-	const titleButton = document.querySelector('.header__title-button');
-	const artistButton = document.querySelector('.header__artist-button');
-	const durationButton = document.querySelector('.header__duration-button');
+	const sortingButtons = document.querySelectorAll('.header__category-button');
 	const buttonArrows = document.querySelectorAll('.header__button-arrow ');
 	const playlistButton = document.querySelector('.header__playlist-button');
 	const playlistButtonIcon = document.querySelector('.header__playlist-button img');
@@ -75,9 +73,10 @@ export default function MusicPlayer() {
 	}
 	
 	musicPlayer.addEventListener('click', handleMusicPlayerClick);
-	titleButton.addEventListener('click', handleTitleButtonClick);
-	artistButton.addEventListener('click', handleArtistButtonClick);
-	durationButton.addEventListener('click', handleDurationButtonClick);
+
+	for (const sortingButton of sortingButtons) {
+		sortingButton.addEventListener('click', handleSortingButtonClick);
+	}
 
 	addPlaylistButton.addEventListener('click', handleAddPlaylistClick)
 	deleteSongButton.addEventListener('click', handleDeleteSongButtonClick)
@@ -179,33 +178,13 @@ export default function MusicPlayer() {
 		renderHTML();
 	}
 
-	function handleTitleButtonClick() {
-		if (currentSorting === 'title') {
+	function handleSortingButtonClick(event) {
+		const category = event.currentTarget.dataset.category;
+		console.log(category);
+		if (currentSorting === category) {
 			currentSorting = null;
 		} else {
-			currentSorting = 'title';
-		}
-		sortCurrentPlaylist();
-		setCurrentPlaylistForShuffle();
-		renderHTML();
-	}
-
-	function handleArtistButtonClick() {
-		if (currentSorting === 'artist') {
-			currentSorting = null;
-		} else {
-			currentSorting = 'artist';
-		}
-		sortCurrentPlaylist();
-		setCurrentPlaylistForShuffle();
-		renderHTML();
-	}
-
-	function handleDurationButtonClick() {
-		if (currentSorting === 'duration') {
-			currentSorting = null;
-		} else {
-			currentSorting = 'duration';
+			currentSorting = category;
 		}
 		sortCurrentPlaylist();
 		setCurrentPlaylistForShuffle();

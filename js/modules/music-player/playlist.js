@@ -112,7 +112,7 @@ export default function Playlists() {
 		]
 	}
 
-	let allPlaylists = [allSongs]
+	let allPlaylists = [allSongs];
 
 	function storePlaylistLocally() {
 		const serializedAllPlaylist = JSON.stringify(allPlaylists);
@@ -134,6 +134,5 @@ export default function Playlists() {
 		allSongs,
 		allPlaylists,
 		storePlaylistLocally,
-		getLocalAllPlaylists,
 	}
 }
