@@ -9,9 +9,9 @@ export default function MusicPlayer() {
 	let currentSong = null;
 
 	let currentPlaylistIndex = 0;
-	let currentPlaylist = JSON.parse(JSON.stringify(playlistsModule.allPlaylists[currentPlaylistIndex]))
+	let currentPlaylist = null;
 	let currentSongIndex = 0;
-	let currentPlaylistForShuffle = [...currentPlaylist.songs];
+	let currentPlaylistForShuffle = null;
 	
 	const audio = new Audio();
 	let currentVolume = null;
@@ -480,6 +480,15 @@ export default function MusicPlayer() {
 	function changeAudioSource() {
 		audio.src = currentSong.url;
 	}
+
+	function loadSongIntoPlayer() {
+		currentSong = 0;
+		currentSongIndex = 0;
+		updateCurrentPlaylist();
+		setCurrentSong();
+		changeAudioSource();
+		renderHTML();
+	}
 	
 	function renderHTML(event) {
 		renderHeader();
@@ -776,9 +785,7 @@ export default function MusicPlayer() {
 		}
 	}
 
-	currentSong = currentPlaylistForShuffle[0];
-	changeAudioSource();
+	loadSongIntoPlayer();
 	setInterval(goToNextSongIfFinished, 1000);
-	renderHTML();
 }
 
