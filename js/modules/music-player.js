@@ -2,14 +2,14 @@ import Playlists from "./music-player/playlist.js";
 
 export default function MusicPlayer() {
 	const playlistsModule = Playlists();
-
+	
 	let isPlaying = false;
 	let isRepeat = false;
 	let isShuffle = false;
 	let currentSong = null;
 
-	let currentPlaylist = playlistsModule.allSongs;
 	let currentPlaylistIndex = 0;
+	let currentPlaylist = JSON.parse(JSON.stringify(playlistsModule.allPlaylists[currentPlaylistIndex]))
 	let currentSongIndex = 0;
 	let currentPlaylistForShuffle = [...currentPlaylist.songs];
 	
@@ -183,7 +183,7 @@ export default function MusicPlayer() {
 		if (currentSorting === 'title') {
 			currentSorting = null;
 		} else {
-		currentSorting = 'title';
+			currentSorting = 'title';
 		}
 		sortCurrentPlaylist();
 		setCurrentPlaylistForShuffle();
@@ -194,7 +194,7 @@ export default function MusicPlayer() {
 		if (currentSorting === 'artist') {
 			currentSorting = null;
 		} else {
-		currentSorting = 'artist';
+			currentSorting = 'artist';
 		}
 		sortCurrentPlaylist();
 		setCurrentPlaylistForShuffle();
@@ -205,7 +205,7 @@ export default function MusicPlayer() {
 		if (currentSorting === 'duration') {
 			currentSorting = null;
 		} else {
-		currentSorting = 'duration';
+			currentSorting = 'duration';
 		}
 		sortCurrentPlaylist();
 		setCurrentPlaylistForShuffle();
@@ -335,20 +335,20 @@ export default function MusicPlayer() {
 
 	function sortCurrentPlaylist() {
 		if (currentSorting !== null) {
-		currentPlaylist.songs.sort((a, b) => {
-			return a[currentSorting] > b[currentSorting] ? 1 : -1;
-		});
+			currentPlaylist.songs.sort((a, b) => {
+				return a[currentSorting] > b[currentSorting] ? 1 : -1;
+			});
 		} else {
 			currentPlaylist = JSON.parse(JSON.stringify(playlistsModule.allPlaylists[currentPlaylistIndex]));
 		}
 	}
 
-	function setCurrentPlaylistForSorting() {
+	function setCurrentPlaylistForShuffle() {
 		currentPlaylistForShuffle = [...currentPlaylist.songs];
 	}
 
 	function updateCurrentPlaylist() {
-		currentPlaylist = playlistsModule.allPlaylists[currentPlaylistIndex];
+		currentPlaylist = JSON.parse(JSON.stringify(playlistsModule.allPlaylists[currentPlaylistIndex]));
 		currentPlaylistForShuffle = [...currentPlaylist.songs]
 	}
 
