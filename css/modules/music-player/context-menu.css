@@ -1,4 +1,4 @@
-.songs__context-menu {
+.context-menu {
 	position: absolute;
 	top: 0;
 	width: 20rem;
@@ -9,15 +9,15 @@
 	list-style: none;
 }
 
-.songs__context-menu--open {
+.context-menu--open {
 	display: block;
 }
 
-.songs__context-menu li {
+.context-menu li {
 	list-style: none;
 }
 
-.songs__context-menu-header {
+.context-menu__header {
 	position: relative;
 	font-size: 2rem;
 	padding-bottom: 1rem;
@@ -25,7 +25,7 @@
 	padding: 1rem;
 }
 
-.songs__context-menu-header::before {
+.context-menu__header::before {
 	position: absolute;
 	content: '';
 	top: 0;
@@ -39,25 +39,25 @@
 	filter: var(--background-color-lighter-filter);
 }
 
-.songs__context-menu-item {
+.context-menu__item {
 	width: 100%;
 	text-align: start;
 	padding: 1rem;
 }
 
-.songs__context-menu-item:hover,
-.songs__context-delete-song:hover {
+.context-menu__item:hover,
+.context-menu__delete-song-button:hover {
 	background-color: var(--text-color-darker);
 }
 
-.songs__context-menu ul {
+.context-menu ul {
 	display: flex;
 	flex-direction: column;
 	height: 25rem;
 	overflow-y: scroll;
 }
 
-.songs__context-delete-song {
+.context-menu__delete-song-button {
 	display: none;
 	width: 100%;
 	text-align: start;
@@ -66,6 +66,6 @@
 	padding: 1rem;
 }
 
-.songs__context-delete-song--active {
+.context-menu__delete-song-button--active {
 	display: block;
 }

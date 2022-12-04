@@ -32,9 +32,9 @@ export default function MusicPlayer() {
 	let songButtons = null;
 	let currentSorting = null;
 	
-	const contextMenu = document.querySelector('.songs__context-menu');
-	const contextMenuUl = document.querySelector('.songs__context-menu ul');
-	const deleteSongButton = document.querySelector('.songs__context-delete-song');
+	const contextMenu = document.querySelector('.context-menu');
+	const contextMenuUl = document.querySelector('.context-menu ul');
+	const deleteSongButton = document.querySelector('.context-menu__delete-song-button');
 	let contextMenuButtons = null;
 	
 	const playlistView = document.querySelector('.playlists');
@@ -66,7 +66,7 @@ export default function MusicPlayer() {
 	function addQuerySelector() {
 		songButtons = document.querySelectorAll('.songs__song');
 		addToPlaylistButtons = document.querySelectorAll('.songs__add-to-playlist-button');
-		contextMenuButtons = document.querySelectorAll('.songs__context-menu-item');
+		contextMenuButtons = document.querySelectorAll('.context-menu__item');
 		playlists = document.querySelectorAll('.playlists__playlist');
 		playlistDeleteButtons = document.querySelectorAll('.playlist__playlist-delete-button');
 		renamePlaylistInput = document.querySelector('.songs__playlist-title-input');
@@ -542,17 +542,17 @@ export default function MusicPlayer() {
 
 		function renderVisibility() {
 			if (isContextMenuOpen) {
-				contextMenu.classList.add('songs__context-menu--open');
+				contextMenu.classList.add('context-menu--open');
 			} else {
-				contextMenu.classList.remove('songs__context-menu--open');
+				contextMenu.classList.remove('context-menu--open');
 			}
 		}
 
 		function renderDeleteButton() {
 			if (currentPlaylist.deletable) {
-				deleteSongButton.classList.add('songs__context-delete-song--active');
+				deleteSongButton.classList.add('context-menu__delete-song-button--active');
 			} else {
-				deleteSongButton.classList.remove('songs__context-delete-song--active');
+				deleteSongButton.classList.remove('context-menu__delete-song-button--active');
 			}
 		}
 
@@ -563,7 +563,7 @@ export default function MusicPlayer() {
 				const menuItem = document.createElement('li');
 				const button = document.createElement('button');
 		
-				button.className = 'songs__context-menu-item';
+				button.className = 'context-menu__item';
 				button.innerText = `${playlistsModule.allPlaylists[index].name}`;
 		
 				menuItem.append(button);
