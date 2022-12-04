@@ -180,23 +180,35 @@ export default function MusicPlayer() {
 	}
 
 	function handleTitleButtonClick() {
+		if (currentSorting === 'title') {
+			currentSorting = null;
+		} else {
 		currentSorting = 'title';
+		}
 		sortCurrentPlaylist();
-		setCurrentPlaylistForSorting();
+		setCurrentPlaylistForShuffle();
 		renderHTML();
 	}
 
 	function handleArtistButtonClick() {
+		if (currentSorting === 'artist') {
+			currentSorting = null;
+		} else {
 		currentSorting = 'artist';
+		}
 		sortCurrentPlaylist();
-		setCurrentPlaylistForSorting();
+		setCurrentPlaylistForShuffle();
 		renderHTML();
 	}
 
 	function handleDurationButtonClick() {
+		if (currentSorting === 'duration') {
+			currentSorting = null;
+		} else {
 		currentSorting = 'duration';
+		}
 		sortCurrentPlaylist();
-		setCurrentPlaylistForSorting();
+		setCurrentPlaylistForShuffle();
 		renderHTML();
 	}
 
@@ -322,9 +334,13 @@ export default function MusicPlayer() {
 	}
 
 	function sortCurrentPlaylist() {
+		if (currentSorting !== null) {
 		currentPlaylist.songs.sort((a, b) => {
 			return a[currentSorting] > b[currentSorting] ? 1 : -1;
 		});
+		} else {
+			currentPlaylist = JSON.parse(JSON.stringify(playlistsModule.allPlaylists[currentPlaylistIndex]));
+		}
 	}
 
 	function setCurrentPlaylistForSorting() {
