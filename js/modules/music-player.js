@@ -74,19 +74,15 @@ export default function MusicPlayer() {
 		renamePlaylistInput = document.querySelector('.songs__playlist-title-input');
 	}
 	
-	musicPlayer.addEventListener('click', handleSongsElementClick);
+	musicPlayer.addEventListener('click', handleMusicPlayerClick);
 	titleButton.addEventListener('click', handleTitleButtonClick);
 	artistButton.addEventListener('click', handleArtistButtonClick);
 	durationButton.addEventListener('click', handleDurationButtonClick);
 
-	addPlaylistButton.addEventListener('click', handleAddPlaylistButton)
-	deleteSongButton.addEventListener('click', handleDeleteSongButtonHandle)
-	playlistView.addEventListener('click', (event) => {
-		handlePlaylistViewClick(event) 
-	})
-	playlistButton.addEventListener('click', (event) => {
-		handlePlaylistButtonClick(event);
-	});
+	addPlaylistButton.addEventListener('click', handleAddPlaylistClick)
+	deleteSongButton.addEventListener('click', handleDeleteSongButtonClick)
+	playlistView.addEventListener('click', handlePlaylistViewClick)
+	playlistButton.addEventListener('click', handlePlaylistButtonClick);
 
 	playButton.addEventListener('click', handlePlayButtonClick);
 	previousButton.addEventListener('click', handlePreviousButtonClick);
@@ -174,7 +170,7 @@ export default function MusicPlayer() {
 		isPlaylistMenuOpen = !isPlaylistMenuOpen;
 	}
 	
-	function handleAddPlaylistButton() {
+	function handleAddPlaylistClick() {
 		addNewPlaylist();
 		playlistsModule.storePlaylistLocally();
 		renderHTML();
@@ -187,7 +183,7 @@ export default function MusicPlayer() {
 		renderHTML();
 	}
 
-	function handleDeleteSongButtonHandle() {
+	function handleDeleteSongButtonClick() {
 		const currentPlaylistDirectory = playlistsModule.allPlaylists[currentPlaylistIndex].songs;
 		currentPlaylistDirectory.splice(indexOfClickedContextMenuButton, 1);
 		playlistsModule.storePlaylistLocally(); 		
@@ -216,7 +212,7 @@ export default function MusicPlayer() {
 		renderHTML();
 	}
 
-	function handleSongsElementClick() {
+	function handleMusicPlayerClick() {
 		isPlaylistMenuOpen = false;
 		renderHTML();
 	}
