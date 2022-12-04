@@ -533,7 +533,6 @@ export default function MusicPlayer() {
 		renderVisibility()
 		renderDeleteButton();
 		renderMenuButtons();
-
 		if (event) {
 			renderPlacement();
 		}
@@ -660,18 +659,24 @@ export default function MusicPlayer() {
 			const playlist = document.createElement('button');
 			playlist.className = 'playlists__playlist';
 
+			createPlayListName();
+			createDeleteButton();
+			playlistContainer.append(playlist);
+
+			function createPlayListName() {
 			const playlistName = document.createElement('p');
 			playlistName.innerText = `${playlistsModule.allPlaylists[index].name}`;
 			playlist.append(playlistName);
+			}
 
+			function createDeleteButton() {
 			const deleteButton = document.createElement('button');
 			deleteButton.className = 'playlist__playlist-delete-button';
 			const deleteButtonIcon = document.createElement('img');
 			deleteButtonIcon.src = '/assets/svg/close.svg';
 			deleteButton.append(deleteButtonIcon);
 			playlist.append(deleteButton);
-
-			playlistContainer.append(playlist);
+			}
 		}
 	}
 
