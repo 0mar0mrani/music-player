@@ -11,7 +11,7 @@ export default function MusicPlayer() {
 	let currentPlaylist = playlistsModule.allSongs;
 	let currentPlaylistIndex = 0;
 	let currentSongIndex = 0;
-	let currentPlaylistForSorting = [...currentPlaylist.songs];
+	let currentPlaylistForShuffle = [...currentPlaylist.songs];
 	
 	const audio = new Audio();
 	let currentVolume = null;
@@ -332,14 +332,14 @@ export default function MusicPlayer() {
 	}
 
 	function setCurrentPlaylistForSorting() {
-		currentPlaylistForSorting = [...currentPlaylist.songs];
+		currentPlaylistForShuffle = [...currentPlaylist.songs];
 	}
 
 	function setIndexOfCurrentSong() {
 		const idOfCurrentSong = currentSong.id;
 
-		for (let index = 0; index < currentPlaylistForSorting.length; index += 1) {
-			if (currentPlaylistForSorting[index].id === idOfCurrentSong) {
+		for (let index = 0; index < currentPlaylistForShuffle.length; index += 1) {
+			if (currentPlaylistForShuffle[index].id === idOfCurrentSong) {
 				currentSongIndex = index;
 				break;
 			}
@@ -348,7 +348,7 @@ export default function MusicPlayer() {
 
 	function updateCurrentPlaylist() {
 		currentPlaylist = playlistsModule.allPlaylists[currentPlaylistIndex];
-		currentPlaylistForSorting = [...currentPlaylist.songs]
+		currentPlaylistForShuffle = [...currentPlaylist.songs]
 	}
 
 	function addNewPlaylist() {
@@ -398,12 +398,12 @@ export default function MusicPlayer() {
 	// https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 	function shuffleSongs() {
 		if (isShuffle) {
-			for (let index = currentPlaylistForSorting.length - 1; index > 0; index -= 1) {
+			for (let index = currentPlaylistForShuffle.length - 1; index > 0; index -= 1) {
 				const j = Math.floor(Math.random() * (index + 1));
-				[currentPlaylistForSorting[index], currentPlaylistForSorting[j]] = [currentPlaylistForSorting[j], currentPlaylistForSorting[index]];
+				[currentPlaylistForShuffle[index], currentPlaylistForShuffle[j]] = [currentPlaylistForShuffle[j], currentPlaylistForShuffle[index]];
 			}
 		} else {
-			currentPlaylistForSorting = [...currentPlaylist];
+			currentPlaylistForShuffle = [...currentPlaylist];
 		}
 	}
 
@@ -429,7 +429,7 @@ export default function MusicPlayer() {
 	}
 
 	function setCurrentSong() {
-		currentSong = currentPlaylistForSorting[currentSongIndex];
+		currentSong = currentPlaylistForShuffle[currentSongIndex];
 	}
 
 	function toggleIsPlaying() {
@@ -779,7 +779,7 @@ export default function MusicPlayer() {
 		}
 	}
 
-	currentSong = currentPlaylistForSorting[0];
+	currentSong = currentPlaylistForShuffle[0];
 	changeAudioSource();
 	setInterval(goToNextSongIfFinished, 1000);
 	renderHTML();
