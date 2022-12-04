@@ -25,6 +25,10 @@ export default function MusicPlayer() {
 	
 	const songsElement = document.querySelector('.songs');
 	const songsContainer = document.querySelector('.songs__container');
+	const titleButton = document.querySelector('.songs__title-button');
+	const artistButton = document.querySelector('.songs__artist-button');
+	const durationButton = document.querySelector('.songs__duration-button');
+	const buttonArrows = document.querySelectorAll('.songs__button-arrow ');
 	let songButtons = null;
 	let currentSorting = null;
 	
@@ -32,10 +36,6 @@ export default function MusicPlayer() {
 	const contextMenuUl = document.querySelector('.songs__context-menu ul');
 	const deleteSongButton = document.querySelector('.songs__context-delete-song');
 	let contextMenuButtons = null;
-	
-	const titleButton = document.querySelector('.songs__title-button');
-	const artistButton = document.querySelector('.songs__artist-button');
-	const durationButton = document.querySelector('.songs__duration-button');
 	
 	const playlistView = document.querySelector('.playlists');
 	const playlistButton = document.querySelector('.songs__playlist-button');
@@ -487,6 +487,7 @@ export default function MusicPlayer() {
 	}
 	
 	function renderHTML(event) {
+		renderHeader();
 		renderSongView();
 		renderPlaylistView();
 		renderCurrentSong();
@@ -505,6 +506,24 @@ export default function MusicPlayer() {
 
 	function renderDeleteSongButton() {
 		// if (currentSong)
+	}
+
+	function renderHeader() {
+		for (const buttonArrow of buttonArrows) {
+			buttonArrow.classList.remove('songs__button-arrow--visible');
+		}
+
+		switch (currentSorting) {
+			case 'title':
+				buttonArrows[0].classList.add('songs__button-arrow--visible');
+				break
+			case 'artist':
+				buttonArrows[1].classList.add('songs__button-arrow--visible');
+				break
+			case 'duration':
+				buttonArrows[2].classList.add('songs__button-arrow--visible');
+				break
+		}
 	}
 
 	function renderPlaylistMenu() {

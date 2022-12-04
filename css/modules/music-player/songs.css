@@ -17,7 +17,21 @@
 .songs__title-button,
 .songs__artist-button,
 .songs__duration-button {
+	display: flex;
+	align-items: center;
 	text-align: start;
+}
+
+.songs__button-arrow {
+	display: none;
+	width: 2rem;
+	height: 2rem;
+	margin-left: 1rem;
+	filter: var(--highlight-color-filter);
+}
+
+.songs__button-arrow--visible {
+	display: flex;
 }
 
 .songs--playlist-open{
