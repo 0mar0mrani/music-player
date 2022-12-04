@@ -498,14 +498,9 @@ export default function MusicPlayer() {
 		renderVolumeRange();
 		renderPlaylistMenu();
 		renderContextMenu(event);
-		renderDeleteSongButton() 
 
 		addQuerySelector();
 		addEventListeners();
-	}
-
-	function renderDeleteSongButton() {
-		// if (currentSong)
 	}
 
 	function renderHeader() {
