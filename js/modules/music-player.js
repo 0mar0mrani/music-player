@@ -417,8 +417,8 @@ export default function MusicPlayer() {
 	function shuffleSongs() {
 		if (isShuffle) {
 			for (let index = currentPlaylistForShuffle.length - 1; index > 0; index -= 1) {
-				const j = Math.floor(Math.random() * (index + 1));
-				[currentPlaylistForShuffle[index], currentPlaylistForShuffle[j]] = [currentPlaylistForShuffle[j], currentPlaylistForShuffle[index]];
+				const randomIndex = Math.floor(Math.random() * (index + 1));
+				[currentPlaylistForShuffle[index], currentPlaylistForShuffle[randomIndex]] = [currentPlaylistForShuffle[randomIndex], currentPlaylistForShuffle[index]];
 			}
 		} else {
 			currentPlaylistForShuffle = [...currentPlaylist];
