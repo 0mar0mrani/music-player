@@ -34,8 +34,8 @@
 }
 
 .header__playlist-button {
-	width: 6rem;
-	height: 6rem;
+	width: 4rem;
+	height: 4rem;
 	align-self: center;
 	justify-self: flex-end;
 	margin-right: 2rem;
