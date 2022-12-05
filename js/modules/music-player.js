@@ -6,33 +6,31 @@ export default function MusicPlayer() {
 	let isPlaying = false;
 	let isRepeat = false;
 	let isShuffle = false;
-	let currentSong = null;
 
+	let currentSong = null;
 	let currentPlaylistIndex = 0;
 	let currentPlaylist = null;
 	let currentSongIndex = 0;
 	let currentPlaylistForShuffle = null;
+	let currentSorting = null;
 	
 	const audio = new Audio();
-	let currentVolume = null;
+	let currentVolume = 1;
 	
 	let isPlaylistMenuOpen = false;
 	let isContextMenuOpen = false;
-	
 	let indexOfClickedContextMenuButton = null;
-	
 	let timerID;
 	
 	const musicPlayer = document.querySelector('.music-player');
-
+	
 	const songsContainer = document.querySelector('.songs');
 	let songButtons = null;
-	let currentSorting = null;
+	let contextMenuButtons = null;
 	let renamePlaylistInput = null;
-	let contextMenuButton = null;
 
 	const sortingButtons = document.querySelectorAll('.header__category-button');
-	const buttonArrows = document.querySelectorAll('.header__button-arrow ');
+	const headerButtonArrowIcons = document.querySelectorAll('.header__button-arrow ');
 	const playlistButton = document.querySelector('.header__playlist-button');
 	const playlistButtonIcon = document.querySelector('.header__playlist-button img');
 	
@@ -61,11 +59,12 @@ export default function MusicPlayer() {
 	const repeatButton = document.querySelector('.audio-player__repeat-button');
 	const shuffleButton = document.querySelector('.audio-player__shuffle-button');
 	const muteButton = document.querySelector('.audio-player__mute-button');
+	// 
 	const muteButtonImage = document.querySelector('.audio-player__mute-button img');
 
 	function addQuerySelector() {
 		songButtons = document.querySelectorAll('.songs__song');
-		contextMenuButton = document.querySelectorAll('.songs__add-to-playlist-button');
+		contextMenuButtons = document.querySelectorAll('.songs__add-to-playlist-button');
 		contextMenuPlaylistButtons = document.querySelectorAll('.context-menu__item');
 		playlists = document.querySelectorAll('.playlists__playlist');
 		playlistDeleteButtons = document.querySelectorAll('.playlist__playlist-delete-button');
@@ -77,7 +76,6 @@ export default function MusicPlayer() {
 	for (const sortingButton of sortingButtons) {
 		sortingButton.addEventListener('click', handleSortingButtonClick);
 	}
-
 	addPlaylistButton.addEventListener('click', handleAddPlaylistClick)
 	deleteSongButton.addEventListener('click', handleDeleteSongButtonClick)
 	playlistView.addEventListener('click', handlePlaylistViewClick)
@@ -91,15 +89,14 @@ export default function MusicPlayer() {
 	repeatButton.addEventListener('click', handleRepeatButtonClick);
 	shuffleButton.addEventListener('click', handleShuffleButtonClick);
 	muteButton.addEventListener('click', handleMuteButtonClick);
-	musicPlayer.addEventListener('click', handleWindowClick);
 
 	function addEventListeners() {
 		for (const songButton of songButtons) {
 			songButton.addEventListener('dblclick', handleSongButtonClick);
 		}
 
-		for (let index = 0; index < contextMenuButton.length; index += 1) {
-			contextMenuButton[index].addEventListener('click', (event) => {
+		for (let index = 0; index < contextMenuButtons.length; index += 1) {
+			contextMenuButtons[index].addEventListener('click', (event) => {
 				handleAddPlaylistButtonClick(event, index);
 			});
 		}
@@ -129,139 +126,10 @@ export default function MusicPlayer() {
 		renamePlaylistInput.addEventListener('keyup', handleRenamePlaylistKeyup)
 	}
 
-	function handleRenamePlaylistKeyup(event) {
-		if (event.key === 'Enter') {
-			renamePlaylistInput.blur();
-		}
-	}
-
-	function handleRenamePlaylistClick(event) {
-		event.stopPropagation();
-	}
-
-	function handleRenamePlaylistInput() {
-		renamePlaylist();
-		updateCurrentPlaylist();	
-	}
-
-	function handlePlaylistViewClick(event) {
-		event.stopPropagation();
-	}
-
-	function handlePlaylistButtonClick(event) {
-		event.stopPropagation();
-		togglePlaylistMenu();
-		isContextMenuOpen = false;
-		renderHTML();
-	}
-
-	function togglePlaylistMenu() {
-		isPlaylistMenuOpen = !isPlaylistMenuOpen;
-	}
-	
-	function handleAddPlaylistClick() {
-		addNewPlaylist();
-		playlistsModule.storePlaylistLocally();
-		renderHTML();
-	}
-
-	function handlePlaylistClick(index) {
-		currentPlaylistIndex = index;
-		updateCurrentPlaylist();
-		togglePlaylistMenu();
-		renderHTML();
-	}
-
-	function handleDeleteSongButtonClick() {
-		deleteSongFromPlaylist();
-		updateCurrentPlaylist();
-		renderHTML();
-	}
-
-	function handleSortingButtonClick(event) {
-		const category = event.currentTarget.dataset.category;
-		console.log(category);
-		if (currentSorting === category) {
-			currentSorting = null;
-		} else {
-			currentSorting = category;
-		}
-		sortCurrentPlaylist();
-		setCurrentPlaylistForShuffle();
-		renderHTML();
-	}
-
 	function handleMusicPlayerClick() {
 		isPlaylistMenuOpen = false;
-		renderHTML();
-	}
-	
-	function handleContextMenuButtonsClick(index) {
-		addSongToPlaylist(index);
-		playlistsModule.storePlaylistLocally(); 
-		updateCurrentPlaylist();
-		renderHTML();
-	}
-
-	function handleWindowClick() {
 		isContextMenuOpen = false;
 		renderHTML();
-	}
-
-	function handleAddPlaylistButtonClick(event, index) {
-		event.stopPropagation();
-		indexOfClickedContextMenuButton = index;
-		isContextMenuOpen = true;
-		renderHTML(event);
-	}
-
-	function handleNextButtonClick() {
-		setIndexOfCurrentSong();
-		if (!isRepeat) {
-			increaseCurrentSongIndex();
-		}
-		setCurrentSong();
-		changeAudioSource();
-		isPlaying = true;
-		renderAudio();
-		renderHTML();
-	}
-
-	function handlePreviousButtonClick() {
-		setIndexOfCurrentSong();
-		if (!isRepeat) {
-			decreaseCurrentSongIndex();
-		}
-		setCurrentSong();
-		changeAudioSource();
-		isPlaying = true;
-		renderAudio();
-		renderHTML();
-	}
-
-	function handlePlayButtonClick() {
-		toggleIsPlaying();
-		renderAudio();
-		renderHTML();
-		if (isPlaying) {
-			timerID = setInterval(renderTimeline, 10);
-		} else {
-			clearInterval(timerID);
-		}
-	}
-
-	function handleVolumeRangeInput() {
-		setCurrentVolume();
-		setVolume();
-		renderHTML();
-	}
-
-	function handleTimelineRangeInput() {
-		const valueInput = timelineRange.value;
-		const roundedDuration = audio.duration;
-		const valueInputToCurrentTime =  valueInput * roundedDuration / 100;
-
-		audio.currentTime = valueInputToCurrentTime;
 	}
 
 	function handleSongButtonClick(event) {
@@ -278,13 +146,74 @@ export default function MusicPlayer() {
 		timerID = setInterval(renderTimeline, 10)
 	}
 
-	function handleRepeatButtonClick() {
-		toggleRepeat();
+	function handleAddPlaylistButtonClick(event, index) {
+		event.stopPropagation();
+		indexOfClickedContextMenuButton = index;
+		isContextMenuOpen = true;
+		renderHTML(event);
+	}
+
+	function handleRenamePlaylistClick(event) {
+		event.stopPropagation();
+	}
+	
+	function handleRenamePlaylistInput() {
+		renamePlaylist();
+		updateCurrentPlaylist();	
+	}
+	
+	function handleRenamePlaylistKeyup(event) {
+		if (event.key === 'Enter') {
+			renamePlaylistInput.blur();
+		}
+	}
+	function handleSortingButtonClick(event) {
+		const category = event.currentTarget.dataset.category;
+		console.log(category);
+		if (currentSorting === category) {
+			currentSorting = null;
+		} else {
+			currentSorting = category;
+		}
+		sortCurrentPlaylist();
+		UpdateCurrentPlaylistForShuffle();
 		renderHTML();
 	}
 
-	function handleMuteButtonClick() {
-		toggleMute();
+	function handlePlaylistButtonClick(event) {
+		event.stopPropagation();
+		togglePlaylistMenu();
+		isContextMenuOpen = false;
+		renderHTML();
+	}
+
+	function handleDeleteSongButtonClick() {
+		deleteSongFromPlaylist();
+		updateCurrentPlaylist();
+		renderHTML();
+	}
+
+	function handleContextMenuButtonsClick(index) {
+		addSongToPlaylist(index);
+		playlistsModule.storePlaylistLocally(); 
+		updateCurrentPlaylist();
+		renderHTML();
+	}
+
+	function handlePlaylistViewClick(event) {
+		event.stopPropagation();
+	}
+
+	function handleAddPlaylistClick() {
+		addNewPlaylist();
+		playlistsModule.storePlaylistLocally();
+		renderHTML();
+	}
+	
+	function handlePlaylistClick(index) {
+		currentPlaylistIndex = index;
+		updateCurrentPlaylist();
+		togglePlaylistMenu();
 		renderHTML();
 	}
 
@@ -295,15 +224,69 @@ export default function MusicPlayer() {
 		renderHTML();
 	}
 
-	function setIndexOfCurrentSong() {
-		const idOfCurrentSong = currentSong.id;
-
-		for (let index = 0; index < currentPlaylistForShuffle.length; index += 1) {
-			if (currentPlaylistForShuffle[index].id === idOfCurrentSong) {
-				currentSongIndex = index;
-				break;
-			}
+	function handlePlayButtonClick() {
+		toggleIsPlaying();
+		renderAudio();
+		renderHTML();
+		if (isPlaying) {
+			timerID = setInterval(renderTimeline, 10);
+		} else {
+			clearInterval(timerID);
 		}
+	}
+
+	function handlePreviousButtonClick() {
+		setIndexOfCurrentSong();
+		if (!isRepeat) {
+			decreaseCurrentSongIndex();
+		}
+		setCurrentSong();
+		changeAudioSource();
+		isPlaying = true;
+		renderAudio();
+		renderHTML();
+	}
+
+	function handleNextButtonClick() {
+		setIndexOfCurrentSong();
+		if (!isRepeat) {
+			increaseCurrentSongIndex();
+		}
+		setCurrentSong();
+		changeAudioSource();
+		isPlaying = true;
+		renderAudio();
+		renderHTML();
+	}
+
+	function handleVolumeRangeInput() {
+		setCurrentVolume();
+		setVolume();
+		renderHTML();
+	}
+
+	function handleTimelineRangeInput() {
+		const valueInput = timelineRange.value;
+		const roundedDuration = audio.duration;
+		const valueInputToCurrentTime =  valueInput * roundedDuration / 100;
+
+		audio.currentTime = valueInputToCurrentTime;
+	}
+
+	function handleRepeatButtonClick() {
+		toggleRepeat();
+		renderHTML();
+	}
+
+	function handleShuffleButtonClick() {
+		toggleShuffle();
+		shuffleSongs();
+		renderHTML();
+	}
+
+	function handleMuteButtonClick() {
+		toggleMute();
+		renderHTML();
 	}
 
 	function addSongToPlaylist(index) {
@@ -322,7 +305,7 @@ export default function MusicPlayer() {
 		}
 	}
 
-	function setCurrentPlaylistForShuffle() {
+	function UpdateCurrentPlaylistForShuffle() {
 		currentPlaylistForShuffle = [...currentPlaylist.songs];
 	}
 
@@ -381,15 +364,24 @@ export default function MusicPlayer() {
 		isRepeat = !isRepeat;
 	}
 
-	
-	function handleShuffleButtonClick() {
-		toggleShuffle();
-		shuffleSongs();
-		renderHTML();
-	}
-
 	function toggleShuffle() {
 		isShuffle = !isShuffle;
+	}
+
+
+	function togglePlaylistMenu() {
+		isPlaylistMenuOpen = !isPlaylistMenuOpen;
+	}
+
+	function setIndexOfCurrentSong() {
+		const idOfCurrentSong = currentSong.id;
+
+		for (let index = 0; index < currentPlaylistForShuffle.length; index += 1) {
+			if (currentPlaylistForShuffle[index].id === idOfCurrentSong) {
+				currentSongIndex = index;
+				break;
+			}
+		}
 	}
 	
 	// https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
@@ -508,19 +500,19 @@ export default function MusicPlayer() {
 	}
 
 	function renderHeader() {
-		for (const buttonArrow of buttonArrows) {
+		for (const buttonArrow of headerButtonArrowIcons) {
 			buttonArrow.classList.remove('header__button-arrow--visible');
 		}
 
 		switch (currentSorting) {
 			case 'title':
-				buttonArrows[0].classList.add('header__button-arrow--visible');
+				headerButtonArrowIcons[0].classList.add('header__button-arrow--visible');
 				break
 			case 'artist':
-				buttonArrows[1].classList.add('header__button-arrow--visible');
+				headerButtonArrowIcons[1].classList.add('header__button-arrow--visible');
 				break
 			case 'duration':
-				buttonArrows[2].classList.add('header__button-arrow--visible');
+				headerButtonArrowIcons[2].classList.add('header__button-arrow--visible');
 				break
 		}
 	}
