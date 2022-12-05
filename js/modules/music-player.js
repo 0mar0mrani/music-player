@@ -267,8 +267,8 @@ export default function MusicPlayer() {
 
 	function handleTimelineRangeInput() {
 		const valueInput = timelineRange.value;
-		const roundedDuration = audio.duration;
-		const valueInputToCurrentTime =  valueInput * roundedDuration / 100;
+		const duration = audio.duration;
+		const valueInputToCurrentTime =  valueInput * duration / 100;
 
 		audio.currentTime = valueInputToCurrentTime;
 	}
