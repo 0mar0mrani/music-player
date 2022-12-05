@@ -9,12 +9,19 @@
 	list-style: none;
 }
 
-.context-menu--open {
-	display: block;
-}
-
 .context-menu li {
 	list-style: none;
+}
+
+.context-menu ul {
+	display: flex;
+	flex-direction: column;
+	height: 25rem;
+	overflow-y: scroll;
+}
+
+.context-menu--open {
+	display: block;
 }
 
 .context-menu__header {
@@ -39,24 +46,6 @@
 	filter: var(--background-color-lighter-filter);
 }
 
-.context-menu__item {
-	width: 100%;
-	text-align: start;
-	padding: 1rem;
-}
-
-.context-menu__item:hover,
-.context-menu__delete-song-button:hover {
-	background-color: var(--text-color-darker);
-}
-
-.context-menu ul {
-	display: flex;
-	flex-direction: column;
-	height: 25rem;
-	overflow-y: scroll;
-}
-
 .context-menu__delete-song-button {
 	display: none;
 	width: 100%;
@@ -68,4 +57,15 @@
 
 .context-menu__delete-song-button--active {
 	display: block;
+}
+
+.context-menu__item {
+	width: 100%;
+	text-align: start;
+	padding: 1rem;
+}
+
+.context-menu__item:hover,
+.context-menu__delete-song-button:hover {
+	background-color: var(--text-color-darker);
 }

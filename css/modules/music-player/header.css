@@ -1,3 +1,12 @@
+.header__container {
+	display: grid;
+	grid-template-columns: 1fr 3fr 10fr 10fr 4fr 2fr;
+	background-color: var(--background-color);
+	color: var(--text-color);
+	font-size: 2.5rem;
+	height: 6rem;
+}
+
 .header__number {
 	font-size: 2rem;
 	align-self: center;
@@ -12,6 +21,10 @@
 	text-align: start;
 }
 
+.header__category-button-title {
+	grid-column: 3 / 4;
+}
+
 .header__button-arrow {
 	display: none;
 	width: 2rem;
@@ -22,15 +35,6 @@
 
 .header__button-arrow--visible {
 	display: flex;
-}
-
-.header__container {
-	display: grid;
-	grid-template-columns: 1fr 3fr 10fr 10fr 4fr 2fr;
-}
-
-.header__category-button-title {
-	grid-column: 3 / 4;
 }
 
 .header__playlist-button {
@@ -45,11 +49,4 @@
 	width: 100%;
 	height: auto;
 	filter: invert(96%) sepia(7%) saturate(79%) hue-rotate(202deg) brightness(99%) contrast(94%);
-}
-
-.header__container {
-	background-color: var(--background-color);
-	color: var(--text-color);
-	font-size: 2.5rem;
-	height: 6rem;
 }

@@ -27,12 +27,12 @@
 }
 
 .songs__add-to-playlist-button {
+	display: none;
+	justify-self: flex-end;
 	width: 4rem;
 	height: 4rem;
-	justify-self: flex-end;
 	margin-right: 3rem;
 	z-index: 100;
-	display: none;
 }
 
 .songs__song:hover .songs__add-to-playlist-button {
@@ -79,7 +79,6 @@
 	background-color: var(--background-color)
 }
 
-/* No Songs In Playlist Message */
 .songs__no-songs-message {
 	position: absolute;
 	top: 50%;
@@ -89,7 +88,6 @@
 	color: var(--highlight-color);
 }
 
-/* Playlist Title */
 .songs__playlist-title {
 	display: flex;
 	align-items: center;
@@ -109,6 +107,5 @@
 	width: 40rem;
 	background-color: inherit;
 	border: none;
-	/* border-bottom: solid 1px; */
 	color: inherit;
 }

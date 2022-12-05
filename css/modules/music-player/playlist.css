@@ -2,19 +2,19 @@
 	display: flex;
 	flex-direction: column;
 	position: absolute;
+	width: 33vw;
+	height: 100vh;
 	top: 0;
 	right: 0;
 	background-color: var(--text-color);
-	width: 33vw;
-	height: 100vh;
 	transform: translateX(33.1vw);
 	color: var(--background-color-lighter);
 }
 
 .playlists__container {
 	display: flex;
-	flex-grow: 1;
 	flex-direction: column;
+	flex-grow: 1;
 	font-size: 2rem;
 	overflow-y: overlay;
 }
@@ -53,7 +53,6 @@
 	border-bottom: solid 1px #000;
 }
 
-
 .playlist__add-playlist-button {
 	display: flex;
 	align-items: center;
@@ -85,7 +84,6 @@
 	height: auto;
 }
 
-/* Delete Button */
 .playlist__playlist-delete-button {
 	width: 3rem;
 	height: 3rem;
