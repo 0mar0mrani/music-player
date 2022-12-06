@@ -60,6 +60,10 @@
 	text-align: center;
 }
 
+.songs__song--active {
+	color: var(--highlight-color);
+}
+
 .songs__add-to-playlist-button {
 	display: none;
 	justify-self: flex-end;

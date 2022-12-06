@@ -729,6 +729,9 @@ export default function MusicPlayer() {
 				function returnCreateSongElement() {
 					const song = document.createElement('button');
 					song.className = 'songs__song';
+					if (currentSong.id === currentPlaylist.songs[index].id) {
+						song.classList.add('songs__song--active');
+					}
 					song.dataset.id = `${currentPlaylist.songs[index].id}`;
 					return song;
 				}
@@ -806,5 +809,6 @@ export default function MusicPlayer() {
 
 	loadSongIntoPlayer();
 	setInterval(goToNextSongIfFinished, 1000);
+	console.log(currentSong.id);
 }
 
