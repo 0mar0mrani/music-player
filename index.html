@@ -10,116 +10,122 @@
 	</head>
 
 	<body>
-		<section class="music-player">
-			<div class="header__container">
-				<p class="header__number">#</p>
+		<section class="music-player-cotainer">
+			<div class="music-player">
+				<div class="header__container">
+					<p class="header__number">#</p>
 
-				<button class="header__category-button header__category-button-title"  data-category="title">
-					<p>Title</p>
+					<button class="header__category-button header__category-button-title"  data-category="title">
+						<p>Title</p>
 
-					<div class="header__button-arrow">
-						<img src="/assets/svg/arrow-down.svg" alt="Sort by title">
-					</div>
-				</button>
+						<div class="header__button-arrow">
+							<img src="/assets/svg/arrow-down.svg" alt="Sort by title">
+						</div>
+					</button>
 
-				<button class="header__category-button"  data-category="artist">
-					<p>Artist</p>
+					<button class="header__category-button header__category-button-artist"  data-category="artist">
+						<p>Artist</p>
 
-					<div class="header__button-arrow">
-						<img src="/assets/svg/arrow-down.svg" alt="Sort by artist">
-					</div>
-				</button>
+						<div class="header__button-arrow">
+							<img src="/assets/svg/arrow-down.svg" alt="Sort by artist">
+						</div>
+					</button>
 
-				<button class="header__category-button" data-category="duration">
-					<p>Duration</p>
+					<button class="header__category-button header__category-button-duration" data-category="duration">
+						<p>Duration</p>
 
-					<div class="header__button-arrow">
-						<img src="/assets/svg/arrow-down.svg" alt="Sort by duration">
-					</div>
-				</button>
+						<div class="header__button-arrow">
+							<img src="/assets/svg/arrow-down.svg" alt="Sort by duration">
+						</div>
+					</button>
 
-				<button class="header__playlist-button">
-					<img src="/assets/svg/menu.svg" alt="Open playlists">
-				</button>
-			</div>
-
-			<div class="context-menu">
-				<button class="context-menu__delete-song-button">Delete song</button>
-				<div class="context-menu__header">Add to playlist</div>
-
-				<ul></ul>
-			</div>
-
-			<div class="playlists">
-				<button class="playlist__add-playlist-button">
-					<div class="playlist__add-playlist-button-icon">
-						<img src="/assets/svg/plus.svg" alt="Create a new playlist">
-					</div>
-					
-					<p>Create a new playlist</p>
-				</button>
-
-				<div class="playlists__container"></div>
-			</div>
-			
-			<div class="songs"></div>
-
-			<div class="audio-player">
-				<div class="audio-player__current-song">
-					<div class="audio-player__cover">
-						<img>
-					</div>
-					
-					<div class="audio-player__names-container">
-						<p class="audio-player__title"></p>
-
-						<p class="audio-player__artist"></p>
-					</div>
+					<button class="header__playlist-button">
+						<img src="/assets/svg/menu.svg" alt="Open playlists">
+					</button>
 				</div>
 
-				<div class="audio-player__main-controllers">
-					<div class="audio-player__main-controllers-top">
-						<button class="audio-player__shuffle-button">
-							<img src="/assets/svg/shuffle.svg" alt="Shuffle">
-						</button>
+				<div class="context-menu">
+					<button class="context-menu__delete-song-button">Delete song</button>
+					<div class="context-menu__header">Add to playlist</div>
 
-						<button class="audio-player__previous-button">
-							<img src="/assets/svg/previous.svg" alt="Previous">
-						</button>
-						
-						<button class="audio-player__play-button">
-							<img src="/assets/svg/play.svg" alt="Play">
-						</button>
-						
-						<button class="audio-player__next-button">
-							<img src="/assets/svg/next.svg" alt="Next">
-						</button>
-						
-						<button class="audio-player__repeat-button">
-							<img src="/assets/svg/repeat.svg" alt="Repeat">
-						</button>
-					</div>
+					<ul></ul>
+				</div>
 
-					<div class="audio-player__main-controllers-bottom">
-						<div class="audio-player__current-time">0:0</div>
-	
-						<div class="audio-player__timeline-container">
-							<input type="range" min="0" max="100" value="0" step="0.01" class="audio-player__timeline-range">
+				<div class="playlists">
+					<button class="playlist__add-playlist-button">
+						<div class="playlist__add-playlist-button-icon">
+							<img src="/assets/svg/plus.svg" alt="Create a new playlist">
 						</div>
 						
-						<div class="audio-player__duration">0:0</div>
-					</div>
-				</div>
-
-				
-				<div class="audio-player__volume-controllers">
-					<button class="audio-player__mute-button">
-						<img src="/assets/svg/audio.svg" alt="Mute">
+						<p>Create a new playlist</p>
 					</button>
-	
-					<div class="audio-player__volume-container">
-						<input type="range" min="0" max="100" value="100" class="audio-player__volume-range">
+
+					<div class="playlists__container"></div>
+				</div>
+				
+				<div class="songs"></div>
+
+				<div class="audio-player">
+					<div class="audio-player__current-song">
+						<div class="audio-player__cover">
+							<img>
+						</div>
+						
+						<div class="audio-player__names-container">
+							<p class="audio-player__title"></p>
+
+							<p class="audio-player__artist"></p>
+						</div>
 					</div>
+
+					<div class="audio-player__main-controllers">
+						<div class="audio-player__main-controllers-top">
+							<button class="audio-player__shuffle-button">
+								<img src="/assets/svg/shuffle.svg" alt="Shuffle">
+							</button>
+
+							<button class="audio-player__previous-button">
+								<img src="/assets/svg/previous.svg" alt="Previous">
+							</button>
+							
+							<button class="audio-player__play-button">
+								<img src="/assets/svg/play.svg" alt="Play">
+							</button>
+							
+							<button class="audio-player__next-button">
+								<img src="/assets/svg/next.svg" alt="Next">
+							</button>
+							
+							<button class="audio-player__repeat-button">
+								<img src="/assets/svg/repeat.svg" alt="Repeat">
+							</button>
+						</div>
+
+						<div class="audio-player__main-controllers-bottom">
+							<div class="audio-player__current-time">0:0</div>
+		
+							<div class="audio-player__timeline-container">
+								<input type="range" min="0" max="100" value="0" step="0.01" class="audio-player__timeline-range">
+							</div>
+							
+							<div class="audio-player__duration">0:0</div>
+						</div>
+					</div>
+
+					
+					<div class="audio-player__volume-controllers">
+						<button class="audio-player__mute-button">
+							<img src="/assets/svg/audio.svg" alt="Mute">
+						</button>
+		
+						<div class="audio-player__volume-container">
+							<input type="range" min="0" max="100" value="100" class="audio-player__volume-range">
+						</div>
+					</div>
+
+					<button class="audio-player__close-mobile-player-button">
+						<img src="/assets/svg/arrow-down.svg" alt="Close player">
+					</button>
 				</div>
 			</div>
 		</section>

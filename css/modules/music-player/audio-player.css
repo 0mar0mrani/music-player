@@ -2,6 +2,11 @@
 	display: grid;
 	grid-template-columns: 1.5fr 4fr 1.5fr;
 	align-items: center;
+	position: absolute;
+	width: 100%;
+	top: 0;
+	left: 0;
+	margin-top: calc(100vh - 10rem);
 	column-gap: 2rem;
 	height: 10rem;
 	background-color: var(--background-color);
@@ -145,4 +150,114 @@
 
 .audio-player__button--active {
 	filter: var(--highlight-color-filter);
+}
+
+.audio-player__close-mobile-player-button {
+	background: none;
+	display: none;
+	position: absolute;
+	top: 0rem;
+	left: 1rem;
+	width: 4rem;
+	height: 4rem;
+}
+
+.audio-player__close-mobile-player-button img {
+	width: 100%;
+	height: 100%;
+	filter: var(--highlight-color-filter);
+}
+
+@media only screen and (max-width: 600px) {
+	.audio-player {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		z-index: 999;
+		transition: 0.3s all;
+		cursor: pointer;
+	}
+
+	.audio-player--open {
+		flex-direction: column;
+		position: absolute;
+		width: 100vw;
+		height: 100vh;
+		margin-top: 0;
+		cursor: unset;
+	}
+
+	.audio-player__shuffle-button,
+	.audio-player__previous-button,
+	.audio-player__next-button,
+	.audio-player__repeat-button,
+	.audio-player__volume-controllers,
+	.audio-player__main-controllers-bottom {
+		display: none;
+	}
+
+	.audio-player__main-controllers-top {
+		margin-right: 2rem;
+	}
+
+	.audio-player--open .audio-player__shuffle-button,
+	.audio-player--open .audio-player__previous-button,
+	.audio-player--open .audio-player__next-button,
+	.audio-player--open .audio-player__repeat-button,
+	.audio-player--open .audio-player__volume-controllers {
+		display: unset;
+	}
+
+	.audio-player--open 	.audio-player__main-controllers {
+		order: 1;
+		margin-bottom: 2rem;
+	}
+
+	.audio-player--open .audio-player__main-controllers-bottom {
+		display: flex;
+	}
+
+	.audio-player--open .audio-player__cover {
+		width: 100%;
+		height: auto;
+		padding: 2rem;
+		margin: 0;
+	}
+
+	.audio-player--open .audio-player__current-song {
+		flex-direction: column;
+		justify-content: space-evenly;
+		flex-grow: 1;
+		width: 100%;
+	}
+
+	.audio-player--open .audio-player__names-container {
+		margin: 0;
+	}
+
+	.audio-player--open .audio-player__title,
+	.audio-player--open .audio-player__artist {
+		text-align: center;
+	}
+
+	.audio-player--open .audio-player__main-controllers {
+		width: 100%;
+		padding: 1rem;
+	}
+
+	.audio-player--open .audio-player__volume-container {
+		width: 100%;
+	}
+
+	.audio-player--open .audio-player__volume-controllers {
+		display: flex;
+		padding: 1rem;
+		width: 50%;
+		order: 0;
+		margin-bottom: 2rem;
+	}
+	
+	.audio-player--open .audio-player__close-mobile-player-button {
+		display: block;
+	}
 }

@@ -1,12 +1,46 @@
+.music-player-cotainer {
+	overflow: hidden;
+}
+
 .music-player {
 	display: flex;
 	flex-direction: column;
 	position: relative;
 	transition: transform 0.3s ease-in;
+	height: 100vh;
 }
 
 .music-player__playlist-open {
 	transform: translateX(-33vw);
+}
+
+.songs {
+	position: relative;
+	height: calc(100vh - 6rem);
+	overflow-y: overlay;
+	margin-bottom: 10rem;
+}
+
+.songs::-webkit-scrollbar {
+	appearance: none;
+	width: 1rem;
+}
+
+.songs::-webkit-scrollbar-track {
+	background-color: var(--background-color-lighter);
+}
+
+.songs::-webkit-scrollbar-thumb {
+	background-color: var(--background-color)
+}
+
+.songs__no-songs-message {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 4rem;
+	color: var(--highlight-color);
 }
 
 .songs__song {
@@ -60,34 +94,6 @@
 	display: block;
 }
 
-.songs {
-	position: relative;
-	height: calc(100vh - (10rem + 6rem));
-	overflow-y: overlay;
-}
-
-.songs::-webkit-scrollbar {
-	appearance: none;
-	width: 1rem;
-}
-
-.songs::-webkit-scrollbar-track {
-	background-color: var(--background-color-lighter);
-}
-
-.songs::-webkit-scrollbar-thumb {
-	background-color: var(--background-color)
-}
-
-.songs__no-songs-message {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	font-size: 4rem;
-	color: var(--highlight-color);
-}
-
 .songs__playlist-title {
 	display: flex;
 	align-items: center;
@@ -108,4 +114,35 @@
 	background-color: inherit;
 	border: none;
 	color: inherit;
+}
+
+
+@media only screen and (max-width: 600px) {
+	.music-player {
+		height: 100vh;
+		width: 100vw;
+		/* overflow: hidden; */
+	}
+
+	.songs__song {
+		grid-template-columns: 8rem 10fr 10fr 0.1fr;
+	}
+
+	.music-player__playlist-open {
+		transform: translateX(-80vw);
+	}
+
+	.songs {
+		height: calc(100vh - 6rem);
+		overflow-x: hidden;
+	}
+
+	.songs__song-number,
+	.songs__song-duration {
+		display: none;
+	}
+
+	.songs__add-to-playlist-button {
+		display: block;
+	}
 }

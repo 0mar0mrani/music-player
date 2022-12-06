@@ -19,6 +19,7 @@ export default function MusicPlayer() {
 	
 	let isPlaylistMenuOpen = false;
 	let isContextMenuOpen = false;
+	let isMobilePlayerOpen = false;
 	let indexOfClickedContextMenuButton = null;
 	let timerID;
 	
@@ -45,6 +46,7 @@ export default function MusicPlayer() {
 	let playlists = null;
 	let playlistDeleteButtons = null;
 	
+	const audioPlayer = document.querySelector('.audio-player');
 	const playButton = document.querySelector('.audio-player__play-button');
 	const playButtonImage = document.querySelector('.audio-player__play-button img');
 	const previousButton = document.querySelector('.audio-player__previous-button');
@@ -59,8 +61,8 @@ export default function MusicPlayer() {
 	const repeatButton = document.querySelector('.audio-player__repeat-button');
 	const shuffleButton = document.querySelector('.audio-player__shuffle-button');
 	const muteButton = document.querySelector('.audio-player__mute-button');
-	// 
 	const muteButtonImage = document.querySelector('.audio-player__mute-button img');
+	const playerMobileButton = document.querySelector('.audio-player__close-mobile-player-button')
 
 	function addQuerySelector() {
 		songButtons = document.querySelectorAll('.songs__song');
@@ -81,6 +83,7 @@ export default function MusicPlayer() {
 	playlistView.addEventListener('click', handlePlaylistViewClick)
 	playlistButton.addEventListener('click', handlePlaylistButtonClick);
 
+	audioPlayer.addEventListener('click', handleAudioPlayerClick)
 	playButton.addEventListener('click', handlePlayButtonClick);
 	previousButton.addEventListener('click', handlePreviousButtonClick);
 	nextButton.addEventListener('click', handleNextButtonClick);
@@ -89,6 +92,7 @@ export default function MusicPlayer() {
 	repeatButton.addEventListener('click', handleRepeatButtonClick);
 	shuffleButton.addEventListener('click', handleShuffleButtonClick);
 	muteButton.addEventListener('click', handleMuteButtonClick);
+	playerMobileButton.addEventListener('click', handlePlayerMobileButtonClick);
 
 	function addEventListeners() {
 		for (const songButton of songButtons) {
@@ -224,7 +228,14 @@ export default function MusicPlayer() {
 		renderHTML();
 	}
 
-	function handlePlayButtonClick() {
+	function handleAudioPlayerClick() {
+		isMobilePlayerOpen = !isMobilePlayerOpen;
+		audioPlayer.removeEventListener('click', handleAudioPlayerClick)
+		renderHTML();
+	}
+
+	function handlePlayButtonClick(event) {
+		event.stopPropagation();
 		toggleIsPlaying();
 		renderAudio();
 		renderHTML();
@@ -286,6 +297,13 @@ export default function MusicPlayer() {
 
 	function handleMuteButtonClick() {
 		toggleMute();
+		renderHTML();
+	}
+
+	function handlePlayerMobileButtonClick(event) {
+		event.stopPropagation();
+		isMobilePlayerOpen = false;
+		audioPlayer.addEventListener('click', handleAudioPlayerClick);
 		renderHTML();
 	}
 
@@ -494,6 +512,7 @@ export default function MusicPlayer() {
 		renderVolumeRange();
 		renderPlaylistMenu();
 		renderContextMenu(event);
+		renderMobileAudioPlayer();
 
 		addQuerySelector();
 		addEventListeners();
@@ -524,6 +543,14 @@ export default function MusicPlayer() {
 		} else {
 			musicPlayer.classList.remove('music-player__playlist-open');
 			playlistButtonIcon.src = '/assets/svg/menu.svg';
+		}
+	}
+
+	function renderMobileAudioPlayer() {
+		if (isMobilePlayerOpen) {
+			audioPlayer.classList.add('audio-player--open')
+		} else {
+			audioPlayer.classList.remove('audio-player--open')
 		}
 	}
 
