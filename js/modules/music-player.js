@@ -434,7 +434,7 @@ export default function MusicPlayer() {
 				[currentPlaylistForShuffle[index], currentPlaylistForShuffle[randomIndex]] = [currentPlaylistForShuffle[randomIndex], currentPlaylistForShuffle[index]];
 			}
 		} else {
-			currentPlaylistForShuffle = [...currentPlaylist];
+			currentPlaylistForShuffle = [...currentPlaylist.songs];
 		}
 	}
 
