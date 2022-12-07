@@ -301,7 +301,7 @@
 		width: 80%;
 	}
 
-	.audio-player__main-controllers-top {
+	.audio-player--open .audio-player__main-controllers-top {
 		margin: 0;
 	}
 }

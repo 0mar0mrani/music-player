@@ -1,19 +1,3 @@
-.music-player-cotainer {
-	overflow: hidden;
-}
-
-.music-player {
-	display: flex;
-	flex-direction: column;
-	position: relative;
-	transition: transform 0.3s ease-in;
-	height: 100vh;
-}
-
-.music-player__playlist-open {
-	transform: translateX(-33vw);
-}
-
 .songs {
 	position: relative;
 	height: calc(100vh - 6rem);
@@ -122,21 +106,12 @@
 
 
 @media only screen and (max-width: 750px) {
-	.music-player {
-		height: 100vh;
-		width: 100vw;
-	}
-
 	.songs__playlist-title-input {
 		font-size: 3rem;
 	}
 
 	.songs__song {
 		grid-template-columns: 8rem 10fr 10fr 4fr;
-	}
-
-	.music-player__playlist-open {
-		transform: translateX(-80vw);
 	}
 
 	.songs {

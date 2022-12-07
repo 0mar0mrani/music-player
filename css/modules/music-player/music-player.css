@@ -1,0 +1,26 @@
+.music-player-cotainer {
+	overflow: hidden;
+}
+
+.music-player {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	transition: transform 0.3s ease-in;
+	height: 100vh;
+}
+
+.music-player__playlist-open {
+	transform: translateX(-33vw);
+}
+
+@media only screen and (max-width: 750px) {
+	.music-player {
+		height: 100vh;
+		width: 100vw;
+	}
+
+	.music-player__playlist-open {
+		transform: translateX(-80vw);
+	}
+}
