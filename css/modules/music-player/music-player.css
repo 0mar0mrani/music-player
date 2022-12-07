@@ -1,13 +1,14 @@
-.music-player-cotainer {
-	overflow: hidden;
+.music-player-container {
+	/* overflow: hidden; */
 }
 
 .music-player {
 	display: flex;
 	flex-direction: column;
 	position: relative;
+	height: 100%;
+	width: 100%;
 	transition: transform 0.3s ease-in;
-	height: 100vh;
 }
 
 .music-player__playlist-open {
@@ -16,7 +17,6 @@
 
 @media only screen and (max-width: 750px) {
 	.music-player {
-		height: 100vh;
 		width: 100vw;
 	}
 

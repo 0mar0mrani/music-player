@@ -4,9 +4,8 @@
 	align-items: center;
 	position: absolute;
 	width: 100%;
-	top: 0;
 	left: 0;
-	margin-top: calc(100vh - 10rem);
+	bottom: 0;
 	column-gap: 2rem;
 	height: 10rem;
 	background-color: var(--background-color);
@@ -197,16 +196,14 @@
 		align-items: center;
 		justify-content: space-between;
 		z-index: 999;
-		transition: 0.3s all;
+		transition: 0.3s height;
 		cursor: pointer;
 	}
 
 	.audio-player--open {
+		display: flex;
 		flex-direction: column;
-		position: absolute;
-		width: 100vw;
-		height: 100vh;
-		margin-top: 0;
+		height: 100%;
 		cursor: unset;
 	}
 
