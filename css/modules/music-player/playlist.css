@@ -75,6 +75,7 @@
 }
 
 .playlist__add-playlist-button-icon {
+	flex-shrink: 0;
 	width: 4rem;
 	height: 4rem;
 }
@@ -131,5 +132,11 @@
 	.playlists {
 		width: 80vw;
 		transform: translateX(80.1vw);
+	}
+}
+
+@media only screen and (max-width: 500px) {
+	.playlist__add-playlist-button {
+		padding: 1rem;
 	}
 }
