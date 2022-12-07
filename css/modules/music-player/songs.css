@@ -105,17 +105,17 @@
 
 
 @media only screen and (max-width: 750px) {
-	.songs__playlist-title-input {
-		font-size: 3rem;
+	.songs {
+		height: calc(100vh - 6rem);
+		overflow-x: hidden;
 	}
 
 	.songs__song {
 		grid-template-columns: 8rem 10fr 10fr 4fr;
 	}
 
-	.songs {
-		height: calc(100vh - 6rem);
-		overflow-x: hidden;
+	.songs__playlist-title-input {
+		font-size: 3rem;
 	}
 
 	.songs__song-number,
@@ -130,17 +130,17 @@
 }
 
 @media only screen and (max-width: 500px) {
-	.songs__playlist-title-input {
-		font-size: 2rem;
+	.songs__song {
+		font-size: 1.2rem;
+		column-gap: 1rem;
 	}
 
 	.songs__song {
 		grid-template-columns: 6rem 10fr 10fr 7rem;
 	}
-
-	.songs__song {
-		font-size: 1.2rem;
-		column-gap: 1rem;
+	
+	.songs__playlist-title-input {
+		font-size: 2rem;
 	}
 
 	.songs__add-to-playlist-button {

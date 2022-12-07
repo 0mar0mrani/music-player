@@ -70,15 +70,12 @@
 	.header__container {
 		grid-template-columns: 6rem 10fr 10fr 7rem;
 		column-gap: 1rem;
+		font-size: 2rem;
 	}
 
 	.header__playlist-button {
 		width: 3rem;
 		height: 3rem;
-	}
-
-	.header__container {
-		font-size: 2rem;
 	}
 }
 

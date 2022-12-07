@@ -110,11 +110,6 @@
 }
 
 @media only screen and (max-width: 1100px) {
-	/* .playlist__add-playlist-button-icon {
-		width: 2rem;
-		height: 2rem;
-	} */
-
 	.playlist__add-playlist-button {
 		font-size: 1.8rem;
 	}
