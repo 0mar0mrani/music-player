@@ -45,7 +45,7 @@
 
 .songs__song {
 	display: grid;
-	grid-template-columns: 1fr 3fr 10fr 10fr 4fr 2fr;
+	grid-template-columns: 1fr 3fr 10fr 10fr 4fr 2.5fr;
 	text-align: start;
 	align-items: center;
 	width: 100%;
@@ -125,11 +125,14 @@
 	.music-player {
 		height: 100vh;
 		width: 100vw;
-		/* overflow: hidden; */
+	}
+
+	.songs__playlist-title-input {
+		font-size: 3rem;
 	}
 
 	.songs__song {
-		grid-template-columns: 8rem 10fr 10fr 0.1fr;
+		grid-template-columns: 8rem 10fr 10fr 4fr;
 	}
 
 	.music-player__playlist-open {
@@ -148,5 +151,41 @@
 
 	.songs__add-to-playlist-button {
 		display: block;
+		margin-right: 2rem;
+	}
+}
+
+@media only screen and (max-width: 500px) {
+	.songs__playlist-title-input {
+		font-size: 2rem;
+	}
+
+	.songs__song {
+		grid-template-columns: 6rem 10fr 10fr 7rem;
+	}
+
+	.songs__song {
+		font-size: 1.2rem;
+		column-gap: 1rem;
+	}
+
+	.songs__add-to-playlist-button {
+		width: 3rem;
+		height: 3rem;
+	}
+}
+
+@media only screen and (max-width: 350px) {
+	.header__container {
+		grid-template-columns: 5rem 10fr 10fr 3rem;
+	}
+
+	.songs__song-cover {
+		width: 5rem;
+		height: 5rem;
+	}
+
+	.songs__add-to-playlist-button {
+		margin-right: 1rem;
 	}
 }
