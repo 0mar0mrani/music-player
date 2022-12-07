@@ -252,8 +252,7 @@
 	.audio-player--open .audio-player__shuffle-button,
 	.audio-player--open .audio-player__previous-button,
 	.audio-player--open .audio-player__next-button,
-	.audio-player--open .audio-player__repeat-button,
-	.audio-player--open .audio-player__volume-controllers {
+	.audio-player--open .audio-player__repeat-button {
 		display: unset;
 	}
 
