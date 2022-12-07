@@ -23,6 +23,7 @@ export default function MusicPlayer() {
 	let indexOfClickedContextMenuButton = null;
 	let timerID;
 	
+	const musicPlayerContainer = document.querySelector('.music-player-container')
 	const musicPlayer = document.querySelector('.music-player');
 	
 	const songsContainer = document.querySelector('.songs');
@@ -72,6 +73,9 @@ export default function MusicPlayer() {
 		playlistDeleteButtons = document.querySelectorAll('.playlist__playlist-delete-button');
 		renamePlaylistInput = document.querySelector('.songs__playlist-title-input');
 	}
+	
+	window.addEventListener('DOMContentLoaded', handleWindowDOMContentLoaded)
+	window.addEventListener('resize', handleWindowResize)
 	
 	musicPlayer.addEventListener('click', handleMusicPlayerClick);
 
@@ -128,6 +132,14 @@ export default function MusicPlayer() {
 		renamePlaylistInput.addEventListener('input', handleRenamePlaylistInput)
 
 		renamePlaylistInput.addEventListener('keyup', handleRenamePlaylistKeyup)
+	}
+
+	function handleWindowDOMContentLoaded() {
+		updateWindowInnerHeight();
+	}
+
+	function handleWindowResize() {
+		updateWindowInnerHeight();
 	}
 
 	function handleMusicPlayerClick() {
@@ -299,11 +311,10 @@ export default function MusicPlayer() {
 		renderHTML();
 	}
 
-	function handlePlayerMobileButtonClick(event) {
-		event.stopPropagation();
-		isMobilePlayerOpen = false;
-		audioPlayer.addEventListener('click', handleAudioPlayerClick);
-		renderHTML();
+	function updateWindowInnerHeight() {
+		const height = window.innerHeight;
+
+		musicPlayerContainer.style.height = `${height}px`;
 	}
 
 	function addSongToPlaylist(index) {
