@@ -51,7 +51,7 @@
 	filter: invert(96%) sepia(7%) saturate(79%) hue-rotate(202deg) brightness(99%) contrast(94%);
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 750px) {
 	.header__container {
 		grid-template-columns: 8rem 10fr 10fr 0.1fr;
 	}
