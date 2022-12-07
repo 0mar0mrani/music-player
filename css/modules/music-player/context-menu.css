@@ -69,3 +69,25 @@
 .context-menu__delete-song-button:hover {
 	background-color: var(--text-color-darker);
 }
+
+@media only screen and (max-width: 500px) {
+	.context-menu {
+		width: 15rem;
+	}
+
+	.context-menu__header {
+		font-size: 1.5rem;
+	}
+
+	.context-menu__header::before {
+		background-size: 2rem;
+	}
+
+	.context-menu ul {
+		height: 20rem;
+	}
+
+	.context-menu li {
+		font-size: 1.5rem;
+	}
+}
