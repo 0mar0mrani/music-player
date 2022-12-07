@@ -138,16 +138,15 @@ export default function MusicPlayer() {
 
 	function handleSongButtonClick(event) {
 		if (!isPlaylistMenuOpen) {
-			const [clickedSong, clickedSongIndex] = getPropertiesOfClickedSong(event);
-			currentSong = clickedSong;
-			currentSongIndex = clickedSongIndex;
+			const songObject = returnGetSongOfClickedSong(event);
+			currentSong = songObject;
 			changeAudioSource();
 			isPlaying = true;
 			renderAudio();
 			renderHTML();
 		}
 
-		timerID = setInterval(renderTimeline, 10)
+		timerID = setInterval(renderTime, 10)
 	}
 
 	function handleAddPlaylistButtonClick(event, index) {
@@ -477,12 +476,14 @@ export default function MusicPlayer() {
 		}
 	}
 
-	function getPropertiesOfClickedSong(event) {
-		const clickedSong = event.currentTarget.dataset.id;
+	function returnGetSongOfClickedSong(event) {
+		const clickedSongID = event.currentTarget.dataset.id;
 
 		for (let index = 0; index < playlistsModule.allSongs.songs.length; index += 1) {
-			if (playlistsModule.allSongs.songs[index].id === clickedSong) {
-				return [playlistsModule.allSongs.songs[index], index];
+			const song = playlistsModule.allSongs.songs[index];
+
+			if (song.id === clickedSongID) {
+				return song;
 			}
 		}
 	}
