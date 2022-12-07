@@ -54,7 +54,7 @@ export default function Playlists() {
 				id: '7',
 			},
 			{	title: 'The Blackest Bouquet',
-				artist: 'LeonellCassio',
+				artist: 'Leonell Cassio',
 				duration: '3:41',
 				url: '/assets/audio/the-blackest-bouquet.mp3',
 				cover: '/assets/image/theblackestbouquet.jpg',
