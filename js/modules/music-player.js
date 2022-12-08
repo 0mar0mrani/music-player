@@ -236,9 +236,12 @@ export default function MusicPlayer() {
 	}
 
 	function handleAudioPlayerClick() {
+		const mobileWidth = 750;
+		if (window.innerWidth < mobileWidth) {
 		isMobilePlayerOpen = true;
-		audioPlayer.removeEventListener('click', handleAudioPlayerClick)
+			audioPlayer.removeEventListener('click', handleAudioPlayerClick);
 		renderHTML();
+	}
 	}
 
 	function handlePlayerMobileButtonClick(event) {
