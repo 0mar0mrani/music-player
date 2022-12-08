@@ -20,7 +20,7 @@
 	overflow-y: scroll;
 }
 
-.context-menu--open {
+.context-menu--visible {
 	display: block;
 }
 
