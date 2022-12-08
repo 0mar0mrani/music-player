@@ -21,9 +21,9 @@ export default function MusicPlayer() {
 	let isContextMenuOpen = false;
 	let isMobilePlayerOpen = false;
 	let indexOfClickedContextMenuButton = null;
-	let timerID;
+	let renderTimeID;
 	
-	const musicPlayerContainer = document.querySelector('.music-player-container')
+	const musicPlayerContainer = document.querySelector('.music-player-container');
 	const musicPlayer = document.querySelector('.music-player');
 	
 	const songsContainer = document.querySelector('.songs');
@@ -63,9 +63,9 @@ export default function MusicPlayer() {
 	const shuffleButton = document.querySelector('.audio-player__shuffle-button');
 	const muteButton = document.querySelector('.audio-player__mute-button');
 	const muteButtonImage = document.querySelector('.audio-player__mute-button img');
-	const playerMobileButton = document.querySelector('.audio-player__close-mobile-player-button')
+	const playerMobileButton = document.querySelector('.audio-player__close-mobile-player-button');
 
-	function addQuerySelector() {
+	function addQuerySelectors() {
 		songButtons = document.querySelectorAll('.songs__song');
 		contextMenuButtons = document.querySelectorAll('.songs__add-to-playlist-button');
 		contextMenuPlaylistButtons = document.querySelectorAll('.context-menu__item');
@@ -74,20 +74,20 @@ export default function MusicPlayer() {
 		renamePlaylistInput = document.querySelector('.songs__playlist-title-input');
 	}
 
-	window.addEventListener('DOMContentLoaded', handleWindowDOMContentLoaded)
-	window.addEventListener('resize', handleWindowResize)
+	window.addEventListener('DOMContentLoaded', handleWindowDOMContentLoaded);
+	window.addEventListener('resize', handleWindowResize);
 	
 	musicPlayer.addEventListener('click', handleMusicPlayerClick);
 
 	for (const sortingButton of sortingButtons) {
 		sortingButton.addEventListener('click', handleSortingButtonClick);
 	}
-	addPlaylistButton.addEventListener('click', handleAddPlaylistClick)
-	deleteSongButton.addEventListener('click', handleDeleteSongButtonClick)
-	playlistView.addEventListener('click', handlePlaylistViewClick)
+	addPlaylistButton.addEventListener('click', handleAddPlaylistClick);
+	deleteSongButton.addEventListener('click', handleDeleteSongButtonClick);
+	playlistView.addEventListener('click', handlePlaylistViewClick);
 	playlistButton.addEventListener('click', handlePlaylistButtonClick);
 
-	audioPlayer.addEventListener('click', handleAudioPlayerClick)
+	audioPlayer.addEventListener('click', handleAudioPlayerClick);
 	playButton.addEventListener('click', handlePlayButtonClick);
 	previousButton.addEventListener('click', handlePreviousButtonClick);
 	nextButton.addEventListener('click', handleNextButtonClick);
@@ -111,7 +111,7 @@ export default function MusicPlayer() {
 
 		for (let index = 0; index < contextMenuPlaylistButtons.length; index += 1) {
 			contextMenuPlaylistButtons[index].addEventListener('click', () => {
-				handleContextMenuButtonsClick(index) 
+				handleContextMenuButtonsClick(index);
 			})
 		}
 
@@ -123,15 +123,15 @@ export default function MusicPlayer() {
 
 		for (let index = 0; index < playlistDeleteButtons.length; index += 1) {
 			playlistDeleteButtons[index].addEventListener('click', (event) => {
-				handlePlaylistDeleteButtonClick(event, index)
+				handlePlaylistDeleteButtonClick(event, index);
 			})
 		}
 
 		renamePlaylistInput.addEventListener('click', handleRenamePlaylistClick);
 
-		renamePlaylistInput.addEventListener('input', handleRenamePlaylistInput)
+		renamePlaylistInput.addEventListener('input', handleRenamePlaylistInput);
 
-		renamePlaylistInput.addEventListener('keyup', handleRenamePlaylistKeyup)
+		renamePlaylistInput.addEventListener('keyup', handleRenamePlaylistKeyup);
 	}
 
 	function handleWindowDOMContentLoaded() {
@@ -156,9 +156,8 @@ export default function MusicPlayer() {
 			isPlaying = true;
 			renderAudio();
 			renderHTML();
+			renderTimeID = setInterval(renderTime, 1000);
 		}
-
-		timerID = setInterval(renderTime, 10)
 	}
 
 	function handleAddPlaylistButtonClick(event, index) {
@@ -238,10 +237,10 @@ export default function MusicPlayer() {
 	function handleAudioPlayerClick() {
 		const mobileWidth = 750;
 		if (window.innerWidth < mobileWidth) {
-		isMobilePlayerOpen = true;
+			isMobilePlayerOpen = true;
 			audioPlayer.removeEventListener('click', handleAudioPlayerClick);
-		renderHTML();
-	}
+			renderHTML();
+		}
 	}
 
 	function handlePlayerMobileButtonClick(event) {
@@ -257,9 +256,9 @@ export default function MusicPlayer() {
 		renderAudio();
 		renderHTML();
 		if (isPlaying) {
-			timerID = setInterval(renderTime, 10);
+			renderTimeID = setInterval(renderTime, 1000);
 		} else {
-			clearInterval(timerID);
+			clearInterval(renderTimeID);
 		}
 	}
 
@@ -313,6 +312,9 @@ export default function MusicPlayer() {
 		renderHTML();
 	}
 
+	/**
+	 * This function makes sure height 100% in CSS is 100% of viewport height, also on safari iOS - which is a known issue
+	 */
 	function updateWindowInnerHeight() {
 		const height = window.innerHeight;
 
@@ -322,8 +324,8 @@ export default function MusicPlayer() {
 	/**
 	 * Adds song to user playlist
 	 * @see indexOfClickedContextMenuButton is the index of clicked context menu button
-	 * @see selectedPlaylist we add 1 to the index so playlists in context menu and playlists overview correlates, because the context menu does not contain All Songs
-	 * @param {number} index of button clicked in context menu
+	 * @see selectedPlaylist we add 1 to the index so context menu and and playlists overview correlates, because the context menu does not contain All Songs playlist
+	 * @param {number} index of button clicked of context menu
 	 */
 	function addSongToPlaylist(index) {
 		const selectedSong = currentPlaylist.songs[indexOfClickedContextMenuButton];
@@ -333,6 +335,7 @@ export default function MusicPlayer() {
 
 	function updateCurrentSorting(event) {
 		const category = event.currentTarget.dataset.category;
+
 		if (currentSorting === category) {
 			currentSorting = null;
 		} else {
@@ -342,9 +345,8 @@ export default function MusicPlayer() {
 
 	/**
 	 * Sorts currentPlaylist based on current sorting: title, artist and duration
-	 * @see currentPlaylist
+	 * @see currentSorting
 	 * If currentSorting is null, it takes a copy of the original playlist i.e. not sorted
-	 * @see playlistsModule.allPlaylists[currentPlaylistIndex]
 	 * Used JSON to get a deep copy of the object
 	 */
 	function sortCurrentPlaylist() {
@@ -389,19 +391,23 @@ export default function MusicPlayer() {
 		currentPlaylistDirectory.splice(indexOfClickedContextMenuButton, 1);	
 	}
 
+	/**
+	 * Updates currentPlaylistForShuffle
+	 * @see currentPlaylistForShuffle
+	 */
 	function UpdateCurrentPlaylistForShuffle() {
 		currentPlaylistForShuffle = [...currentPlaylist.songs];
 	}
 
 	/**
-	 * Updates playlist variables 
-	 * @see currentPlaylist
-	 * @see currentPlaylistForShuffle
+	 * Updates both playlist variables 
+	 * @see currentPlaylist - this is what we render the HTML of off
+	 * @see currentPlaylistForShuffle - this is what we render Audio of off so if we shuffle the playlist the HTML will stay the same 
 	 * Used JSON to get a deep copy of the object
 	 */
 	function updateCurrentPlaylist() {
 		currentPlaylist = JSON.parse(JSON.stringify(playlistsModule.allPlaylists[currentPlaylistIndex]));
-		currentPlaylistForShuffle = [...currentPlaylist.songs]
+		currentPlaylistForShuffle = [...currentPlaylist.songs];
 	}
 
 	function updateCurrentSong() {
@@ -424,25 +430,22 @@ export default function MusicPlayer() {
 	}
 
 	/**
-	 * @author Laurens Holst // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-	 * Shuffles currentPlaylistForShuffle 
+	 * @author Laurens Holst @ https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+	 * Shuffles the order of currentPlaylistForShuffle 
 	 * The loop starts from the end of array and places it at a random index for each song by swapping place with another song
-	 * If IsShuffle is false, we get a copy of currentPlaylist - i.e. currentPlaylistForShuffle is not shuffled anymore
+	 * If IsShuffle is false, we get a copy of currentPlaylist - i.e. currentPlaylistForShuffle is not shuffled anymore and is in the original order
 	 * @see isShuffle
 	 */
 	function shuffleSongs() {
 		if (isShuffle) {
 			for (let index = currentPlaylistForShuffle.length - 1; index > 0; index -= 1) {
 				const randomIndex = Math.floor(Math.random() * (index + 1));
+
 				[currentPlaylistForShuffle[index], currentPlaylistForShuffle[randomIndex]] = [currentPlaylistForShuffle[randomIndex], currentPlaylistForShuffle[index]];
 			}
 		} else {
 			currentPlaylistForShuffle = [...currentPlaylist.songs];
 		}
-	}
-
-	function setCurrentVolume() {
-		currentVolume = audio.volume;
 	}
 
 	function setCurrentTime() {
@@ -451,6 +454,10 @@ export default function MusicPlayer() {
 		const valueInputToCurrentTime =  valueInput * duration / 100;
 
 		audio.currentTime = valueInputToCurrentTime;
+	}
+
+	function setCurrentVolume() {
+		currentVolume = audio.volume;
 	}
 
 	function toggleMute() {
@@ -508,8 +515,20 @@ export default function MusicPlayer() {
 	}
 
 	/**
-	 * Goes to the next show if song is finished
+	 * Checks if song is finished
+	 * @returns {boolean} true / false
 	 */
+	function returnCheckIfSongFinished() {
+		const duration = audio.duration;
+		const currentTime = audio.currentTime;
+
+		if (duration / currentTime === 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	function goToNextSongIfFinished() {
 		const isCurrentSongFinished = returnCheckIfSongFinished();
 		
@@ -526,24 +545,9 @@ export default function MusicPlayer() {
 	}
 
 	/**
-	 * Checks if song is finished
-	 * @returns {boolean}
-	 */
-	function returnCheckIfSongFinished() {
-		const duration = audio.duration;
-		const currentTime = audio.currentTime
-
-		if (duration / currentTime === 1) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	/**
 	 * Goes through allSongs and matches ID with the clicked song 
 	 * @see playlistsModule.allSongs
-	 * @param {event} click
+	 * @param {object} event - click event
 	 * @returns {object} song
 	 */
 	function returnGetSongOfClickedSong(event) {
@@ -563,7 +567,7 @@ export default function MusicPlayer() {
 	}
 
 	/**
-	 * Will only be called once, this sets the fist song of 'All songs' and renders the HTML
+	 * Will only be called once, this sets the first song and renders the HTML.
 	 */
 	function initializeMusicPlayer() {
 		currentSong = 0;
@@ -575,15 +579,13 @@ export default function MusicPlayer() {
 	}
 	
 	/**
-	 * This main function consist of subfunctions that renders the HTML based on the state/model of Javascript.
+	 * This main function consist of subfunctions that renders the HTML based on the state/model of music player.
 	 * The last function are query selectors and event listeners for the newly created HTML. 
 	 * @see addQuerySelector
 	 * @see addEventListeners
-	 * @param {event} for renderContextMenu to place the context menu correctly and avoid error when there is no 'click'. 
-	 * @see renderContextMenu
 	 */
 	function renderHTML(event) {
-		renderHeader();
+		renderHeaderSortButtons();
 		renderSongView();
 		renderPlaylists();
 		renderCurrentSong();
@@ -596,15 +598,11 @@ export default function MusicPlayer() {
 		renderContextMenu(event);
 		renderMobileAudioPlayer();
 
-		addQuerySelector();
+		addQuerySelectors();
 		addEventListeners();
 	}
 
-	/**
-	 * Renders arrow on the sorting buttons based on the state of currentSorting
-	 * @see currentSorting
-	 */
-	function renderHeader() {
+	function renderHeaderSortButtons() {
 		for (const headerButtonArrowIcon of headerButtonArrowIcons) {
 			headerButtonArrowIcon.classList.remove('header__button-arrow--visible');
 		}
@@ -622,10 +620,6 @@ export default function MusicPlayer() {
 		}
 	}
 
-	/**
-	 * Renders the playlist menu button based on the state of isPlaylistMenuOpen
-	 * @see isPlaylistMenuOpen
-	 */
 	function renderPlaylistMenu() {
 		if (isPlaylistMenuOpen) {
 			musicPlayer.classList.add('music-player__playlist-open');
@@ -636,46 +630,30 @@ export default function MusicPlayer() {
 		}
 	}
 
-
-	/**
-	 * Renders the mobile music-player based on isMobilePlayerOpen
-	 * @see isMobilePlayerOpen
-	 */
 	function renderMobileAudioPlayer() {
 		if (isMobilePlayerOpen) {
-			audioPlayer.classList.add('audio-player--open')
+			audioPlayer.classList.add('audio-player--open');
 		} else {
-			audioPlayer.classList.remove('audio-player--open')
+			audioPlayer.classList.remove('audio-player--open');
 		}
 	}
 
-	/**
-	 * Renders the context menu
-	 */
 	function renderContextMenu(event) {
-		renderVisibility()
+		renderVisibility();
 		renderDeleteButton();
 		renderPlaylistButtons();
 		if (event) {
 			renderPlacement(event);
 		}
 
-		/**
-	 	* Renders if the context menu visibility based on the state of isContextMenuOpen
-		* @see isContextMenuOpen
-	 	*/
 		function renderVisibility() {
 			if (isContextMenuOpen) {
-				contextMenu.classList.add('context-menu--open');
+				contextMenu.classList.add('context-menu--visible');
 			} else {
-				contextMenu.classList.remove('context-menu--open');
+				contextMenu.classList.remove('context-menu--visible');
 			}
 		}
 
-		/**
-	 	* Renders the delete button based on if currentPlaylist.deletable 
-		* @see currentPlaylist.deletable
-	 	*/
 		function renderDeleteButton() {
 			if (currentPlaylist.deletable) {
 				deleteSongButton.classList.add('context-menu__delete-song-button--active');
@@ -707,7 +685,7 @@ export default function MusicPlayer() {
 	 	* Renders the placement of context menu from where the click happened
 		* If the click happens of the bottom 2/5 of the viewport the context menu appears above the click
 		* @see startOfBottomTwoFifth
-		* @param {event} is to know where to place the context menu over or below the click 
+		* @param {object} event - click event where to place the context menu 
 	 	*/
 		function renderPlacement(event) {
 			const x = event.clientX;
@@ -764,9 +742,8 @@ export default function MusicPlayer() {
 	}
 
 	/**
-	 * Renders timeline, current time and the duration of the song based on duration and currentTime
-	 * @see duration
-	 * @see currentTime
+	 * Renders timeline, current time and the duration of the song
+	 * Checks if !isNAN, to only display when the calculation is a number
 	 */
 	function renderTime() {
 		const duration = audio.duration;
@@ -787,16 +764,16 @@ export default function MusicPlayer() {
 			const durationInSeconds = Math.floor(duration) - durationInMinutes * 60;
 	
 			if (!isNaN(durationInMinutes)) {
-				timeStampDuration.innerHTML = `${durationInMinutes}:${durationInSeconds}`
+				timeStampDuration.innerHTML = `${durationInMinutes}:${durationInSeconds}`;
 			}
 		}
 
 		function renderCurrentTime() {
-			const currentTimeInMinutes = Math.floor(Math.floor(currentTime) / 60)
+			const currentTimeInMinutes = Math.floor(Math.floor(currentTime) / 60);
 			const currentTimeInSeconds = Math.floor(currentTime) - currentTimeInMinutes * 60;
 	
 			if (!isNaN(currentTimeInMinutes)) {
-				timeStampCurrentTime.innerHTML = `${currentTimeInMinutes}:${currentTimeInSeconds}`
+				timeStampCurrentTime.innerHTML = `${currentTimeInMinutes}:${currentTimeInSeconds}`;
 			}
 		}
 	}
@@ -808,7 +785,6 @@ export default function MusicPlayer() {
 			currentSongArtist.innerText = currentSong.artist;
 		}
 	}
-
 
 	function renderPlaylists() {
 		playlistContainer.innerHTML = '';
@@ -839,7 +815,7 @@ export default function MusicPlayer() {
 	}
 
 	/**
-	 * Renders songs and playlist name in main window from currentPlaylist. If playlist is empty it renders a an 'no songs' message. 
+	 * Renders playlist name  and songs in main window from currentPlaylist. If playlist is empty it renders a 'no songs' message. 
 	 */
 	function renderSongView() {
 		const playlistIsEmpty = currentPlaylist.songs.length === 0;
@@ -891,10 +867,10 @@ export default function MusicPlayer() {
 				}
 		
 				function createSongCover() {
-					const songCover = document.createElement('div')
-					songCover.className = 'songs__song-cover'
-					const songCoverImage = document.createElement('img')
-					songCoverImage.src = `${currentPlaylist.songs[index].cover}`
+					const songCover = document.createElement('div');
+					songCover.className = 'songs__song-cover';
+					const songCoverImage = document.createElement('img');
+					songCoverImage.src = `${currentPlaylist.songs[index].cover}`;
 					songCover.append(songCoverImage);
 					songElement.append(songCover);
 				}
@@ -923,7 +899,7 @@ export default function MusicPlayer() {
 				function createContextMenu() {
 					const contextMenu = document.createElement('button');
 					contextMenu.className = 'songs__add-to-playlist-button';
-					contextMenu.innerHTML = '<img src="/assets/svg/add-to-playlist.svg">'
+					contextMenu.innerHTML = '<img src="/assets/svg/add-to-playlist.svg">';
 					songElement.append(contextMenu);
 				}
 			}
@@ -931,7 +907,7 @@ export default function MusicPlayer() {
 
 		function createTitleOfPlaylist() {
 			const playlistTitle = document.createElement('div');
-			playlistTitle.className = 'songs__playlist-title'
+			playlistTitle.className = 'songs__playlist-title';
 			
 			const titleName = document.createElement('input');
 			titleName.value = `${currentPlaylist.name}`;
@@ -947,17 +923,14 @@ export default function MusicPlayer() {
 
 		function createNoSongsMessage() {
 			const paragraph = document.createElement('p');
-			paragraph.className = 'songs__no-songs-message'
-			paragraph.innerHTML = 'No songs in playlist'
+			paragraph.className = 'songs__no-songs-message';
+			paragraph.innerHTML = 'No songs in playlist';
 
 			songsContainer.append(paragraph);
 		}
 	}
-
+	
 	initializeMusicPlayer();
-	/**
-	 * This checks every second if song is finished, if true, goes to next song.
-	 */
-	setInterval(goToNextSongIfFinished, 1000);
+	setInterval(goToNextSongIfFinished, 1000); // This checks every second if song is finished, if true, goes to next song.
 }
 
