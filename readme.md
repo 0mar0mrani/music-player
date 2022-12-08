@@ -1,5 +1,5 @@
 # Music Player
-This is a music player with playlist features. 
+This is a music player where you can manage playlists. 
 
 ## Features 
 - Create, delete and name playlists.
