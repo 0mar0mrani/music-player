@@ -156,7 +156,8 @@ export default function MusicPlayer() {
 			isPlaying = true;
 			renderAudio();
 			renderHTML();
-			renderTimeID = setInterval(renderTime, 1000);
+			clearInterval(renderTimeID);
+			renderTimeID = setInterval(renderTime, 100);
 		}
 	}
 
@@ -256,7 +257,7 @@ export default function MusicPlayer() {
 		renderAudio();
 		renderHTML();
 		if (isPlaying) {
-			renderTimeID = setInterval(renderTime, 1000);
+			renderTimeID = setInterval(renderTime, 100);
 		} else {
 			clearInterval(renderTimeID);
 		}
