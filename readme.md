@@ -1,5 +1,5 @@
 # Music Player
-This is a music player where you can manage playlists. 
+This is a music player where you can manage playlists. This was built with HTML, CSS and JS. 
 
 ## Features 
 - Create, delete and name playlists.
